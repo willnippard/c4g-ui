@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100..900;1,100..900&family=Manrope:wght@200..800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-manrope text-foreground bg-background antialiased;
+  }
+
+  .dark body {
+    @apply text-foreground-dark bg-background-dark;
+  }
+}
