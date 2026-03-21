@@ -10,9 +10,10 @@ export default defineConfig({
   ],
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/index.ts'),
-      name: 'C4gUI',
-      fileName: 'c4g-ui',
+      entry: {
+        'c4g-ui': resolve(__dirname, 'src/index.ts'),
+        'tailwind-preset': resolve(__dirname, 'src/tailwind-preset.ts'),
+      },
       formats: ['es', 'cjs'],
     },
     rollupOptions: {
@@ -23,6 +24,7 @@ export default defineConfig({
           'react-dom': 'ReactDOM',
           'react/jsx-runtime': 'jsxRuntime',
         },
+        assetFileNames: 'style[extname]',
       },
     },
   },

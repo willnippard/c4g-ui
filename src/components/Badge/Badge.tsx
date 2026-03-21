@@ -5,7 +5,7 @@ export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
   variant?: 'primary' | 'accent' | 'muted'
 }
 
-const variantStyles: Record<string, string> = {
+const variantStyles: Record<NonNullable<BadgeProps['variant']>, string> = {
   primary:
     'bg-primary text-primary-foreground dark:bg-primary-dark',
   accent:

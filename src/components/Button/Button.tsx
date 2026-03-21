@@ -6,7 +6,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: 'sm' | 'md' | 'lg'
 }
 
-const variantStyles: Record<string, string> = {
+const variantStyles: Record<NonNullable<ButtonProps['variant']>, string> = {
   primary:
     'bg-primary text-primary-foreground hover:bg-primary/90 dark:bg-primary-dark dark:hover:bg-primary-dark/90',
   secondary:
@@ -15,7 +15,7 @@ const variantStyles: Record<string, string> = {
     'bg-accent text-accent-foreground hover:bg-accent/90 dark:bg-accent-dark dark:hover:bg-accent-dark/90',
 }
 
-const sizeStyles: Record<string, string> = {
+const sizeStyles: Record<NonNullable<ButtonProps['size']>, string> = {
   sm: 'px-3 py-1.5 text-sm',
   md: 'px-4 py-2 text-base',
   lg: 'px-6 py-3 text-lg',
@@ -30,7 +30,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           'inline-flex items-center justify-center font-manrope font-semibold rounded-ethos transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary',
           variantStyles[variant],
           sizeStyles[size],
-          disabled && 'opacity-50 cursor-not-allowed pointer-events-none',
+          disabled && 'opacity-50 cursor-not-allowed',
           className,
         )}
         disabled={disabled}

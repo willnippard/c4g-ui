@@ -1,8 +1,7 @@
 import type { Config } from 'tailwindcss'
 
-const config: Config = {
+export const c4gPreset: Partial<Config> = {
   darkMode: 'class',
-  content: ['./src/**/*.{ts,tsx}', './.storybook/**/*.{ts,tsx}'],
   theme: {
     extend: {
       colors: {
@@ -53,7 +52,4 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
 }
-
-export default config

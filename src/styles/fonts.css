@@ -1,0 +1,5 @@
+/* Google Fonts – opt-in import for Epilogue and Manrope.
+   Import this file in your app entry if you want the library's default fonts:
+     import '@c4g/ui/dist/fonts.css'
+   Or self-host the fonts for GDPR compliance / performance. */
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100..900;1,100..900&family=Manrope:wght@200..800&display=swap');

@@ -1,4 +1,4 @@
-import { type InputHTMLAttributes, forwardRef } from 'react'
+import { type InputHTMLAttributes, forwardRef, useId } from 'react'
 import { cn } from '../../lib/utils'
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -9,7 +9,13 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ className, label, error, helperText, id, ...props }, ref) => {
-    const inputId = id || label?.toLowerCase().replace(/\s+/g, '-')
+    const generatedId = useId()
+    const inputId = id || generatedId
+    const descriptionId = error
+      ? `${inputId}-error`
+      : helperText
+        ? `${inputId}-helper`
+        : undefined
 
     return (
       <div className="flex flex-col gap-1.5">
@@ -24,6 +30,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         <input
           ref={ref}
           id={inputId}
+          aria-invalid={!!error || undefined}
+          aria-describedby={descriptionId}
           className={cn(
             'rounded-ethos border border-border bg-card px-3 py-2 text-sm font-manrope text-foreground placeholder:text-muted-foreground transition-colors',
             'focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent',
@@ -35,10 +43,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           {...props}
         />
         {error && (
-          <p className="text-xs text-red-500 font-manrope">{error}</p>
+          <p id={`${inputId}-error`} role="alert" className="text-xs text-red-500 font-manrope">{error}</p>
         )}
         {helperText && !error && (
-          <p className="text-xs text-muted-foreground font-manrope">{helperText}</p>
+          <p id={`${inputId}-helper`} className="text-xs text-muted-foreground font-manrope">{helperText}</p>
         )}
       </div>
     )
