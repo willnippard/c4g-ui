@@ -58,4 +58,10 @@ export { Textarea, type TextareaProps, type TextareaSize } from './components/Te
 export { Checkbox, type CheckboxProps, type CheckboxSize } from './components/Checkbox'
 export { Modal, type ModalProps, type ModalSize } from './components/Modal'
 export { AuthBlock, type AuthBlockProps } from './blocks/AuthBlock'
+export {
+  Avatar,
+  type AvatarProps,
+  type AvatarSize,
+  type AvatarVariant,
+} from './components/Avatar'
 export { cn } from './lib/utils'
