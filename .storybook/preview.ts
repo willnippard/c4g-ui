@@ -15,8 +15,10 @@ const preview: Preview = {
     }),
   ],
   parameters: {
-    docs: {
-      theme: themes.dark,
+    darkMode: {
+      dark: themes.dark,
+      light: themes.light,
+      stylePreview: true,
     },
     options: {
       storySort: {
