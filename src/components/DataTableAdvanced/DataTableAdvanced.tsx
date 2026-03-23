@@ -206,7 +206,7 @@ function DataTableAdvancedInner<T>(
             ...(filterOptions[col.key] ?? []).map((val) => ({ value: val, label: val })),
           ]
           return (
-            <div key={col.key} className="w-full max-w-xs">
+            <div key={col.key} className="min-w-[120px] max-w-[240px]">
               <Select
                 label={col.header}
                 size={sizeToInput[size]}
