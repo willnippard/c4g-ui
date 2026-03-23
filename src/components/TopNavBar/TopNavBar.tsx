@@ -6,11 +6,8 @@ import {
   useEffect,
   useRef,
   useCallback,
-  useId,
 } from 'react'
 import { cn } from '../../lib/utils'
-
-export type TopNavSize = 'sm' | 'md' | 'lg'
 
 export type TopNavLink = {
   label: string
@@ -62,11 +59,12 @@ export const TopNavBar = forwardRef<HTMLElement, TopNavBarProps>(
       [ref],
     )
 
-    // Close dropdowns on outside click
+    // Close dropdowns and mega menus on outside click
     useEffect(() => {
       const handleClickOutside = (e: MouseEvent) => {
         if (navRef.current && !navRef.current.contains(e.target as Node)) {
           setOpenDropdown(null)
+          setOpenMegaMenu(null)
         }
       }
       document.addEventListener('mousedown', handleClickOutside)
@@ -78,6 +76,7 @@ export const TopNavBar = forwardRef<HTMLElement, TopNavBarProps>(
       const handleEscape = (e: KeyboardEvent) => {
         if (e.key === 'Escape') {
           setOpenDropdown(null)
+          setOpenMegaMenu(null)
           setMobileOpen(false)
         }
       }
