@@ -5,7 +5,7 @@ const meta: Meta<typeof HoverCard> = {
   title: 'Components/HoverCard',
   component: HoverCard,
   argTypes: {
-    size: { control: 'select', options: ['compact', 'spacious', 'zoomed'] },
+    size: { control: 'select', options: ['sm', 'md', 'lg'] },
   },
 }
 
@@ -15,9 +15,9 @@ type Story = StoryObj<typeof HoverCard>
 const avatarUrl =
   'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&crop=face'
 
-export const Compact: Story = {
+export const Small: Story = {
   args: {
-    size: 'compact',
+    size: 'sm',
     name: 'Marcus Thorne',
     imageSrc: avatarUrl,
     subtitle: 'DOB: 12/05/1988',
@@ -27,9 +27,9 @@ export const Compact: Story = {
   },
 }
 
-export const Spacious: Story = {
+export const Medium: Story = {
   args: {
-    size: 'spacious',
+    size: 'md',
     name: 'Elena Rodriguez',
     imageSrc: avatarUrl,
     subtitle: 'DOB: 24/11/1992',
@@ -39,9 +39,9 @@ export const Spacious: Story = {
   },
 }
 
-export const Zoomed: Story = {
+export const Large: Story = {
   args: {
-    size: 'zoomed',
+    size: 'lg',
     name: 'Elena Rodriguez',
     imageSrc: avatarUrl,
     subtitle: 'Date of Birth: 24/11/1992',
@@ -56,7 +56,7 @@ export const Zoomed: Story = {
 
 export const WarningStatus: Story = {
   args: {
-    size: 'spacious',
+    size: 'md',
     name: 'Alex Rivera',
     imageSrc: avatarUrl,
     subtitle: 'DOB: 03/09/1995',
@@ -68,7 +68,7 @@ export const WarningStatus: Story = {
 
 export const ErrorStatus: Story = {
   args: {
-    size: 'spacious',
+    size: 'md',
     name: 'Jordan Chen',
     imageSrc: avatarUrl,
     subtitle: 'DOB: 17/02/1990',
@@ -80,7 +80,7 @@ export const ErrorStatus: Story = {
 
 export const NoStatus: Story = {
   args: {
-    size: 'compact',
+    size: 'sm',
     name: 'Sam Patel',
     imageSrc: avatarUrl,
     subtitle: 'Volunteer since 2023',
@@ -103,7 +103,7 @@ export const InlineText: StoryObj<typeof HoverCardTrigger> = {
       <HoverCardTrigger
         card={
           <HoverCard
-            size="compact"
+            size="sm"
             name="Elena Rodriguez"
             imageSrc={avatarUrl}
             subtitle="DOB: 24/11/1992"
@@ -129,7 +129,7 @@ export const MultipleInline: StoryObj<typeof HoverCardTrigger> = {
       <HoverCardTrigger
         card={
           <HoverCard
-            size="compact"
+            size="sm"
             name="Marcus Thorne"
             imageSrc={avatarUrl}
             subtitle="Lead Contributor"
@@ -145,7 +145,7 @@ export const MultipleInline: StoryObj<typeof HoverCardTrigger> = {
       <HoverCardTrigger
         card={
           <HoverCard
-            size="compact"
+            size="sm"
             name="Alex Rivera"
             imageSrc={avatarUrl}
             subtitle="Senior Developer"

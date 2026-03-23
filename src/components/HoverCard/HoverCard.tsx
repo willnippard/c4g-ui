@@ -31,11 +31,11 @@ export interface HoverCardProps extends HTMLAttributes<HTMLDivElement> {
   /** Action click handler (used if no actionHref) */
   onAction?: () => void;
   /** Size preset */
-  size?: "compact" | "spacious" | "zoomed";
+  size?: "sm" | "md" | "lg";
 }
 
 const sizeConfig = {
-  compact: {
+  sm: {
     card: "rounded-xl p-4 gap-4 flex-row min-w-[280px]",
     imageWrap: "w-20",
     imageAbsolute: true,
@@ -47,7 +47,7 @@ const sizeConfig = {
     action: "text-sm",
     contentGap: "gap-2",
   },
-  spacious: {
+  md: {
     card: "rounded-xl p-8 gap-8 flex-row min-w-[360px]",
     imageWrap: "w-28",
     imageAbsolute: true,
@@ -59,7 +59,7 @@ const sizeConfig = {
     action: "text-base",
     contentGap: "gap-3",
   },
-  zoomed: {
+  lg: {
     card: "rounded-2xl p-12 gap-12 flex-col md:flex-row min-w-[480px]",
     imageWrap: "w-full md:w-64 md:h-auto",
     imageAbsolute: false,
@@ -134,7 +134,7 @@ export const HoverCard = forwardRef<HTMLDivElement, HoverCardProps>(
       actionLabel,
       actionHref,
       onAction,
-      size = "spacious",
+      size = "md",
       ...props
     },
     ref,

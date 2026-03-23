@@ -3,7 +3,7 @@ import { cn } from '../../lib/utils'
 
 export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
   variant?: 'primary' | 'accent' | 'muted'
-  size?: 'compact' | 'spacious' | 'zoomed'
+  size?: 'sm' | 'md' | 'lg'
 }
 
 const variantStyles: Record<NonNullable<BadgeProps['variant']>, string> = {
@@ -16,19 +16,19 @@ const variantStyles: Record<NonNullable<BadgeProps['variant']>, string> = {
 }
 
 const sizeConfig = {
-  compact: {
+  sm: {
     badge: 'px-1.5 py-px text-[10px]',
   },
-  spacious: {
+  md: {
     badge: 'px-2.5 py-0.5 text-xs',
   },
-  zoomed: {
+  lg: {
     badge: 'px-4 py-1.5 text-base',
   },
 } as const
 
 export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
-  ({ className, variant = 'primary', size = 'spacious', ...props }, ref) => {
+  ({ className, variant = 'primary', size = 'md', ...props }, ref) => {
     const config = sizeConfig[size]
 
     return (

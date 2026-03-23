@@ -5,7 +5,7 @@ const meta: Meta<typeof ImpactCard> = {
   title: 'Components/ImpactCard',
   component: ImpactCard,
   argTypes: {
-    size: { control: 'select', options: ['compact', 'spacious', 'zoomed'] },
+    size: { control: 'select', options: ['sm', 'md', 'lg'] },
   },
 }
 
@@ -50,9 +50,9 @@ export const CustomStat: Story = {
   },
 }
 
-export const Compact: Story = {
+export const Small: Story = {
   args: {
-    size: 'compact',
+    size: 'sm',
     label: 'Weekly Summary',
     stat: '128',
     description: 'Pull requests merged this week across all projects',
@@ -61,9 +61,9 @@ export const Compact: Story = {
   },
 }
 
-export const Spacious: Story = {
+export const Medium: Story = {
   args: {
-    size: 'spacious',
+    size: 'md',
     label: 'Annual Impact Report',
     stat: '1.2M+',
     description: 'Lines of code contributed to nonprofit projects worldwide',
@@ -72,9 +72,9 @@ export const Spacious: Story = {
   },
 }
 
-export const Zoomed: Story = {
+export const Large: Story = {
   args: {
-    size: 'zoomed',
+    size: 'lg',
     label: 'Total Reach',
     stat: '2.8M',
     description: 'People positively impacted by Code4Good projects globally',

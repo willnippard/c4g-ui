@@ -6,7 +6,7 @@ const meta: Meta<typeof Alert> = {
   component: Alert,
   argTypes: {
     variant: { control: 'select', options: ['success', 'error', 'warning', 'info'] },
-    size: { control: 'select', options: ['compact', 'spacious', 'zoomed'] },
+    size: { control: 'select', options: ['sm', 'md', 'lg'] },
   },
 }
 
@@ -53,31 +53,31 @@ export const ErrorWithRetry: Story = {
   },
 }
 
-export const Compact: Story = {
+export const Small: Story = {
   args: {
     children: 'Your profile information has been securely updated.',
     variant: 'success',
-    size: 'compact',
+    size: 'sm',
     onDismiss: () => {},
     action: { label: 'Undo', onClick: () => {} },
   },
 }
 
-export const Spacious: Story = {
+export const Medium: Story = {
   args: {
     children: 'Your profile information has been securely updated.',
     variant: 'success',
-    size: 'spacious',
+    size: 'md',
     onDismiss: () => {},
     action: { label: 'Undo', onClick: () => {} },
   },
 }
 
-export const Zoomed: Story = {
+export const Large: Story = {
   args: {
     children: 'Your profile information has been securely updated.',
     variant: 'success',
-    size: 'zoomed',
+    size: 'lg',
     onDismiss: () => {},
     action: { label: 'Undo', onClick: () => {} },
   },

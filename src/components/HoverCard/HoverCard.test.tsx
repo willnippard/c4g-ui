@@ -67,7 +67,7 @@ describe('HoverCard', () => {
 
   // --- Size variants ---
   it('renders all size variants without errors', () => {
-    const sizes = ['compact', 'spacious', 'zoomed'] as const
+    const sizes = ['sm', 'md', 'lg'] as const
     sizes.forEach((size) => {
       const { unmount } = render(<HoverCard {...defaultProps} size={size} />)
       expect(screen.getByText('Jane Doe')).toBeInTheDocument()

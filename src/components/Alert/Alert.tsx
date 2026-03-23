@@ -1,7 +1,7 @@
 import { type HTMLAttributes, forwardRef } from 'react'
 import { cn } from '../../lib/utils'
 
-export type AlertSize = 'compact' | 'spacious' | 'zoomed'
+export type AlertSize = 'sm' | 'md' | 'lg'
 
 export interface AlertProps extends HTMLAttributes<HTMLDivElement> {
   variant?: 'success' | 'error' | 'warning' | 'info'
@@ -25,7 +25,7 @@ const actionVariantStyles: Record<NonNullable<AlertProps['variant']>, string> = 
 }
 
 const sizeConfig = {
-  compact: {
+  sm: {
     container: 'p-3 gap-2',
     text: 'text-sm',
     actionButton: 'px-2.5 py-1 text-xs',
@@ -34,7 +34,7 @@ const sizeConfig = {
     contentGap: 'gap-2',
     variantIcon: 'w-4 h-4',
   },
-  spacious: {
+  md: {
     container: 'p-6 gap-4',
     text: 'text-base',
     actionButton: 'px-4 py-1.5 text-xs',
@@ -43,7 +43,7 @@ const sizeConfig = {
     contentGap: 'gap-3',
     variantIcon: 'w-5 h-5',
   },
-  zoomed: {
+  lg: {
     container: 'p-10 gap-6',
     text: 'text-xl',
     actionButton: 'px-6 py-2.5 text-base',
@@ -85,7 +85,7 @@ const variantIcons: Record<NonNullable<AlertProps['variant']>, (iconClass: strin
 }
 
 export const Alert = forwardRef<HTMLDivElement, AlertProps>(
-  ({ className, variant = 'info', size = 'spacious', onDismiss, action, children, ...props }, ref) => {
+  ({ className, variant = 'info', size = 'md', onDismiss, action, children, ...props }, ref) => {
     const config = sizeConfig[size]
 
     return (

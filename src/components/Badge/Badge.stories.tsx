@@ -6,7 +6,7 @@ const meta: Meta<typeof Badge> = {
   component: Badge,
   argTypes: {
     variant: { control: 'select', options: ['primary', 'accent', 'muted'] },
-    size: { control: 'select', options: ['compact', 'spacious', 'zoomed'] },
+    size: { control: 'select', options: ['sm', 'md', 'lg'] },
   },
 }
 
@@ -25,14 +25,14 @@ export const Muted: Story = {
   args: { children: 'Muted', variant: 'muted' },
 }
 
-export const Compact: Story = {
-  args: { children: 'Compact', variant: 'primary', size: 'compact' },
+export const Small: Story = {
+  args: { children: 'Small', variant: 'primary', size: 'sm' },
 }
 
-export const Spacious: Story = {
-  args: { children: 'Spacious', variant: 'primary', size: 'spacious' },
+export const Medium: Story = {
+  args: { children: 'Medium', variant: 'primary', size: 'md' },
 }
 
-export const Zoomed: Story = {
-  args: { children: 'Zoomed', variant: 'primary', size: 'zoomed' },
+export const Large: Story = {
+  args: { children: 'Large', variant: 'primary', size: 'lg' },
 }

@@ -1,7 +1,7 @@
 import { type HTMLAttributes, forwardRef } from 'react'
 import { cn } from '../../lib/utils'
 
-export type ImpactCardSize = 'compact' | 'spacious' | 'zoomed'
+export type ImpactCardSize = 'sm' | 'md' | 'lg'
 
 export interface ImpactCardProps extends HTMLAttributes<HTMLDivElement> {
   label: string
@@ -14,7 +14,7 @@ export interface ImpactCardProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const sizeConfig = {
-  compact: {
+  sm: {
     card: 'p-6 rounded-lg',
     decorCircle: 'w-32 h-32 -mr-16 -mt-16',
     label: 'text-[10px] tracking-[0.15em]',
@@ -24,7 +24,7 @@ const sizeConfig = {
     progressBar: 'h-0.5',
     progressLabel: 'text-xs',
   },
-  spacious: {
+  md: {
     card: 'p-10 rounded-xl',
     decorCircle: 'w-48 h-48 -mr-24 -mt-24',
     label: 'text-xs tracking-[0.2em]',
@@ -34,7 +34,7 @@ const sizeConfig = {
     progressBar: 'h-1',
     progressLabel: 'text-sm',
   },
-  zoomed: {
+  lg: {
     card: 'p-14 rounded-2xl',
     decorCircle: 'w-64 h-64 -mr-32 -mt-32',
     label: 'text-sm tracking-[0.25em]',
@@ -48,7 +48,7 @@ const sizeConfig = {
 
 export const ImpactCard = forwardRef<HTMLDivElement, ImpactCardProps>(
   (
-    { className, label, stat, description, progress, progressLabel, size = 'spacious', ...props },
+    { className, label, stat, description, progress, progressLabel, size = 'md', ...props },
     ref,
   ) => {
     const config = sizeConfig[size]
