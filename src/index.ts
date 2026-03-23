@@ -21,6 +21,7 @@ export {
   type DataTableProps,
   type DataTableColumn,
   type DataTableSize,
+  type SortDirection,
 } from './components/DataTable'
 export {
   TopNavBar,
@@ -40,5 +41,10 @@ export {
   type HoverCardProps,
   type HoverCardTriggerProps,
 } from './components/HoverCard'
+export {
+  DataTableAdvanced,
+  type DataTableAdvancedProps,
+  type DataTableAdvancedColumn,
+} from './components/DataTableAdvanced'
 export { AuthBlock, type AuthBlockProps } from './blocks/AuthBlock'
 export { cn } from './lib/utils'
