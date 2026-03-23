@@ -1,5 +1,6 @@
 import { type HTMLAttributes, forwardRef } from 'react'
 import { cn } from '../../lib/utils'
+import { Button } from '../Button'
 
 export type AlertSize = 'sm' | 'md' | 'lg'
 
@@ -106,17 +107,17 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
         </div>
         <div className="flex items-center gap-2">
           {action && (
-            <button
-              type="button"
+            <Button
+              variant="secondary"
+              size={size}
               className={cn(
-                'rounded-md font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-on-surface focus-visible:ring-offset-2',
                 config.actionButton,
                 actionVariantStyles[variant],
               )}
               onClick={action.onClick}
             >
               {action.label}
-            </button>
+            </Button>
           )}
           {onDismiss && (
             <button

@@ -7,6 +7,7 @@ import {
   useState,
 } from "react";
 import { cn } from "../../lib/utils";
+import { Button } from "../Button";
 
 /* ─── HoverCard (the popup content) ──────────────────────────── */
 
@@ -156,17 +157,17 @@ export const HoverCard = forwardRef<HTMLDivElement, HoverCardProps>(
           {actionLabel}
         </a>
       ) : (
-        <button
-          type="button"
+        <Button
+          variant="secondary"
+          size={size}
           onClick={onAction}
           className={cn(
-            "font-bold text-primary hover:underline underline-offset-4 inline-block transition-colors",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm",
+            "bg-transparent text-primary hover:bg-transparent hover:underline underline-offset-4 px-0 py-0",
             config.action,
           )}
         >
           {actionLabel}
-        </button>
+        </Button>
       ));
 
     return (

@@ -1,5 +1,6 @@
 import { type HTMLAttributes, forwardRef } from 'react'
 import { cn } from '../../lib/utils'
+import { Button } from '../Button'
 
 export type SideNavItem = {
   label: string
@@ -170,16 +171,14 @@ export const SideNavBar = forwardRef<HTMLElement, SideNavBarProps>(
                 </a>
               ))}
             {footerAction && (
-              <button
-                type="button"
+              <Button
+                variant="primary"
+                size={size}
                 onClick={footerAction.onClick}
-                className={cn(
-                  'w-full mt-4 bg-primary text-on-primary rounded-xl font-bold hover:brightness-110 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
-                  s.footerButton,
-                )}
+                className={cn('w-full mt-4', s.footerButton)}
               >
                 {footerAction.label}
-              </button>
+              </Button>
             )}
           </div>
         )}

@@ -8,6 +8,7 @@ import {
   useCallback,
 } from 'react'
 import { cn } from '../../lib/utils'
+import { Button } from '../Button'
 
 export type TopNavLink = {
   label: string
@@ -386,16 +387,17 @@ export const TopNavBar = forwardRef<HTMLElement, TopNavBarProps>(
             )}
 
             {/* Action button (desktop only) */}
-            <button
-              type="button"
+            <Button
+              variant="primary"
+              size={size}
               className={cn(
-                'hidden md:block bg-primary text-on-primary rounded-xl font-bold transition-all duration-200 hover:shadow-lg hover:shadow-primary/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary',
+                'hidden md:inline-flex',
                 sc.actionButton,
               )}
               onClick={onAction}
             >
               {actionLabel}
-            </button>
+            </Button>
 
             {/* Hamburger (mobile only) */}
             <button
@@ -469,17 +471,18 @@ export const TopNavBar = forwardRef<HTMLElement, TopNavBarProps>(
             )}
 
             {/* Action button in mobile */}
-            <button
-              type="button"
+            <Button
+              variant="primary"
+              size={size}
               className={cn(
-                'w-full bg-primary text-on-primary rounded-xl font-bold transition-all duration-200 hover:shadow-lg hover:shadow-primary/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary',
+                'w-full',
                 sc.mobileItem,
                 sc.link.split(' ').find((c) => c.startsWith('text-')),
               )}
               onClick={onAction}
             >
               {actionLabel}
-            </button>
+            </Button>
           </div>
         </div>
       </nav>

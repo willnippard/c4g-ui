@@ -1,5 +1,6 @@
 import { type HTMLAttributes, forwardRef } from 'react'
 import { cn } from '../../lib/utils'
+import { Button } from '../Button'
 
 export type ProjectCardSize = 'sm' | 'md' | 'lg'
 
@@ -134,16 +135,17 @@ export const ProjectCard = forwardRef<HTMLElement, ProjectCardProps>(
               ))}
             </div>
             {onDetailsClick && (
-              <button
-                type="button"
+              <Button
+                variant="secondary"
+                size={size}
                 onClick={onDetailsClick}
                 className={cn(
-                  'text-primary font-bold font-manrope flex items-center gap-1 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded',
+                  'bg-transparent text-primary hover:bg-transparent hover:underline px-0 py-0',
                   config.detailsBtn,
                 )}
               >
                 Details &rarr;
-              </button>
+              </Button>
             )}
           </div>
         </div>
