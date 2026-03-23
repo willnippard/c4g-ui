@@ -206,6 +206,14 @@ describe('TopNavBar', () => {
       'false',
     )
   })
+
+  // --- Actions area ---
+  it('renders actions area content', () => {
+    render(
+      <TopNavBar actions={<span data-testid="actions">Actions</span>} />,
+    )
+    expect(screen.getByTestId('actions')).toBeInTheDocument()
+  })
 })
 
 describe('TopNavBar accessibility', () => {

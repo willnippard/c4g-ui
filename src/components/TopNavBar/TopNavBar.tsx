@@ -6,8 +6,11 @@ import {
   useEffect,
   useRef,
   useCallback,
+  useId,
 } from 'react'
 import { cn } from '../../lib/utils'
+
+export type TopNavSize = 'sm' | 'md' | 'lg'
 
 export type TopNavLink = {
   label: string
@@ -39,6 +42,7 @@ export const TopNavBar = forwardRef<HTMLElement, TopNavBarProps>(
       links = [],
       actionLabel = 'Sign In',
       onAction,
+      actions,
       ...props
     },
     ref,
@@ -317,6 +321,13 @@ export const TopNavBar = forwardRef<HTMLElement, TopNavBarProps>(
               </ul>
             )}
 
+            {/* Actions area (desktop only) */}
+            {actions && (
+              <div className="hidden md:flex items-center gap-3">
+                {actions}
+              </div>
+            )}
+
             {/* Action button (desktop only) */}
             <button
               type="button"
@@ -387,6 +398,13 @@ export const TopNavBar = forwardRef<HTMLElement, TopNavBarProps>(
           </ul>
 
           <div className="px-4 pb-4 space-y-3">
+            {/* Actions area in mobile */}
+            {actions && (
+              <div className="pt-3 border-t border-outline-variant/20">
+                {actions}
+              </div>
+            )}
+
             {/* Action button in mobile */}
             <button
               type="button"
