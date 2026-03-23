@@ -197,18 +197,18 @@ describe('RadioGroup', () => {
   })
 
   describe('Size variants', () => {
-    it('renders with compact size', () => {
-      render(<RadioGroup options={defaultOptions} name="test" size="compact" />)
+    it('renders with sm size', () => {
+      render(<RadioGroup options={defaultOptions} name="test" size="sm" />)
       expect(screen.getByRole('radiogroup')).toBeInTheDocument()
     })
 
-    it('renders with spacious size', () => {
-      render(<RadioGroup options={defaultOptions} name="test" size="spacious" />)
+    it('renders with md size', () => {
+      render(<RadioGroup options={defaultOptions} name="test" size="md" />)
       expect(screen.getByRole('radiogroup')).toBeInTheDocument()
     })
 
-    it('renders with zoomed size', () => {
-      render(<RadioGroup options={defaultOptions} name="test" size="zoomed" />)
+    it('renders with lg size', () => {
+      render(<RadioGroup options={defaultOptions} name="test" size="lg" />)
       expect(screen.getByRole('radiogroup')).toBeInTheDocument()
     })
   })

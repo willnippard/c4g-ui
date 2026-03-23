@@ -171,18 +171,18 @@ describe('Select', () => {
   })
 
   describe('Size variants', () => {
-    it('renders with compact size', () => {
-      render(<Select options={defaultOptions} size="compact" />)
+    it('renders with sm size', () => {
+      render(<Select options={defaultOptions} size="sm" />)
       expect(screen.getByRole('combobox')).toBeInTheDocument()
     })
 
-    it('renders with spacious size (default)', () => {
-      render(<Select options={defaultOptions} size="spacious" />)
+    it('renders with md size (default)', () => {
+      render(<Select options={defaultOptions} size="md" />)
       expect(screen.getByRole('combobox')).toBeInTheDocument()
     })
 
-    it('renders with zoomed size', () => {
-      render(<Select options={defaultOptions} size="zoomed" />)
+    it('renders with lg size', () => {
+      render(<Select options={defaultOptions} size="lg" />)
       expect(screen.getByRole('combobox')).toBeInTheDocument()
     })
   })

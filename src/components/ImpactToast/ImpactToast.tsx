@@ -3,7 +3,7 @@ import { cn } from '../../lib/utils'
 
 export interface ToastProps extends HTMLAttributes<HTMLDivElement> {
   variant?: 'success' | 'error' | 'warning' | 'info' | 'impact'
-  size?: 'compact' | 'spacious' | 'zoomed'
+  size?: 'sm' | 'md' | 'lg'
   title: string
   description?: string
   icon?: ReactNode
@@ -37,7 +37,7 @@ const variantStyles: Record<NonNullable<ToastProps['variant']>, { container: str
 }
 
 const sizeConfig = {
-  compact: {
+  sm: {
     container: 'p-2.5 gap-2',
     icon: 'h-4 w-4',
     iconWrapper: 'mt-0',
@@ -45,7 +45,7 @@ const sizeConfig = {
     description: 'text-[10px] mt-0.5',
     dismissIcon: 'h-3 w-3',
   },
-  spacious: {
+  md: {
     container: 'p-4 gap-3',
     icon: 'h-5 w-5',
     iconWrapper: 'mt-0.5',
@@ -53,7 +53,7 @@ const sizeConfig = {
     description: 'text-xs mt-1',
     dismissIcon: 'h-4 w-4',
   },
-  zoomed: {
+  lg: {
     container: 'p-8 gap-5',
     icon: 'h-8 w-8',
     iconWrapper: 'mt-1',
@@ -100,7 +100,7 @@ const makeDefaultIcon = (iconSize: string, variant: NonNullable<ToastProps['vari
 }
 
 export const Toast = forwardRef<HTMLDivElement, ToastProps>(
-  ({ className, variant = 'info', size = 'spacious', title, description, icon, onDismiss, ...props }, ref) => {
+  ({ className, variant = 'info', size = 'md', title, description, icon, onDismiss, ...props }, ref) => {
     const styles = variantStyles[variant]
     const config = sizeConfig[size]
 

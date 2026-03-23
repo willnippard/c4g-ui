@@ -62,26 +62,26 @@ export const Disabled: Story = {
   },
 }
 
-export const Compact: Story = {
+export const Small: Story = {
   args: {
     label: 'Project Type',
     options: sampleOptions,
-    size: 'compact',
+    size: 'sm',
   },
 }
 
-export const Spacious: Story = {
+export const Medium: Story = {
   args: {
     label: 'Project Type',
     options: sampleOptions,
-    size: 'spacious',
+    size: 'md',
   },
 }
 
-export const Zoomed: Story = {
+export const Large: Story = {
   args: {
     label: 'Project Type',
     options: sampleOptions,
-    size: 'zoomed',
+    size: 'lg',
   },
 }

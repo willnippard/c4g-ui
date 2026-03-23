@@ -113,32 +113,32 @@ export const DisabledGroup: Story = {
   },
 }
 
-export const Compact: Story = {
+export const Small: Story = {
   args: {
-    name: 'plan-compact',
+    name: 'plan-sm',
     options: defaultOptions,
     legend: 'Select a protocol',
     value: 'standard',
-    size: 'compact',
+    size: 'sm',
   },
 }
 
-export const Spacious: Story = {
+export const Medium: Story = {
   args: {
-    name: 'plan-spacious',
+    name: 'plan-md',
     options: defaultOptions,
     legend: 'Select a protocol',
     value: 'standard',
-    size: 'spacious',
+    size: 'md',
   },
 }
 
-export const Zoomed: Story = {
+export const Large: Story = {
   args: {
-    name: 'plan-zoomed',
+    name: 'plan-lg',
     options: defaultOptions,
     legend: 'Select a protocol',
     value: 'standard',
-    size: 'zoomed',
+    size: 'lg',
   },
 }

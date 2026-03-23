@@ -6,7 +6,7 @@ const meta: Meta<typeof Toast> = {
   component: Toast,
   argTypes: {
     variant: { control: 'select', options: ['success', 'error', 'warning', 'info', 'impact'] },
-    size: { control: 'select', options: ['compact', 'spacious', 'zoomed'] },
+    size: { control: 'select', options: ['sm', 'md', 'lg'] },
     title: { control: 'text' },
     description: { control: 'text' },
   },
@@ -71,30 +71,30 @@ export const TitleOnly: Story = {
   },
 }
 
-export const Compact: Story = {
+export const Small: Story = {
   args: {
     variant: 'success',
-    size: 'compact',
+    size: 'sm',
     title: 'Changes saved',
     description: 'Your profile has been updated successfully.',
     onDismiss: () => {},
   },
 }
 
-export const Spacious: Story = {
+export const Medium: Story = {
   args: {
     variant: 'success',
-    size: 'spacious',
+    size: 'md',
     title: 'Changes saved',
     description: 'Your profile has been updated successfully.',
     onDismiss: () => {},
   },
 }
 
-export const Zoomed: Story = {
+export const Large: Story = {
   args: {
     variant: 'success',
-    size: 'zoomed',
+    size: 'lg',
     title: 'Changes saved',
     description: 'Your profile has been updated successfully.',
     onDismiss: () => {},

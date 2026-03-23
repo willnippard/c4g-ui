@@ -1,7 +1,7 @@
 import { type InputHTMLAttributes, forwardRef, useId } from 'react'
 import { cn } from '../../lib/utils'
 
-export type InputSize = 'compact' | 'spacious' | 'zoomed'
+export type InputSize = 'sm' | 'md' | 'lg'
 
 export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
   label?: string
@@ -12,19 +12,19 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
 }
 
 const sizeConfig = {
-  compact: {
+  sm: {
     wrapper: 'gap-1',
     label: 'text-xs',
     input: 'px-2 py-1.5 text-sm',
     helper: 'text-xs',
   },
-  spacious: {
+  md: {
     wrapper: 'gap-1.5',
     label: 'text-xs',
     input: 'px-3 py-2 text-sm',
     helper: 'text-xs',
   },
-  zoomed: {
+  lg: {
     wrapper: 'gap-2',
     label: 'text-base',
     input: 'px-4 py-3 text-lg',
@@ -33,7 +33,7 @@ const sizeConfig = {
 } as const
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ className, label, error, helperText, id, size = 'spacious', ...props }, ref) => {
+  ({ className, label, error, helperText, id, size = 'md', ...props }, ref) => {
     const generatedId = useId()
     const inputId = id || generatedId
     const descriptionId = error

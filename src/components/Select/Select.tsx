@@ -3,7 +3,7 @@ import { cn } from '../../lib/utils'
 
 export type SelectOption = { value: string; label: string }
 
-export type SelectSize = 'compact' | 'spacious' | 'zoomed'
+export type SelectSize = 'sm' | 'md' | 'lg'
 
 export interface SelectProps extends Omit<SelectHTMLAttributes<HTMLSelectElement>, 'size'> {
   label?: string
@@ -16,21 +16,21 @@ export interface SelectProps extends Omit<SelectHTMLAttributes<HTMLSelectElement
 }
 
 const sizeConfig = {
-  compact: {
+  sm: {
     wrapper: 'gap-1',
     label: 'text-xs',
     select: 'px-3 py-2 pr-8 text-sm',
     icon: 'right-2 h-4 w-4',
     helper: 'text-xs',
   },
-  spacious: {
+  md: {
     wrapper: 'gap-1.5',
     label: 'text-xs',
     select: 'px-4 py-3 pr-10 text-base',
     icon: 'right-3 h-5 w-5',
     helper: 'text-xs',
   },
-  zoomed: {
+  lg: {
     wrapper: 'gap-2',
     label: 'text-base',
     select: 'px-5 py-4 pr-12 text-lg',
@@ -40,7 +40,7 @@ const sizeConfig = {
 } as const
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
-  ({ className, label, options, placeholder, error, helperText, id, size = 'spacious', ...props }, ref) => {
+  ({ className, label, options, placeholder, error, helperText, id, size = 'md', ...props }, ref) => {
     const generatedId = useId()
     const selectId = id || generatedId
     const descriptionId = error

@@ -8,7 +8,7 @@ export type RadioOption = {
   disabled?: boolean
 }
 
-export type RadioGroupSize = 'compact' | 'spacious' | 'zoomed'
+export type RadioGroupSize = 'sm' | 'md' | 'lg'
 
 export interface RadioGroupProps {
   options: RadioOption[]
@@ -26,7 +26,7 @@ export interface RadioGroupProps {
 }
 
 const sizeConfig = {
-  compact: {
+  sm: {
     wrapper: 'gap-2',
     legend: 'text-xs mb-1',
     verticalGap: 'gap-2',
@@ -36,7 +36,7 @@ const sizeConfig = {
     description: 'text-xs',
     error: 'text-xs',
   },
-  spacious: {
+  md: {
     wrapper: 'gap-3',
     legend: 'text-xs mb-2',
     verticalGap: 'gap-4',
@@ -46,7 +46,7 @@ const sizeConfig = {
     description: 'text-xs',
     error: 'text-xs',
   },
-  zoomed: {
+  lg: {
     wrapper: 'gap-4',
     legend: 'text-base mb-3',
     verticalGap: 'gap-6',
@@ -70,7 +70,7 @@ export const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
       disabled,
       required,
       orientation = 'vertical',
-      size = 'spacious',
+      size = 'md',
       className,
     },
     ref,
