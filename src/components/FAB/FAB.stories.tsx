@@ -6,7 +6,7 @@ const meta: Meta<typeof FAB> = {
   component: FAB,
   argTypes: {
     size: { control: 'select', options: ['sm', 'md', 'lg'] },
-    density: { control: 'select', options: ['compact', 'spacious', 'zoomed'] },
+    density: { control: 'select', options: ['sm', 'md', 'lg'] },
     position: {
       control: 'select',
       options: ['bottom-right', 'bottom-left', 'top-right', 'top-left'],
@@ -68,24 +68,24 @@ export const AllPositions: Story = {
   ),
 }
 
-export const Compact: Story = {
-  args: { density: 'compact', fixed: false },
+export const DensitySmall: Story = {
+  args: { density: 'sm', fixed: false },
 }
 
-export const Spacious: Story = {
-  args: { density: 'spacious', fixed: false },
+export const DensityMedium: Story = {
+  args: { density: 'md', fixed: false },
 }
 
-export const Zoomed: Story = {
-  args: { density: 'zoomed', fixed: false },
+export const DensityLarge: Story = {
+  args: { density: 'lg', fixed: false },
 }
 
 export const AllDensities: Story = {
   render: () => (
     <div className="flex items-center gap-4">
-      <FAB density="compact" fixed={false} aria-label="Compact" />
-      <FAB density="spacious" fixed={false} aria-label="Spacious" />
-      <FAB density="zoomed" fixed={false} aria-label="Zoomed" />
+      <FAB density="sm" fixed={false} aria-label="Small density" />
+      <FAB density="md" fixed={false} aria-label="Medium density" />
+      <FAB density="lg" fixed={false} aria-label="Large density" />
     </div>
   ),
 }

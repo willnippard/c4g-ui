@@ -1,7 +1,7 @@
 import { type ButtonHTMLAttributes, forwardRef } from 'react'
 import { cn } from '../../lib/utils'
 
-export type FABDensity = 'compact' | 'spacious' | 'zoomed'
+export type FABDensity = 'sm' | 'md' | 'lg'
 
 export interface FABProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: 'sm' | 'md' | 'lg'
@@ -32,15 +32,15 @@ const positionStyles: Record<NonNullable<FABProps['position']>, string> = {
 }
 
 const densityConfig = {
-  compact: {
+  sm: {
     button: 'w-10 h-10 text-lg',
     icon: 'w-4 h-4',
   },
-  spacious: {
+  md: {
     button: '',
     icon: 'w-6 h-6',
   },
-  zoomed: {
+  lg: {
     button: 'w-24 h-24 text-5xl',
     icon: 'w-10 h-10',
   },
@@ -67,7 +67,7 @@ export const FAB = forwardRef<HTMLButtonElement, FABProps>(
     {
       className,
       size = 'md',
-      density = 'spacious',
+      density = 'md',
       icon,
       position = 'bottom-right',
       fixed = true,
@@ -79,7 +79,7 @@ export const FAB = forwardRef<HTMLButtonElement, FABProps>(
   ) => {
     const densityCfg = densityConfig[density]
     const iconClasses =
-      density !== 'spacious' ? densityCfg.icon : sizeIconStyles[size]
+      density !== 'md' ? densityCfg.icon : sizeIconStyles[size]
 
     return (
       <button
@@ -88,7 +88,7 @@ export const FAB = forwardRef<HTMLButtonElement, FABProps>(
         className={cn(
           'inline-flex items-center justify-center rounded-full bg-primary text-primary-foreground shadow-2xl transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
           sizeStyles[size],
-          density !== 'spacious' && densityCfg.button,
+          density !== 'md' && densityCfg.button,
           fixed && 'fixed z-50',
           fixed && positionStyles[position],
           disabled
