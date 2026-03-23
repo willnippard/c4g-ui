@@ -95,4 +95,9 @@ export {
   type ProgressBarSize,
   type ProgressBarVariant,
 } from './components/ProgressBar'
+export {
+  EmptyState,
+  type EmptyStateProps,
+  type EmptyStateSize,
+} from './components/EmptyState'
 export { cn } from './lib/utils'
