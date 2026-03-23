@@ -7,6 +7,7 @@ const meta: Meta<typeof SideNavBar> = {
   argTypes: {
     title: { control: 'text' },
     subtitle: { control: 'text' },
+    size: { control: 'select', options: ['sm', 'md', 'lg'] },
   },
 }
 
@@ -37,16 +38,51 @@ const sampleItems = [
   { label: 'Donations', href: '#donations', icon: '💛' },
 ]
 
+const sampleFooterLinks = [
+  { label: 'Help', href: '#help', icon: '❓' },
+  { label: 'Settings', href: '#settings', icon: '⚙️' },
+]
+
 export const Default: Story = {
   args: {
     brandIcon: <CodeIcon />,
     title: 'Code4Good',
     subtitle: 'Architect of Good',
     items: sampleItems,
-    footerLinks: [
-      { label: 'Help', href: '#help', icon: '❓' },
-      { label: 'Settings', href: '#settings', icon: '⚙️' },
-    ],
+    footerLinks: sampleFooterLinks,
+  },
+}
+
+export const Small: Story = {
+  args: {
+    brandIcon: <CodeIcon />,
+    title: 'Code4Good',
+    subtitle: 'Architect of Good',
+    items: sampleItems,
+    footerLinks: sampleFooterLinks,
+    size: 'sm',
+  },
+}
+
+export const Medium: Story = {
+  args: {
+    brandIcon: <CodeIcon />,
+    title: 'Code4Good',
+    subtitle: 'Architect of Good',
+    items: sampleItems,
+    footerLinks: sampleFooterLinks,
+    size: 'md',
+  },
+}
+
+export const Large: Story = {
+  args: {
+    brandIcon: <CodeIcon />,
+    title: 'Code4Good',
+    subtitle: 'Architect of Good',
+    items: sampleItems,
+    footerLinks: sampleFooterLinks,
+    size: 'lg',
   },
 }
 

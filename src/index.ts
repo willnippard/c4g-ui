@@ -34,6 +34,7 @@ export {
   type SideNavBarProps,
   type SideNavItem,
   type SideNavFooterLink,
+  type SideNavBarSize,
 } from './components/SideNavBar'
 export { FAB, type FABProps, type FABDensity } from './components/FAB'
 export {
