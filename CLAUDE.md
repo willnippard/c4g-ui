@@ -37,13 +37,18 @@ src/
 
 Each component uses `forwardRef`, typed variant props (union types), and follows this pattern. All size/density presets are standardized to `sm | md | lg`.
 
+- `Accordion` — collapsible content panels with single or multiple open mode; sm/md/lg
 - `Alert` — dismissible status banner with optional action button; success/error/warning/info, sm/md/lg
+- `Avatar` — user image with initials fallback; square/rounded variants, sm/md/lg
 - `Badge` — inline pill label; primary/accent/muted, sm/md/lg
+- `Breadcrumbs` — navigation trail with custom separator and optional item icons; sm/md/lg
 - `Button` — primary/secondary/accent, sm/md/lg (also has density prop)
 - `Card` — content container with media/header/body/footer slots, sm/md/lg
 - `Checkbox` — checkbox input with label, description, error, and indeterminate state; sm/md/lg
 - `DataTable` — generic data table with sortable columns, empty state, and caption; sm/md/lg
 - `DataTableAdvanced` — wraps `DataTable` adding global search, per-column filters, and filter chips; sm/md/lg
+- `DropdownMenu` — trigger-activated menu with items, dividers, and danger styling; left/right align, sm/md/lg
+- `EmptyState` — placeholder with icon, title, description, and action slot; sm/md/lg
 - `FAB` — floating action button with configurable icon and screen position; sm/md/lg, fixed/inline
 - `HoverCard` — profile-style popup card (avatar, name, status, action) shown via `HoverCardTrigger` on hover/focus; sm/md/lg
 - `ImpactCard` — stat highlight card with label, large stat number, description, and progress bar; sm/md/lg
@@ -51,13 +56,18 @@ Each component uses `forwardRef`, typed variant props (union types), and follows
 - `Input` — text input with label, error, helper text, aria attributes, auto-generated IDs via `useId()`; sm/md/lg
 - `Modal` — dialog overlay with title, footer slots, close-on-overlay/escape support; sm/md/lg
 - `Pagination` — page navigation with prev/next, numbered pages, ellipsis, and configurable sibling count; sm/md/lg
+- `ProgressBar` — determinate progress indicator with label and percentage display; primary/accent/error, sm/md/lg
 - `ProjectCard` — project showcase card with image, status badge, avatar stack, and details action; sm/md/lg
 - `RadioGroup` — fieldset of radio options with legend, descriptions, error, vertical/horizontal orientation; sm/md/lg
 - `Select` — native dropdown with label, placeholder, error, helper text, auto-generated IDs; sm/md/lg
+- `Skeleton` — loading placeholder with text, rectangular, and rounded variants; sm/md/lg
+- `Stepper` — multi-step progress indicator with horizontal/vertical orientation and clickable steps; sm/md/lg
+- `Tabs` — tabbed navigation with icons and keyboard arrow-key support; sm/md/lg
 - `Textarea` — multiline text input with label, error, helper text; sm/md/lg
-- `SideNavBar` — vertical sidebar navigation with brand header, nav items, footer links, and CTA button; sm/md/lg
 - `Toggle` — switch input with label; sm/md (track size), sm/md/lg (density)
+- `Tooltip` — hover/focus popup with configurable position and delay; top/bottom/left/right, sm/md/lg
 - `TopNavBar` — fixed top navigation bar with brand, nav links, and action button; sm/md/lg
+- `SideNavBar` — vertical sidebar navigation with brand header, nav items, footer links, and CTA button; sm/md/lg
 
 ## Conventions
 
