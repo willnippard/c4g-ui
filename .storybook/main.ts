@@ -5,7 +5,7 @@ const config: StorybookConfig = {
   addons: [
     '@storybook/addon-essentials',
     '@storybook/addon-a11y',
-    'storybook-dark-mode',
+    '@storybook/addon-themes',
   ],
   framework: {
     name: '@storybook/react-vite',
