@@ -24,12 +24,14 @@ describe('TopNavBar', () => {
 
   it('renders default action button label', () => {
     render(<TopNavBar />)
-    expect(screen.getByText('Sign In')).toBeInTheDocument()
+    const buttons = screen.getAllByText('Sign In')
+    expect(buttons.length).toBeGreaterThanOrEqual(1)
   })
 
   it('renders custom action button label', () => {
     render(<TopNavBar actionLabel="Get Started" />)
-    expect(screen.getByText('Get Started')).toBeInTheDocument()
+    const buttons = screen.getAllByText('Get Started')
+    expect(buttons.length).toBeGreaterThanOrEqual(1)
   })
 
   it('renders links when provided', () => {
@@ -95,8 +97,8 @@ describe('TopNavBar', () => {
 
   it('has focus-visible styles on action button', () => {
     render(<TopNavBar />)
-    const btn = screen.getByText('Sign In')
-    expect(btn.className).toContain('focus-visible')
+    const buttons = screen.getAllByText('Sign In')
+    expect(buttons[0].className).toContain('focus-visible')
   })
 
   // --- Interaction ---
@@ -104,7 +106,8 @@ describe('TopNavBar', () => {
     const user = userEvent.setup()
     const onAction = vi.fn()
     render(<TopNavBar onAction={onAction} />)
-    await user.click(screen.getByText('Sign In'))
+    const buttons = screen.getAllByText('Sign In')
+    await user.click(buttons[0])
     expect(onAction).toHaveBeenCalledTimes(1)
   })
 
@@ -171,6 +174,37 @@ describe('TopNavBar', () => {
     expect(toggle).toHaveAttribute('aria-expanded', 'true')
     await user.keyboard('{Escape}')
     expect(toggle).toHaveAttribute('aria-expanded', 'false')
+  })
+
+  // --- Mobile menu ---
+  it('renders hamburger button with aria attributes', () => {
+    render(<TopNavBar links={[{ label: 'Home', href: '/' }]} />)
+    const hamburger = screen.getByLabelText('Open menu')
+    expect(hamburger).toHaveAttribute('aria-expanded', 'false')
+    expect(hamburger).toHaveAttribute('aria-controls', 'topnav-mobile-menu')
+  })
+
+  it('toggles mobile menu on hamburger click', async () => {
+    const user = userEvent.setup()
+    render(<TopNavBar links={[{ label: 'Home', href: '/' }]} />)
+    const hamburger = screen.getByLabelText('Open menu')
+    await user.click(hamburger)
+    expect(screen.getByLabelText('Close menu')).toHaveAttribute(
+      'aria-expanded',
+      'true',
+    )
+  })
+
+  it('closes mobile menu on Escape', async () => {
+    const user = userEvent.setup()
+    render(<TopNavBar links={[{ label: 'Home', href: '/' }]} />)
+    await user.click(screen.getByLabelText('Open menu'))
+    expect(screen.getByLabelText('Close menu')).toBeInTheDocument()
+    await user.keyboard('{Escape}')
+    expect(screen.getByLabelText('Open menu')).toHaveAttribute(
+      'aria-expanded',
+      'false',
+    )
   })
 })
 

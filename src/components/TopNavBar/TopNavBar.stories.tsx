@@ -258,6 +258,30 @@ export const WithMegaMenu: Story = {
   },
 }
 
+export const MobileView: Story = {
+  args: {
+    links: [
+      { label: 'Home', href: '#home', icon: IconHome },
+      {
+        label: 'Components',
+        href: '#components',
+        icon: IconCode,
+        children: [
+          { label: 'Buttons', href: '#buttons' },
+          { label: 'Cards', href: '#cards' },
+        ],
+      },
+      { label: 'Docs', href: '#docs', icon: IconBook },
+    ],
+    style: { position: 'relative' },
+  },
+  parameters: {
+    viewport: {
+      defaultViewport: 'mobile1',
+    },
+  },
+}
+
 export const NoLinks: Story = {
   args: {
     links: [],

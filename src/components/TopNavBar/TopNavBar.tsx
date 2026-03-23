@@ -44,7 +44,9 @@ export const TopNavBar = forwardRef<HTMLElement, TopNavBarProps>(
     ref,
   ) => {
     const [openDropdown, setOpenDropdown] = useState<string | null>(null)
+    const [mobileOpen, setMobileOpen] = useState(false)
     const navRef = useRef<HTMLElement | null>(null)
+    const mobileMenuId = 'topnav-mobile-menu'
 
     const setRefs = useCallback(
       (node: HTMLElement | null) => {
@@ -72,6 +74,7 @@ export const TopNavBar = forwardRef<HTMLElement, TopNavBarProps>(
       const handleEscape = (e: KeyboardEvent) => {
         if (e.key === 'Escape') {
           setOpenDropdown(null)
+          setMobileOpen(false)
         }
       }
       document.addEventListener('keydown', handleEscape)
@@ -196,6 +199,99 @@ export const TopNavBar = forwardRef<HTMLElement, TopNavBarProps>(
       )
     }
 
+    const renderMobileLink = (link: TopNavLink) => (
+      <li key={link.href} role="none">
+        {hasSubmenu(link) ? (
+          <>
+            <button
+              type="button"
+              role="menuitem"
+              onClick={() => toggleDropdown(link.href)}
+              aria-expanded={openDropdown === link.href}
+              className={cn(
+                'flex items-center gap-3 w-full px-4 py-3 rounded-lg text-sm font-semibold font-manrope transition-all duration-200',
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary',
+                link.active
+                  ? 'bg-surface-container-lowest text-primary'
+                  : 'text-on-surface hover:bg-surface-container-high',
+              )}
+            >
+              {link.icon && <span className="shrink-0">{link.icon}</span>}
+              <span className="flex-1 text-left">{link.label}</span>
+              <svg
+                className={cn(
+                  'w-4 h-4 transition-transform duration-200',
+                  openDropdown === link.href && 'rotate-180',
+                )}
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </button>
+
+            {/* Dropdown children as indented sub-items */}
+            {link.children && openDropdown === link.href && (
+              <ul
+                className="space-y-1 mt-1 list-none m-0 p-0"
+                role="menu"
+              >
+                {link.children.map((child) => (
+                  <li key={child.href} role="none">
+                    <a
+                      href={child.href}
+                      role="menuitem"
+                      aria-current={child.active ? 'page' : undefined}
+                      className={cn(
+                        'flex items-center gap-3 pl-10 pr-4 py-3 rounded-lg text-sm font-semibold font-manrope transition-all duration-200',
+                        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary',
+                        child.active
+                          ? 'text-primary bg-surface-container-lowest'
+                          : 'text-on-secondary-container hover:bg-surface-container-high',
+                      )}
+                    >
+                      {child.icon && (
+                        <span className="shrink-0">{child.icon}</span>
+                      )}
+                      <span>{child.label}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            {/* Mega menu content inline in mobile */}
+            {link.megaMenu && openDropdown === link.href && (
+              <div className="px-4 py-3">{link.megaMenu}</div>
+            )}
+          </>
+        ) : (
+          <a
+            href={link.href}
+            role="menuitem"
+            aria-current={link.active ? 'page' : undefined}
+            className={cn(
+              'flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-semibold font-manrope transition-all duration-200',
+              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary',
+              link.active
+                ? 'bg-surface-container-lowest text-primary'
+                : 'text-on-surface hover:bg-surface-container-high',
+            )}
+          >
+            {link.icon && <span className="shrink-0">{link.icon}</span>}
+            <span>{link.label}</span>
+          </a>
+        )}
+      </li>
+    )
+
     return (
       <nav
         ref={setRefs}
@@ -212,7 +308,7 @@ export const TopNavBar = forwardRef<HTMLElement, TopNavBarProps>(
             {brand}
           </div>
 
-          {/* Right side: links + action button */}
+          {/* Right side: links + action button + hamburger */}
           <div className="flex items-center gap-4">
             {/* Desktop links */}
             {links.length > 0 && (
@@ -221,10 +317,80 @@ export const TopNavBar = forwardRef<HTMLElement, TopNavBarProps>(
               </ul>
             )}
 
-            {/* Action button */}
+            {/* Action button (desktop only) */}
             <button
               type="button"
-              className="bg-primary text-on-primary px-6 py-2.5 rounded-xl font-bold text-sm transition-all duration-200 hover:shadow-lg hover:shadow-primary/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary"
+              className="hidden md:block bg-primary text-on-primary px-6 py-2.5 rounded-xl font-bold text-sm transition-all duration-200 hover:shadow-lg hover:shadow-primary/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary"
+              onClick={onAction}
+            >
+              {actionLabel}
+            </button>
+
+            {/* Hamburger (mobile only) */}
+            <button
+              type="button"
+              className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg text-on-surface hover:bg-surface-container-high transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary"
+              onClick={() => setMobileOpen((prev) => !prev)}
+              aria-expanded={mobileOpen}
+              aria-controls={mobileMenuId}
+              aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+            >
+              {mobileOpen ? (
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                </svg>
+              )}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile menu */}
+        <div
+          id={mobileMenuId}
+          className={cn(
+            'md:hidden bg-surface-container-low border-t border-outline-variant/20 transition-all duration-300 overflow-hidden',
+            mobileOpen ? 'max-h-[80vh] opacity-100' : 'max-h-0 opacity-0',
+          )}
+        >
+          <ul
+            className="px-4 py-4 space-y-1 list-none m-0 p-0"
+            role="menu"
+            aria-label="Mobile navigation"
+          >
+            {links.map((link) => renderMobileLink(link))}
+          </ul>
+
+          <div className="px-4 pb-4 space-y-3">
+            {/* Action button in mobile */}
+            <button
+              type="button"
+              className="w-full bg-primary text-on-primary py-3 rounded-xl font-bold text-sm transition-all duration-200 hover:shadow-lg hover:shadow-primary/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary"
               onClick={onAction}
             >
               {actionLabel}
