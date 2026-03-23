@@ -21,6 +21,41 @@ export type TopNavLink = {
 /** @deprecated Use TopNavLink instead */
 export type NavLink = TopNavLink
 
+export type TopNavBarSize = 'sm' | 'md' | 'lg'
+
+const sizeConfig = {
+  sm: {
+    bar: 'h-12',
+    brand: 'text-base',
+    link: 'px-3 py-1.5 text-xs',
+    actionButton: 'px-4 py-1.5 text-xs',
+    dropdownItem: 'px-3 py-2',
+    hamburger: 'w-8 h-8',
+    mobileItem: 'py-2',
+    megaMenuTop: 'top-12',
+  },
+  md: {
+    bar: 'h-16',
+    brand: 'text-xl',
+    link: 'px-4 py-2 text-sm',
+    actionButton: 'px-6 py-2.5 text-sm',
+    dropdownItem: 'px-4 py-3',
+    hamburger: 'w-10 h-10',
+    mobileItem: 'py-3',
+    megaMenuTop: 'top-16',
+  },
+  lg: {
+    bar: 'h-20',
+    brand: 'text-2xl',
+    link: 'px-5 py-3 text-base',
+    actionButton: 'px-8 py-3.5 text-base',
+    dropdownItem: 'px-5 py-4',
+    hamburger: 'w-12 h-12',
+    mobileItem: 'py-4',
+    megaMenuTop: 'top-20',
+  },
+} as const
+
 export interface TopNavBarProps extends HTMLAttributes<HTMLElement> {
   /** Brand element — text string or ReactNode (e.g. logo). */
   brand?: ReactNode
@@ -29,6 +64,8 @@ export interface TopNavBarProps extends HTMLAttributes<HTMLElement> {
   onAction?: () => void
   /** Secondary actions area (avatar, icons, etc.) rendered before the action button. */
   actions?: ReactNode
+  /** Size variant. @default 'md' */
+  size?: TopNavBarSize
 }
 
 export const TopNavBar = forwardRef<HTMLElement, TopNavBarProps>(
@@ -40,10 +77,12 @@ export const TopNavBar = forwardRef<HTMLElement, TopNavBarProps>(
       actionLabel = 'Sign In',
       onAction,
       actions,
+      size = 'md',
       ...props
     },
     ref,
   ) => {
+    const sc = sizeConfig[size]
     const [openDropdown, setOpenDropdown] = useState<string | null>(null)
     const [mobileOpen, setMobileOpen] = useState(false)
     const navRef = useRef<HTMLElement | null>(null)
@@ -59,12 +98,11 @@ export const TopNavBar = forwardRef<HTMLElement, TopNavBarProps>(
       [ref],
     )
 
-    // Close dropdowns and mega menus on outside click
+    // Close dropdowns on outside click
     useEffect(() => {
       const handleClickOutside = (e: MouseEvent) => {
         if (navRef.current && !navRef.current.contains(e.target as Node)) {
           setOpenDropdown(null)
-          setOpenMegaMenu(null)
         }
       }
       document.addEventListener('mousedown', handleClickOutside)
@@ -76,7 +114,6 @@ export const TopNavBar = forwardRef<HTMLElement, TopNavBarProps>(
       const handleEscape = (e: KeyboardEvent) => {
         if (e.key === 'Escape') {
           setOpenDropdown(null)
-          setOpenMegaMenu(null)
           setMobileOpen(false)
         }
       }
@@ -103,7 +140,8 @@ export const TopNavBar = forwardRef<HTMLElement, TopNavBarProps>(
               aria-expanded={isOpen}
               aria-haspopup="true"
               className={cn(
-                'flex items-center gap-3 px-4 py-2 rounded-lg text-sm font-semibold font-manrope transition-all duration-200',
+                'flex items-center gap-3 rounded-lg font-semibold font-manrope transition-all duration-200',
+                sc.link,
                 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary',
                 link.active
                   ? 'bg-surface-container-lowest text-primary'
@@ -147,7 +185,9 @@ export const TopNavBar = forwardRef<HTMLElement, TopNavBarProps>(
                     href={child.href}
                     aria-current={child.active ? 'page' : undefined}
                     className={cn(
-                      'flex items-center gap-3 px-4 py-3 mx-2 rounded-lg text-sm font-semibold font-manrope transition-all duration-200',
+                      'flex items-center gap-3 mx-2 rounded-lg font-semibold font-manrope transition-all duration-200',
+                      sc.dropdownItem,
+                      sc.link.split(' ').find((c) => c.startsWith('text-')),
                       'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary',
                       child.active
                         ? 'text-primary bg-surface-container-lowest'
@@ -167,7 +207,8 @@ export const TopNavBar = forwardRef<HTMLElement, TopNavBarProps>(
             {link.megaMenu && (
               <div
                 className={cn(
-                  'fixed left-0 right-0 top-16 bg-surface-container-lowest shadow-xl border-t border-outline-variant/20 transition-all duration-300',
+                  'fixed left-0 right-0 bg-surface-container-lowest shadow-xl border-t border-outline-variant/20 transition-all duration-300',
+                  sc.megaMenuTop,
                   isOpen
                     ? 'opacity-100 pointer-events-auto'
                     : 'opacity-0 pointer-events-none',
@@ -188,7 +229,8 @@ export const TopNavBar = forwardRef<HTMLElement, TopNavBarProps>(
             href={link.href}
             aria-current={link.active ? 'page' : undefined}
             className={cn(
-              'flex items-center gap-3 px-4 py-2 rounded-lg text-sm font-semibold font-manrope transition-all duration-200',
+              'flex items-center gap-3 rounded-lg font-semibold font-manrope transition-all duration-200',
+              sc.link,
               'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary',
               link.active
                 ? 'bg-surface-container-lowest text-primary'
@@ -212,7 +254,9 @@ export const TopNavBar = forwardRef<HTMLElement, TopNavBarProps>(
               onClick={() => toggleDropdown(link.href)}
               aria-expanded={openDropdown === link.href}
               className={cn(
-                'flex items-center gap-3 w-full px-4 py-3 rounded-lg text-sm font-semibold font-manrope transition-all duration-200',
+                'flex items-center gap-3 w-full px-4 rounded-lg font-semibold font-manrope transition-all duration-200',
+                sc.mobileItem,
+                sc.link.split(' ').find((c) => c.startsWith('text-')),
                 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary',
                 link.active
                   ? 'bg-surface-container-lowest text-primary'
@@ -253,7 +297,9 @@ export const TopNavBar = forwardRef<HTMLElement, TopNavBarProps>(
                       role="menuitem"
                       aria-current={child.active ? 'page' : undefined}
                       className={cn(
-                        'flex items-center gap-3 pl-10 pr-4 py-3 rounded-lg text-sm font-semibold font-manrope transition-all duration-200',
+                        'flex items-center gap-3 pl-10 pr-4 rounded-lg font-semibold font-manrope transition-all duration-200',
+                        sc.mobileItem,
+                        sc.link.split(' ').find((c) => c.startsWith('text-')),
                         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary',
                         child.active
                           ? 'text-primary bg-surface-container-lowest'
@@ -281,7 +327,9 @@ export const TopNavBar = forwardRef<HTMLElement, TopNavBarProps>(
             role="menuitem"
             aria-current={link.active ? 'page' : undefined}
             className={cn(
-              'flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-semibold font-manrope transition-all duration-200',
+              'flex items-center gap-3 px-4 rounded-lg font-semibold font-manrope transition-all duration-200',
+              sc.mobileItem,
+              sc.link.split(' ').find((c) => c.startsWith('text-')),
               'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary',
               link.active
                 ? 'bg-surface-container-lowest text-primary'
@@ -305,9 +353,19 @@ export const TopNavBar = forwardRef<HTMLElement, TopNavBarProps>(
         )}
         {...props}
       >
-        <div className="flex justify-between items-center px-8 h-16 max-w-screen-2xl mx-auto">
+        <div
+          className={cn(
+            'flex justify-between items-center px-8 max-w-screen-2xl mx-auto',
+            sc.bar,
+          )}
+        >
           {/* Brand */}
-          <div className="text-xl font-black text-primary font-epilogue uppercase tracking-tighter">
+          <div
+            className={cn(
+              'font-black text-primary font-epilogue uppercase tracking-tighter',
+              sc.brand,
+            )}
+          >
             {brand}
           </div>
 
@@ -330,7 +388,10 @@ export const TopNavBar = forwardRef<HTMLElement, TopNavBarProps>(
             {/* Action button (desktop only) */}
             <button
               type="button"
-              className="hidden md:block bg-primary text-on-primary px-6 py-2.5 rounded-xl font-bold text-sm transition-all duration-200 hover:shadow-lg hover:shadow-primary/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary"
+              className={cn(
+                'hidden md:block bg-primary text-on-primary rounded-xl font-bold transition-all duration-200 hover:shadow-lg hover:shadow-primary/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary',
+                sc.actionButton,
+              )}
               onClick={onAction}
             >
               {actionLabel}
@@ -339,7 +400,10 @@ export const TopNavBar = forwardRef<HTMLElement, TopNavBarProps>(
             {/* Hamburger (mobile only) */}
             <button
               type="button"
-              className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg text-on-surface hover:bg-surface-container-high transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary"
+              className={cn(
+                'md:hidden flex items-center justify-center rounded-lg text-on-surface hover:bg-surface-container-high transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary',
+                sc.hamburger,
+              )}
               onClick={() => setMobileOpen((prev) => !prev)}
               aria-expanded={mobileOpen}
               aria-controls={mobileMenuId}
@@ -407,7 +471,11 @@ export const TopNavBar = forwardRef<HTMLElement, TopNavBarProps>(
             {/* Action button in mobile */}
             <button
               type="button"
-              className="w-full bg-primary text-on-primary py-3 rounded-xl font-bold text-sm transition-all duration-200 hover:shadow-lg hover:shadow-primary/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary"
+              className={cn(
+                'w-full bg-primary text-on-primary rounded-xl font-bold transition-all duration-200 hover:shadow-lg hover:shadow-primary/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary',
+                sc.mobileItem,
+                sc.link.split(' ').find((c) => c.startsWith('text-')),
+              )}
               onClick={onAction}
             >
               {actionLabel}

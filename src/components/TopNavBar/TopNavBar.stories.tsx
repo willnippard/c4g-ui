@@ -103,6 +103,7 @@ const meta: Meta<typeof TopNavBar> = {
   argTypes: {
     brand: { control: 'text' },
     actionLabel: { control: 'text' },
+    size: { control: 'select', options: ['sm', 'md', 'lg'] },
   },
 }
 
@@ -358,6 +359,52 @@ export const FullFeatured: Story = {
     ],
     actions: avatarAction,
     actionLabel: 'Get Started',
+    style: { position: 'relative' },
+  },
+}
+
+/* ------------------------------------------------------------------ */
+/* Size variants                                                        */
+/* ------------------------------------------------------------------ */
+
+const sizeLinks: TopNavLink[] = [
+  { label: 'Home', href: '#home', icon: IconHome },
+  {
+    label: 'Components',
+    href: '#components',
+    icon: IconCode,
+    active: true,
+    children: [
+      { label: 'Buttons', href: '#buttons' },
+      { label: 'Cards', href: '#cards', active: true },
+    ],
+  },
+  { label: 'Docs', href: '#docs', icon: IconBook },
+]
+
+export const Small: Story = {
+  args: {
+    size: 'sm',
+    links: sizeLinks,
+    actionLabel: 'Sign In',
+    style: { position: 'relative' },
+  },
+}
+
+export const Medium: Story = {
+  args: {
+    size: 'md',
+    links: sizeLinks,
+    actionLabel: 'Sign In',
+    style: { position: 'relative' },
+  },
+}
+
+export const Large: Story = {
+  args: {
+    size: 'lg',
+    links: sizeLinks,
+    actionLabel: 'Sign In',
     style: { position: 'relative' },
   },
 }
