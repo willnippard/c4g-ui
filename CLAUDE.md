@@ -35,11 +35,25 @@ src/
 
 ### Components
 
-Each component uses `forwardRef`, typed variant props (union types), and follows this pattern:
-- `Button` — primary/secondary/accent, sm/md/lg
-- `Card` — header/body/footer slots
-- `Badge` — primary/accent/muted
-- `Input` — label, error, helper text, aria attributes, auto-generated IDs via `useId()`
+Each component uses `forwardRef`, typed variant props (union types), and follows this pattern. All size/density presets are standardized to `sm | md | lg`.
+
+- `Alert` — dismissible status banner with optional action button; success/error/warning/info, sm/md/lg
+- `Badge` — inline pill label; primary/accent/muted, sm/md/lg
+- `Button` — primary/secondary/accent, sm/md/lg (also has density prop)
+- `Card` — content container with media/header/body/footer slots, sm/md/lg
+- `DataTable` — generic data table with sortable columns, empty state, and caption; sm/md/lg
+- `DataTableAdvanced` — wraps `DataTable` adding global search, per-column filters, and filter chips; sm/md/lg
+- `FAB` — floating action button with configurable icon and screen position; sm/md/lg, fixed/inline
+- `HoverCard` — profile-style popup card (avatar, name, status, action) shown via `HoverCardTrigger` on hover/focus; sm/md/lg
+- `ImpactCard` — stat highlight card with label, large stat number, description, and progress bar; sm/md/lg
+- `Toast` (alias `ImpactToast`) — notification toast with title, description, and dismiss; success/error/warning/info/impact, sm/md/lg
+- `Input` — text input with label, error, helper text, aria attributes, auto-generated IDs via `useId()`; sm/md/lg
+- `ProjectCard` — project showcase card with image, status badge, avatar stack, and details action; sm/md/lg
+- `RadioGroup` — fieldset of radio options with legend, descriptions, error, vertical/horizontal orientation; sm/md/lg
+- `Select` — native dropdown with label, placeholder, error, helper text, auto-generated IDs; sm/md/lg
+- `SideNavBar` — vertical sidebar navigation with brand header, nav items, footer links, and CTA button
+- `Toggle` — switch input with label; sm/md (track size), sm/md/lg (density)
+- `TopNavBar` — fixed top navigation bar with brand, nav links, and action button
 
 ## Conventions
 
