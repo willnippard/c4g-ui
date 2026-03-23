@@ -6,6 +6,15 @@ import { Button } from '../Button'
 const meta: Meta<ModalProps> = {
   title: 'Components/Modal',
   component: Modal,
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'An accessible modal dialog with focus trapping, Escape-to-close, and overlay click support. Includes optional title and footer slots, in sm/md/lg sizes.',
+      },
+    },
+  },
   argTypes: {
     size: { control: 'select', options: ['sm', 'md', 'lg'] },
     closeOnOverlayClick: { control: 'boolean' },

@@ -4,8 +4,22 @@ import { ImpactCard } from './ImpactCard'
 const meta: Meta<typeof ImpactCard> = {
   title: 'Components/ImpactCard',
   component: ImpactCard,
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'A statistics card designed to showcase key impact metrics with a bold stat, label, description, and optional progress bar. Available in sm/md/lg sizes.',
+      },
+    },
+  },
   argTypes: {
     size: { control: 'select', options: ['sm', 'md', 'lg'] },
+    label: { control: 'text' },
+    stat: { control: 'text' },
+    description: { control: 'text' },
+    progress: { control: { type: 'range', min: 0, max: 100, step: 1 } },
+    progressLabel: { control: 'text' },
   },
 }
 

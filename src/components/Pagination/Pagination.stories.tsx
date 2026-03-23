@@ -5,6 +5,15 @@ import { Pagination } from './Pagination'
 const meta: Meta<typeof Pagination> = {
   title: 'Components/Pagination',
   component: Pagination,
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'A page navigation component with previous/next buttons, numbered pages, and ellipsis for large page counts. Supports configurable sibling count and sm/md/lg sizes.',
+      },
+    },
+  },
   argTypes: {
     size: { control: 'select', options: ['sm', 'md', 'lg'] },
     siblingCount: { control: 'number' },

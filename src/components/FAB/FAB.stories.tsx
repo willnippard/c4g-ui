@@ -4,6 +4,15 @@ import { FAB } from './FAB'
 const meta: Meta<typeof FAB> = {
   title: 'Components/FAB',
   component: FAB,
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'A floating action button for primary actions. Supports fixed positioning in any corner, custom icons, and independent size and density presets.',
+      },
+    },
+  },
   argTypes: {
     size: { control: 'select', options: ['sm', 'md', 'lg'] },
     density: { control: 'select', options: ['sm', 'md', 'lg'] },

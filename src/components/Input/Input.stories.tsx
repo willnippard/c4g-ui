@@ -4,6 +4,23 @@ import { Input } from './Input'
 const meta: Meta<typeof Input> = {
   title: 'Components/Input',
   component: Input,
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'A text input with optional label, helper text, and error state. Uses auto-generated IDs for accessibility and supports sm/md/lg sizes.',
+      },
+    },
+  },
+  argTypes: {
+    size: { control: 'select', options: ['sm', 'md', 'lg'] },
+    label: { control: 'text' },
+    error: { control: 'text' },
+    helperText: { control: 'text' },
+    placeholder: { control: 'text' },
+    disabled: { control: 'boolean' },
+  },
 }
 
 export default meta

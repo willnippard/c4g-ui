@@ -4,6 +4,15 @@ import { Toast } from './ImpactToast'
 const meta: Meta<typeof Toast> = {
   title: 'Components/Toast',
   component: Toast,
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'A toast notification component with success, error, warning, info, and impact variants. Supports a title, description, optional dismiss button, and sm/md/lg sizes.',
+      },
+    },
+  },
   argTypes: {
     variant: { control: 'select', options: ['success', 'error', 'warning', 'info', 'impact'] },
     size: { control: 'select', options: ['sm', 'md', 'lg'] },

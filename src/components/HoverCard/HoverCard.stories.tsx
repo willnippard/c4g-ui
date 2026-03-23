@@ -4,6 +4,15 @@ import { HoverCard, HoverCardTrigger } from './HoverCard'
 const meta: Meta<typeof HoverCard> = {
   title: 'Components/HoverCard',
   component: HoverCard,
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'A profile card that displays a user avatar, name, subtitle, status indicator, and action link. Pair with HoverCardTrigger to show on hover or focus.',
+      },
+    },
+  },
   argTypes: {
     size: { control: 'select', options: ['sm', 'md', 'lg'] },
   },

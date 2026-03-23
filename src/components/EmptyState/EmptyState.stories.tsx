@@ -6,6 +6,15 @@ import { Card } from '../Card/Card'
 const meta: Meta<typeof EmptyState> = {
   title: 'Components/EmptyState',
   component: EmptyState,
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'A placeholder component for empty content areas, featuring an icon, title, description, and optional action button. Available in sm/md/lg sizes.',
+      },
+    },
+  },
   argTypes: {
     size: { control: 'select', options: ['sm', 'md', 'lg'] },
     title: { control: 'text' },

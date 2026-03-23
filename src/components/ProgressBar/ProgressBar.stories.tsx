@@ -4,12 +4,22 @@ import { ProgressBar } from './ProgressBar'
 const meta: Meta<typeof ProgressBar> = {
   title: 'Components/ProgressBar',
   component: ProgressBar,
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'A horizontal progress bar with animated fill, optional label, and percentage display. Offers primary/accent/error color variants and sm/md/lg sizes.',
+      },
+    },
+  },
   argTypes: {
     variant: { control: 'select', options: ['primary', 'accent', 'error'] },
     size: { control: 'select', options: ['sm', 'md', 'lg'] },
     value: { control: { type: 'range', min: 0, max: 100, step: 1 } },
     max: { control: 'number' },
     showValue: { control: 'boolean' },
+    label: { control: 'text' },
   },
 }
 

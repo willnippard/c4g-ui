@@ -7,6 +7,12 @@ const meta: Meta<typeof DropdownMenu> = {
   component: DropdownMenu,
   parameters: {
     layout: 'centered',
+    docs: {
+      description: {
+        component:
+          'A trigger-activated dropdown menu with keyboard navigation, icon support, dividers, and danger item styling. Supports left/right alignment and sm/md/lg sizes.',
+      },
+    },
   },
   tags: ['autodocs'],
 }
