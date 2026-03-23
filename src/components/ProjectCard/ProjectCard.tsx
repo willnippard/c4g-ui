@@ -3,7 +3,7 @@ import { cn } from '../../lib/utils'
 
 export type ProjectCardSize = 'sm' | 'md' | 'lg'
 
-export interface ProjectCardProps extends HTMLAttributes<HTMLDivElement> {
+export interface ProjectCardProps extends HTMLAttributes<HTMLElement> {
   title: string
   description: string
   imageSrc?: string
@@ -54,14 +54,14 @@ const sizeConfig = {
   },
 } as const
 
-export const ProjectCard = forwardRef<HTMLDivElement, ProjectCardProps>(
+export const ProjectCard = forwardRef<HTMLElement, ProjectCardProps>(
   (
     {
       className,
       title,
       description,
       imageSrc,
-      imageAlt = '',
+      imageAlt,
       status,
       avatarCount = 3,
       onDetailsClick,
@@ -73,7 +73,7 @@ export const ProjectCard = forwardRef<HTMLDivElement, ProjectCardProps>(
     const config = sizeConfig[size]
 
     return (
-      <div
+      <article
         ref={ref}
         className={cn(
           'group bg-surface-container-lowest overflow-hidden flex flex-col md:flex-row shadow-sm hover:shadow-md transition-shadow border border-outline-variant/20',
@@ -87,7 +87,7 @@ export const ProjectCard = forwardRef<HTMLDivElement, ProjectCardProps>(
             {imageSrc && (
               <img
                 src={imageSrc}
-                alt={imageAlt}
+                alt={imageAlt ?? title}
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
               />
             )}
@@ -147,7 +147,7 @@ export const ProjectCard = forwardRef<HTMLDivElement, ProjectCardProps>(
             )}
           </div>
         </div>
-      </div>
+      </article>
     )
   },
 )

@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { axe } from 'vitest-axe'
 import { describe, it, expect, vi } from 'vitest'
 import { HoverCard, HoverCardTrigger } from './HoverCard'
 
@@ -154,8 +155,9 @@ describe('HoverCardTrigger', () => {
         Trigger
       </HoverCardTrigger>,
     )
-    const trigger = screen.getByRole('button')
+    const trigger = screen.getByText('Trigger')
     expect(trigger).toHaveAttribute('aria-expanded', 'false')
+    expect(trigger).toHaveAttribute('aria-haspopup', 'dialog')
   })
 
   it('has focus-visible classes on the trigger', () => {
@@ -164,7 +166,17 @@ describe('HoverCardTrigger', () => {
         Trigger
       </HoverCardTrigger>,
     )
-    const trigger = screen.getByRole('button')
+    const trigger = screen.getByText('Trigger')
     expect(trigger.className).toContain('focus-visible')
+  })
+})
+
+describe('HoverCard accessibility', () => {
+  it('has no accessibility violations', async () => {
+    const { container } = render(
+      <HoverCard name="Jane Doe" imageSrc="https://example.com/avatar.jpg" />,
+    )
+    const results = await axe(container)
+    expect(results).toHaveNoViolations()
   })
 })

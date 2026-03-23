@@ -109,7 +109,7 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
             <button
               type="button"
               className={cn(
-                'rounded-md font-bold',
+                'rounded-md font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-on-surface focus-visible:ring-offset-2',
                 config.actionButton,
                 actionVariantStyles[variant],
               )}
@@ -122,7 +122,7 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
             <button
               type="button"
               className={cn(
-                'text-on-surface-variant hover:text-on-surface transition-colors',
+                'text-on-surface-variant hover:text-on-surface transition-colors rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-on-surface',
                 config.dismissButton,
               )}
               onClick={onDismiss}

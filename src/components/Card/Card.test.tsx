@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react'
+import { axe } from 'vitest-axe'
 import { describe, it, expect } from 'vitest'
 import { Card } from './Card'
 
@@ -121,8 +122,16 @@ describe('Card', () => {
     expect(screen.getByTestId('test-card')).toBeInTheDocument()
   })
 
-  it('renders as a div element', () => {
+  it('renders as an article element', () => {
     const { container } = render(<Card>Content</Card>)
-    expect(container.firstElementChild?.tagName).toBe('DIV')
+    expect(container.firstElementChild?.tagName).toBe('ARTICLE')
+  })
+})
+
+describe('Card accessibility', () => {
+  it('has no accessibility violations', async () => {
+    const { container } = render(<Card header="Title">Card content</Card>)
+    const results = await axe(container)
+    expect(results).toHaveNoViolations()
   })
 })

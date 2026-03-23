@@ -3,7 +3,7 @@ import { cn } from '../../lib/utils'
 
 export type CardSize = 'sm' | 'md' | 'lg'
 
-export interface CardProps extends HTMLAttributes<HTMLDivElement> {
+export interface CardProps extends HTMLAttributes<HTMLElement> {
   /** Full-bleed media area rendered at the top with no padding (images, video) */
   media?: ReactNode
   /** Headline rendered inside the content area with display font styling */
@@ -35,12 +35,12 @@ const sizeConfig = {
   },
 } as const
 
-export const Card = forwardRef<HTMLDivElement, CardProps>(
+export const Card = forwardRef<HTMLElement, CardProps>(
   ({ className, media, header, footer, children, size = 'md', ...props }, ref) => {
     const config = sizeConfig[size]
 
     return (
-      <div
+      <article
         ref={ref}
         className={cn(
           'group overflow-hidden',
@@ -79,7 +79,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
             </div>
           )}
         </div>
-      </div>
+      </article>
     )
   },
 )

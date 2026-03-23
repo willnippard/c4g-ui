@@ -285,7 +285,7 @@ export const HoverCardTrigger = forwardRef<
     >
       <span
         tabIndex={0}
-        role="button"
+        aria-haspopup="dialog"
         aria-expanded={open}
         className={cn(
           "font-semibold text-on-surface cursor-pointer transition-all duration-200",
@@ -300,7 +300,8 @@ export const HoverCardTrigger = forwardRef<
       </span>
       {open && (
         <div
-          role="tooltip"
+          role="dialog"
+          aria-label="Additional details"
           className="absolute left-0 top-full mt-2 z-50 animate-in fade-in"
           onMouseEnter={handleOpen}
           onMouseLeave={handleClose}

@@ -108,6 +108,7 @@ export const Toast = forwardRef<HTMLDivElement, ToastProps>(
       <div
         ref={ref}
         role={variant === 'error' ? 'alert' : 'status'}
+        aria-live={variant === 'error' ? 'assertive' : 'polite'}
         className={cn(
           'rounded-lg shadow-xl backdrop-blur-md flex items-start border',
           config.container,
@@ -122,7 +123,7 @@ export const Toast = forwardRef<HTMLDivElement, ToastProps>(
         <div className="flex-1 min-w-0">
           <h4 className={config.title}>{title}</h4>
           {description && (
-            <p className={cn('leading-relaxed opacity-90', config.description)}>
+            <p className={cn('leading-relaxed', config.description)}>
               {description}
             </p>
           )}
@@ -131,7 +132,7 @@ export const Toast = forwardRef<HTMLDivElement, ToastProps>(
           <button
             type="button"
             onClick={onDismiss}
-            className="shrink-0 opacity-70 hover:opacity-100 transition-opacity"
+            className="shrink-0 opacity-70 hover:opacity-100 transition-opacity rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:opacity-100"
             aria-label="Dismiss"
           >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className={config.dismissIcon} aria-hidden="true">

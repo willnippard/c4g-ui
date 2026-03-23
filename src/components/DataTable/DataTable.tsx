@@ -1,4 +1,4 @@
-import { type ReactNode, useState, useMemo, useCallback } from 'react'
+import { type KeyboardEvent, type ReactNode, useState, useMemo, useCallback } from 'react'
 import { cn } from '../../lib/utils'
 
 export type DataTableSize = 'sm' | 'md' | 'lg'
@@ -187,10 +187,21 @@ export function DataTable<T>({
                     styles.th,
                     'font-extrabold uppercase tracking-[0.15em] text-primary font-epilogue',
                     col.align === 'right' && 'text-right',
-                    isSortable && 'cursor-pointer select-none hover:bg-primary/10 transition-colors',
+                    isSortable && 'cursor-pointer select-none hover:bg-primary/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary',
                     isActive && 'bg-primary/8',
                   )}
+                  tabIndex={isSortable ? 0 : undefined}
                   onClick={isSortable ? () => handleHeaderClick(col.key) : undefined}
+                  onKeyDown={
+                    isSortable
+                      ? (e: KeyboardEvent<HTMLTableCellElement>) => {
+                          if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault()
+                            handleHeaderClick(col.key)
+                          }
+                        }
+                      : undefined
+                  }
                   aria-sort={
                     isActive
                       ? activeSortDirection === 'asc'

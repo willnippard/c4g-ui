@@ -40,6 +40,7 @@ export const SideNavBar = forwardRef<HTMLElement, SideNavBarProps>(
     return (
       <aside
         ref={ref}
+        aria-label={title ?? 'Side navigation'}
         className={cn(
           'h-screen w-64 bg-surface-container-low flex flex-col py-6 px-4 font-manrope',
           className,

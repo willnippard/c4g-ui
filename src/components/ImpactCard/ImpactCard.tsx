@@ -68,6 +68,7 @@ export const ImpactCard = forwardRef<HTMLDivElement, ImpactCardProps>(
             'absolute top-0 right-0 bg-primary/70 rounded-full opacity-50',
             config.decorCircle,
           )}
+          aria-hidden="true"
         />
         <div>
           <span
@@ -83,7 +84,7 @@ export const ImpactCard = forwardRef<HTMLDivElement, ImpactCardProps>(
           >
             {stat}
           </h3>
-          <p className={cn('font-manrope text-on-primary/90', config.description)}>
+          <p className={cn('font-manrope text-on-primary', config.description)}>
             {description}
           </p>
         </div>
