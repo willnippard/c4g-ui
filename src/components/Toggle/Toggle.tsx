@@ -105,16 +105,16 @@ export const Toggle = forwardRef<HTMLInputElement, ToggleProps>(
           />
         </label>
         {label && (
-          <span
+          <label
             id={labelId}
-            onClick={() => document.getElementById(toggleId)?.click()}
+            htmlFor={toggleId}
             className={cn(
               'font-semibold text-on-surface cursor-[inherit] select-none',
               densityCfg.label,
             )}
           >
             {label}
-          </span>
+          </label>
         )}
       </div>
     )
