@@ -40,14 +40,16 @@ describe('TopNavBar', () => {
       { label: 'About', href: '/about' },
     ]
     render(<TopNavBar links={links} />)
-    expect(screen.getByText('Home')).toBeInTheDocument()
-    expect(screen.getByText('About')).toBeInTheDocument()
+    // Links appear in both desktop and mobile menus
+    expect(screen.getAllByText('Home').length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText('About').length).toBeGreaterThanOrEqual(1)
   })
 
   it('does not render links section when links array is empty', () => {
     const { container } = render(<TopNavBar links={[]} />)
-    const linkContainer = container.querySelector('ul')
-    expect(linkContainer).not.toBeInTheDocument()
+    // The desktop ul should not render, but the mobile menu ul (role="menu") still exists
+    const desktopLists = container.querySelectorAll('ul:not([role="menu"])')
+    expect(desktopLists.length).toBe(0)
   })
 
   // --- Accessibility ---
@@ -70,28 +72,25 @@ describe('TopNavBar', () => {
       { label: 'About', href: '/about' },
     ]
     render(<TopNavBar links={links} />)
-    expect(screen.getByText('Home').closest('a')).toHaveAttribute(
-      'aria-current',
-      'page',
-    )
-    expect(screen.getByText('About').closest('a')).not.toHaveAttribute(
-      'aria-current',
-    )
+    // Links appear in both desktop and mobile; check the first instance
+    const homeLinks = screen.getAllByText('Home')
+    expect(homeLinks[0].closest('a')).toHaveAttribute('aria-current', 'page')
+    const aboutLinks = screen.getAllByText('About')
+    expect(aboutLinks[0].closest('a')).not.toHaveAttribute('aria-current')
   })
 
   it('links render with correct href', () => {
     const links: TopNavLink[] = [{ label: 'Docs', href: '/docs' }]
     render(<TopNavBar links={links} />)
-    expect(screen.getByText('Docs').closest('a')).toHaveAttribute(
-      'href',
-      '/docs',
-    )
+    const docsLinks = screen.getAllByText('Docs')
+    expect(docsLinks[0].closest('a')).toHaveAttribute('href', '/docs')
   })
 
   it('has focus-visible styles on links', () => {
     const links: TopNavLink[] = [{ label: 'Link', href: '/link' }]
     render(<TopNavBar links={links} />)
-    const link = screen.getByText('Link').closest('a')
+    const linkElements = screen.getAllByText('Link')
+    const link = linkElements[0].closest('a')
     expect(link?.className).toContain('focus-visible')
   })
 
@@ -121,7 +120,9 @@ describe('TopNavBar', () => {
       },
     ]
     render(<TopNavBar links={links} />)
-    expect(screen.getByTestId('home-icon')).toBeInTheDocument()
+    // Icon appears in both desktop and mobile menus
+    const icons = screen.getAllByTestId('home-icon')
+    expect(icons.length).toBeGreaterThanOrEqual(1)
   })
   // --- Dropdown ---
   it('renders dropdown toggle for links with children', () => {
@@ -212,7 +213,9 @@ describe('TopNavBar', () => {
     render(
       <TopNavBar actions={<span data-testid="actions">Actions</span>} />,
     )
-    expect(screen.getByTestId('actions')).toBeInTheDocument()
+    // Actions area renders in both desktop and mobile menus
+    const actions = screen.getAllByTestId('actions')
+    expect(actions.length).toBeGreaterThanOrEqual(1)
   })
 })
 
