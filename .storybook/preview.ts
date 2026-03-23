@@ -18,7 +18,7 @@ const preview: Preview = {
     darkMode: {
       dark: themes.dark,
       light: themes.light,
-      stylePreview: true,
+      stylePreview: false,
     },
     options: {
       storySort: {
