@@ -1,5 +1,6 @@
+import { useState, useCallback } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
-import { DataTable, type DataTableColumn } from './DataTable'
+import { DataTable, type DataTableColumn, type SortDirection } from './DataTable'
 import { Badge } from '../Badge'
 
 interface Organization {
@@ -12,23 +13,31 @@ interface Organization {
 
 const basicColumns: DataTableColumn<Organization>[] = [
   { key: 'name', header: 'Organization' },
-  { key: 'subtitle', header: 'Description' },
+  { key: 'subtitle', header: 'Description', maxWidth: '200px' },
   { key: 'status', header: 'Status' },
   { key: 'date', header: 'Date', align: 'right' },
 ]
 
+const sortableColumns: DataTableColumn<Organization>[] = [
+  { key: 'name', header: 'Organization', sortable: true },
+  { key: 'subtitle', header: 'Description', maxWidth: '200px' },
+  { key: 'status', header: 'Status', sortable: true },
+  { key: 'date', header: 'Date', align: 'right', sortable: true },
+]
+
 const richColumns: DataTableColumn<Organization>[] = [
-  { key: 'name', header: 'Organization' },
-  { key: 'subtitle', header: 'Description' },
+  { key: 'name', header: 'Organization', sortable: true },
+  { key: 'subtitle', header: 'Description', maxWidth: '200px' },
   {
     key: 'status',
     header: 'Status',
+    sortable: true,
     render: (row) => {
       const variant = row.status === 'active' ? 'primary' : row.status === 'pending' ? 'accent' : 'muted'
       return <Badge variant={variant}>{row.status}</Badge>
     },
   },
-  { key: 'date', header: 'Date', align: 'right' },
+  { key: 'date', header: 'Date', align: 'right', sortable: true },
 ]
 
 const sampleData: Organization[] = [
@@ -99,4 +108,68 @@ export const CustomRender: Story = {
     data: sampleData,
     keyExtractor: (row) => row.id,
   },
+}
+
+export const ClientSideSort: Story = {
+  args: {
+    columns: sortableColumns,
+    data: sampleData,
+    keyExtractor: (row) => row.id,
+  },
+}
+
+export const ClientSideSortWithCustomRender: Story = {
+  args: {
+    columns: richColumns,
+    data: sampleData,
+    keyExtractor: (row) => row.id,
+  },
+}
+
+function ServerSideSortExample() {
+  const [sortKey, setSortKey] = useState<string>('name')
+  const [sortDirection, setSortDirection] = useState<SortDirection>('asc')
+  const [data, setData] = useState(sampleData)
+  const [loading, setLoading] = useState(false)
+
+  const handleSort = useCallback(
+    (key: string, direction: SortDirection) => {
+      setSortKey(key)
+      setSortDirection(direction)
+      setLoading(true)
+
+      // Simulate an async server-side sort
+      setTimeout(() => {
+        const sorted = [...sampleData].sort((a, b) => {
+          const aVal = (a as Record<string, unknown>)[key]
+          const bVal = (b as Record<string, unknown>)[key]
+          const cmp = String(aVal ?? '').localeCompare(String(bVal ?? ''))
+          return direction === 'asc' ? cmp : -cmp
+        })
+        setData(sorted)
+        setLoading(false)
+      }, 500)
+    },
+    [],
+  )
+
+  return (
+    <div>
+      {loading && (
+        <p className="text-on-surface-variant text-sm mb-2">Sorting...</p>
+      )}
+      <DataTable
+        columns={sortableColumns}
+        data={data}
+        keyExtractor={(row) => row.id}
+        sortKey={sortKey}
+        sortDirection={sortDirection}
+        onSort={handleSort}
+      />
+    </div>
+  )
+}
+
+export const ServerSideSort: StoryObj = {
+  render: () => <ServerSideSortExample />,
 }
