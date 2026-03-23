@@ -1,1 +1,1 @@
-export { Card, type CardProps } from './Card'
+export { Card, type CardProps, type CardSize } from "./Card"

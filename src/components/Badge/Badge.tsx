@@ -3,24 +3,40 @@ import { cn } from '../../lib/utils'
 
 export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
   variant?: 'primary' | 'accent' | 'muted'
+  size?: 'compact' | 'spacious' | 'zoomed'
 }
 
 const variantStyles: Record<NonNullable<BadgeProps['variant']>, string> = {
   primary:
-    'bg-primary text-primary-foreground dark:bg-primary-dark',
+    'bg-primary text-primary-foreground',
   accent:
-    'bg-accent text-accent-foreground dark:bg-accent-dark',
+    'bg-accent text-accent-foreground',
   muted:
-    'bg-muted text-muted-foreground dark:bg-muted-dark dark:text-foreground-dark',
+    'bg-muted text-muted-foreground',
 }
 
+const sizeConfig = {
+  compact: {
+    badge: 'px-1.5 py-px text-[10px]',
+  },
+  spacious: {
+    badge: 'px-2.5 py-0.5 text-xs',
+  },
+  zoomed: {
+    badge: 'px-4 py-1.5 text-base',
+  },
+} as const
+
 export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
-  ({ className, variant = 'primary', ...props }, ref) => {
+  ({ className, variant = 'primary', size = 'spacious', ...props }, ref) => {
+    const config = sizeConfig[size]
+
     return (
       <span
         ref={ref}
         className={cn(
-          'inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold font-manrope',
+          'inline-flex items-center rounded-full font-semibold font-manrope border border-outline-variant/20',
+          config.badge,
           variantStyles[variant],
           className,
         )}

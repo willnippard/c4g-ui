@@ -7,6 +7,7 @@ const meta: Meta<typeof Button> = {
   argTypes: {
     variant: { control: 'select', options: ['primary', 'secondary', 'accent'] },
     size: { control: 'select', options: ['sm', 'md', 'lg'] },
+    density: { control: 'select', options: ['compact', 'spacious', 'zoomed'] },
     disabled: { control: 'boolean' },
   },
 }
@@ -36,4 +37,26 @@ export const Large: Story = {
 
 export const Disabled: Story = {
   args: { children: 'Disabled', disabled: true },
+}
+
+export const Compact: Story = {
+  args: { children: 'Compact', density: 'compact' },
+}
+
+export const Spacious: Story = {
+  args: { children: 'Spacious', density: 'spacious' },
+}
+
+export const Zoomed: Story = {
+  args: { children: 'Zoomed', density: 'zoomed' },
+}
+
+export const AllDensities: Story = {
+  render: () => (
+    <div className="flex items-center gap-4">
+      <Button density="compact">Compact</Button>
+      <Button density="spacious">Spacious</Button>
+      <Button density="zoomed">Zoomed</Button>
+    </div>
+  ),
 }

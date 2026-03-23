@@ -40,3 +40,27 @@ export const Disabled: Story = {
     disabled: true,
   },
 }
+
+export const Compact: Story = {
+  args: {
+    label: 'Email',
+    placeholder: 'you@example.com',
+    size: 'compact',
+  },
+}
+
+export const Spacious: Story = {
+  args: {
+    label: 'Email',
+    placeholder: 'you@example.com',
+    size: 'spacious',
+  },
+}
+
+export const Zoomed: Story = {
+  args: {
+    label: 'Email',
+    placeholder: 'you@example.com',
+    size: 'zoomed',
+  },
+}

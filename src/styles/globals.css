@@ -3,11 +3,217 @@
 @tailwind utilities;
 
 @layer base {
-  body {
-    @apply font-manrope text-foreground bg-background antialiased;
+  :root {
+    /* Base */
+    --color-background: 248 246 241;
+    --color-foreground: 43 36 32;
+
+    /* Surface hierarchy */
+    --color-surface: 255 248 245;
+    --color-surface-bright: 255 248 245;
+    --color-surface-dim: 229 215 209;
+    --color-surface-container-lowest: 255 255 255;
+    --color-surface-container-low: 255 241 234;
+    --color-surface-container: 249 235 229;
+    --color-surface-container-high: 243 229 223;
+    --color-surface-container-highest: 237 224 217;
+    --color-on-surface: 33 26 22;
+    --color-on-surface-variant: 64 73 64;
+
+    /* Primary */
+    --color-primary: 42 107 63;
+    --color-primary-foreground: 255 255 255;
+    --color-primary-container: 42 107 63;
+    --color-on-primary: 255 255 255;
+    --color-on-primary-container: 165 233 178;
+    --color-primary-fixed: 173 242 187;
+    --color-primary-fixed-dim: 146 214 160;
+
+    /* Accent */
+    --color-accent: 212 163 42;
+    --color-accent-foreground: 43 36 32;
+
+    /* Secondary */
+    --color-secondary: 234 229 219;
+    --color-secondary-foreground: 43 36 32;
+    --color-secondary-container: 231 226 216;
+    --color-on-secondary-container: 103 100 92;
+    --color-secondary-fixed: 231 226 216;
+    --color-secondary-fixed-dim: 202 198 188;
+
+    /* Muted */
+    --color-muted: 237 233 224;
+    --color-muted-foreground: 107 93 84;
+
+    /* Card */
+    --color-card: 255 255 255;
+    --color-card-foreground: 43 36 32;
+
+    /* Border */
+    --color-border: 221 215 204;
+
+    /* Tertiary */
+    --color-tertiary: 92 67 0;
+    --color-tertiary-container: 122 90 0;
+    --color-on-tertiary: 255 255 255;
+    --color-on-tertiary-container: 255 212 120;
+    --color-tertiary-fixed: 255 223 159;
+    --color-tertiary-fixed-dim: 243 191 69;
+
+    /* Outline */
+    --color-outline-variant: 192 201 190;
+
+    /* Error */
+    --color-error: 186 26 26;
+    --color-error-container: 255 218 214;
+    --color-on-error: 255 255 255;
+    --color-on-error-container: 147 0 10;
+
+    /* Inverse */
+    --color-inverse-surface: 54 47 43;
+    --color-inverse-on-surface: 252 238 231;
+
+    /* Toast — fixed colors that don't swap between themes */
+    --color-toast-success: 45 120 68;
+    --color-toast-error: 180 40 40;
+    --color-toast-warning: 140 100 10;
+    --color-toast-info: 80 72 66;
+    --color-toast-impact: 145 108 10;
   }
 
   .dark {
-    @apply text-foreground-dark bg-background-dark;
+    /* Base */
+    --color-background: 20 31 26;
+    --color-foreground: 241 237 228;
+
+    /* Surface hierarchy (inverted: lowest is darkest) */
+    --color-surface: 26 18 16;
+    --color-surface-bright: 65 56 51;
+    --color-surface-dim: 26 18 16;
+    --color-surface-container-lowest: 17 13 11;
+    --color-surface-container-low: 33 26 22;
+    --color-surface-container: 43 34 32;
+    --color-surface-container-high: 54 45 41;
+    --color-surface-container-highest: 65 56 51;
+    --color-on-surface: 237 232 228;
+    --color-on-surface-variant: 192 201 190;
+
+    /* Primary (lighter for dark backgrounds) */
+    --color-primary: 146 214 160;
+    --color-primary-foreground: 0 57 26;
+    --color-primary-container: 10 82 41;
+    --color-on-primary: 0 57 26;
+    --color-on-primary-container: 173 242 187;
+    --color-primary-fixed: 173 242 187;
+    --color-primary-fixed-dim: 146 214 160;
+
+    /* Accent (brighter for dark backgrounds) */
+    --color-accent: 243 191 69;
+    --color-accent-foreground: 61 41 0;
+
+    /* Secondary */
+    --color-secondary: 73 71 63;
+    --color-secondary-foreground: 231 226 216;
+    --color-secondary-container: 73 71 63;
+    --color-on-secondary-container: 231 226 216;
+    --color-secondary-fixed: 231 226 216;
+    --color-secondary-fixed-dim: 202 198 188;
+
+    /* Muted */
+    --color-muted: 51 41 36;
+    --color-muted-foreground: 192 184 176;
+
+    /* Card */
+    --color-card: 43 34 32;
+    --color-card-foreground: 237 232 228;
+
+    /* Border */
+    --color-border: 80 68 64;
+
+    /* Tertiary (brighter for dark backgrounds) */
+    --color-tertiary: 243 191 69;
+    --color-tertiary-container: 92 67 0;
+    --color-on-tertiary: 61 41 0;
+    --color-on-tertiary-container: 255 223 159;
+    --color-tertiary-fixed: 255 223 159;
+    --color-tertiary-fixed-dim: 243 191 69;
+
+    /* Outline */
+    --color-outline-variant: 69 77 68;
+
+    /* Error */
+    --color-error: 255 180 171;
+    --color-error-container: 147 0 10;
+    --color-on-error: 105 0 5;
+    --color-on-error-container: 255 218 214;
+
+    /* Inverse */
+    --color-inverse-surface: 237 232 228;
+    --color-inverse-on-surface: 54 47 43;
+
+    /* Toast — same values as light (intentionally fixed) */
+    --color-toast-success: 45 120 68;
+    --color-toast-error: 180 40 40;
+    --color-toast-warning: 140 100 10;
+    --color-toast-info: 80 72 66;
+    --color-toast-impact: 145 108 10;
+
+    /* Brand panel */
+    --color-brand-panel: 46 44 40;
+    --color-brand-panel-bar: 59 143 85;
+  }
+
+  body {
+    @apply font-manrope text-foreground bg-background antialiased;
+  }
+}
+
+@layer components {
+  /* Custom radio — editorial "tactile" style */
+  .radio-tactile {
+    appearance: none;
+    width: 1.25rem;
+    height: 1.25rem;
+    border: 2px solid rgb(var(--color-on-surface-variant));
+    border-radius: 50%;
+    display: grid;
+    place-content: center;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .radio-tactile::before {
+    content: "";
+    width: 0.625rem;
+    height: 0.625rem;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: transform 120ms ease-in-out;
+    background-color: rgb(var(--color-on-primary));
+  }
+
+  .radio-tactile:checked {
+    border-color: rgb(var(--color-primary));
+    background-color: rgb(var(--color-primary));
+  }
+
+  .radio-tactile:checked::before {
+    transform: scale(1);
+  }
+
+  .radio-tactile:hover:not(:disabled) {
+    border-color: rgb(var(--color-primary));
+    box-shadow: 0 0 0 4px rgb(var(--color-primary) / 0.15);
+  }
+
+  .radio-tactile:focus-visible {
+    outline: 2px solid transparent;
+    box-shadow: 0 0 0 4px rgb(var(--color-primary) / 0.35);
+  }
+
+  .radio-tactile:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
   }
 }

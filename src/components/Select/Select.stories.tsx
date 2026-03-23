@@ -1,0 +1,87 @@
+import type { Meta, StoryObj } from '@storybook/react'
+import { Select } from './Select'
+
+const meta: Meta<typeof Select> = {
+  title: 'Components/Select',
+  component: Select,
+}
+
+export default meta
+type Story = StoryObj<typeof Select>
+
+const sampleOptions = [
+  { value: 'community', label: 'Community Growth' },
+  { value: 'education', label: 'Education' },
+  { value: 'environment', label: 'Environment' },
+  { value: 'health', label: 'Health & Wellness' },
+]
+
+export const Default: Story = {
+  args: {
+    options: sampleOptions,
+  },
+}
+
+export const WithLabel: Story = {
+  args: {
+    label: 'Project Type',
+    options: sampleOptions,
+  },
+}
+
+export const WithHelperText: Story = {
+  args: {
+    label: 'Project Type',
+    options: sampleOptions,
+    helperText: 'Choose the category that best fits your project.',
+  },
+}
+
+export const WithError: Story = {
+  args: {
+    label: 'Project Type',
+    options: [{ value: '', label: 'Select an option...' }, ...sampleOptions],
+    error: 'Please select a project type.',
+  },
+}
+
+export const WithPlaceholder: Story = {
+  args: {
+    label: 'Project Type',
+    options: sampleOptions,
+    placeholder: 'Select a project type...',
+    defaultValue: '',
+  },
+}
+
+export const Disabled: Story = {
+  args: {
+    label: 'Project Type',
+    options: sampleOptions,
+    disabled: true,
+  },
+}
+
+export const Compact: Story = {
+  args: {
+    label: 'Project Type',
+    options: sampleOptions,
+    size: 'compact',
+  },
+}
+
+export const Spacious: Story = {
+  args: {
+    label: 'Project Type',
+    options: sampleOptions,
+    size: 'spacious',
+  },
+}
+
+export const Zoomed: Story = {
+  args: {
+    label: 'Project Type',
+    options: sampleOptions,
+    size: 'zoomed',
+  },
+}
