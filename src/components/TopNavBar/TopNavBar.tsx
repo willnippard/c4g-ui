@@ -82,12 +82,13 @@ export const TopNavBar = forwardRef<HTMLElement, TopNavBarProps>(
       setOpenDropdown((prev) => (prev === href ? null : href))
     }
 
-    const hasDropdown = (link: TopNavLink) => !!(link.children?.length)
+    const hasSubmenu = (link: TopNavLink) =>
+      !!(link.children?.length || link.megaMenu)
 
     const renderDesktopLink = (link: TopNavLink) => {
       const isOpen = openDropdown === link.href
 
-      if (hasDropdown(link)) {
+      if (hasSubmenu(link)) {
         return (
           <li key={link.href} className="relative">
             <button
@@ -125,34 +126,52 @@ export const TopNavBar = forwardRef<HTMLElement, TopNavBarProps>(
             </button>
 
             {/* Dropdown panel */}
-            <div
-              className={cn(
-                'absolute top-full left-0 mt-2 min-w-[220px] bg-surface-container-lowest rounded-xl shadow-lg border border-outline-variant/20 py-2 transition-all duration-300',
-                isOpen
-                  ? 'opacity-100 translate-y-0 pointer-events-auto'
-                  : 'opacity-0 -translate-y-2 pointer-events-none',
-              )}
-            >
-              {link.children!.map((child) => (
-                <a
-                  key={child.href}
-                  href={child.href}
-                  aria-current={child.active ? 'page' : undefined}
-                  className={cn(
-                    'flex items-center gap-3 px-4 py-3 mx-2 rounded-lg text-sm font-semibold font-manrope transition-all duration-200',
-                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary',
-                    child.active
-                      ? 'text-primary bg-surface-container-lowest'
-                      : 'text-on-secondary-container hover:bg-surface-container-high',
-                  )}
-                >
-                  {child.icon && (
-                    <span className="shrink-0">{child.icon}</span>
-                  )}
-                  <span>{child.label}</span>
-                </a>
-              ))}
-            </div>
+            {link.children && link.children.length > 0 && (
+              <div
+                className={cn(
+                  'absolute top-full left-0 mt-2 min-w-[220px] bg-surface-container-lowest rounded-xl shadow-lg border border-outline-variant/20 py-2 transition-all duration-300',
+                  isOpen
+                    ? 'opacity-100 translate-y-0 pointer-events-auto'
+                    : 'opacity-0 -translate-y-2 pointer-events-none',
+                )}
+              >
+                {link.children.map((child) => (
+                  <a
+                    key={child.href}
+                    href={child.href}
+                    aria-current={child.active ? 'page' : undefined}
+                    className={cn(
+                      'flex items-center gap-3 px-4 py-3 mx-2 rounded-lg text-sm font-semibold font-manrope transition-all duration-200',
+                      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary',
+                      child.active
+                        ? 'text-primary bg-surface-container-lowest'
+                        : 'text-on-secondary-container hover:bg-surface-container-high',
+                    )}
+                  >
+                    {child.icon && (
+                      <span className="shrink-0">{child.icon}</span>
+                    )}
+                    <span>{child.label}</span>
+                  </a>
+                ))}
+              </div>
+            )}
+
+            {/* Mega menu panel */}
+            {link.megaMenu && (
+              <div
+                className={cn(
+                  'fixed left-0 right-0 top-16 bg-surface-container-lowest shadow-xl border-t border-outline-variant/20 transition-all duration-300',
+                  isOpen
+                    ? 'opacity-100 pointer-events-auto'
+                    : 'opacity-0 pointer-events-none',
+                )}
+              >
+                <div className="max-w-screen-2xl mx-auto px-8 py-6">
+                  {link.megaMenu}
+                </div>
+              </div>
+            )}
           </li>
         )
       }

@@ -144,6 +144,120 @@ export const WithDropdowns: Story = {
   },
 }
 
+const megaMenuContent = (
+  <div className="grid grid-cols-3 gap-8 font-manrope">
+    <div>
+      <h3 className="font-epilogue font-bold text-primary text-sm mb-3">
+        Getting Started
+      </h3>
+      <ul className="space-y-2 list-none m-0 p-0">
+        <li>
+          <a
+            href="#install"
+            className="text-sm text-on-surface hover:text-primary transition-colors duration-200"
+          >
+            Installation
+          </a>
+        </li>
+        <li>
+          <a
+            href="#quickstart"
+            className="text-sm text-on-surface hover:text-primary transition-colors duration-200"
+          >
+            Quick Start
+          </a>
+        </li>
+        <li>
+          <a
+            href="#theming"
+            className="text-sm text-on-surface hover:text-primary transition-colors duration-200"
+          >
+            Theming
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <h3 className="font-epilogue font-bold text-primary text-sm mb-3">
+        Components
+      </h3>
+      <ul className="space-y-2 list-none m-0 p-0">
+        <li>
+          <a
+            href="#buttons"
+            className="text-sm text-on-surface hover:text-primary transition-colors duration-200"
+          >
+            Buttons
+          </a>
+        </li>
+        <li>
+          <a
+            href="#cards"
+            className="text-sm text-on-surface hover:text-primary transition-colors duration-200"
+          >
+            Cards
+          </a>
+        </li>
+        <li>
+          <a
+            href="#forms"
+            className="text-sm text-on-surface hover:text-primary transition-colors duration-200"
+          >
+            Forms
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <h3 className="font-epilogue font-bold text-primary text-sm mb-3">
+        Resources
+      </h3>
+      <ul className="space-y-2 list-none m-0 p-0">
+        <li>
+          <a
+            href="#github"
+            className="text-sm text-on-surface hover:text-primary transition-colors duration-200"
+          >
+            GitHub
+          </a>
+        </li>
+        <li>
+          <a
+            href="#figma"
+            className="text-sm text-on-surface hover:text-primary transition-colors duration-200"
+          >
+            Figma
+          </a>
+        </li>
+        <li>
+          <a
+            href="#changelog"
+            className="text-sm text-on-surface hover:text-primary transition-colors duration-200"
+          >
+            Changelog
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+)
+
+export const WithMegaMenu: Story = {
+  args: {
+    links: [
+      { label: 'Home', href: '#home', icon: IconHome },
+      {
+        label: 'Resources',
+        href: '#resources',
+        icon: IconBook,
+        megaMenu: megaMenuContent,
+      },
+      { label: 'Team', href: '#team', icon: IconUsers },
+    ],
+    style: { position: 'relative' },
+  },
+}
+
 export const NoLinks: Story = {
   args: {
     links: [],
