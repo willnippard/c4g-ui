@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
+import type { TopNavLink } from './TopNavBar'
 import { TopNavBar } from './TopNavBar'
 
 /* ------------------------------------------------------------------ */
@@ -115,6 +116,30 @@ export const WithIcons: Story = {
       { label: 'Team', href: '#team', icon: IconUsers },
       { label: 'Code', href: '#code', icon: IconCode },
     ],
+    style: { position: 'relative' },
+  },
+}
+
+const dropdownLinks: TopNavLink[] = [
+  { label: 'Home', href: '#home', icon: IconHome },
+  {
+    label: 'Components',
+    href: '#components',
+    icon: IconCode,
+    active: true,
+    children: [
+      { label: 'Buttons', href: '#buttons' },
+      { label: 'Cards', href: '#cards', active: true },
+      { label: 'Inputs', href: '#inputs' },
+      { label: 'Navigation', href: '#navigation' },
+    ],
+  },
+  { label: 'Docs', href: '#docs', icon: IconBook },
+]
+
+export const WithDropdowns: Story = {
+  args: {
+    links: dropdownLinks,
     style: { position: 'relative' },
   },
 }

@@ -120,6 +120,58 @@ describe('TopNavBar', () => {
     render(<TopNavBar links={links} />)
     expect(screen.getByTestId('home-icon')).toBeInTheDocument()
   })
+  // --- Dropdown ---
+  it('renders dropdown toggle for links with children', () => {
+    const links: TopNavLink[] = [
+      {
+        label: 'Components',
+        href: '#components',
+        children: [
+          { label: 'Buttons', href: '#buttons' },
+          { label: 'Cards', href: '#cards' },
+        ],
+      },
+    ]
+    render(<TopNavBar links={links} />)
+    const toggle = screen.getByRole('button', { name: /Components/ })
+    expect(toggle).toHaveAttribute('aria-haspopup', 'true')
+    expect(toggle).toHaveAttribute('aria-expanded', 'false')
+  })
+
+  it('opens dropdown on click', async () => {
+    const user = userEvent.setup()
+    const links: TopNavLink[] = [
+      {
+        label: 'Components',
+        href: '#components',
+        children: [
+          { label: 'Buttons', href: '#buttons' },
+          { label: 'Cards', href: '#cards' },
+        ],
+      },
+    ]
+    render(<TopNavBar links={links} />)
+    const toggle = screen.getByRole('button', { name: /Components/ })
+    await user.click(toggle)
+    expect(toggle).toHaveAttribute('aria-expanded', 'true')
+  })
+
+  it('closes dropdown on Escape', async () => {
+    const user = userEvent.setup()
+    const links: TopNavLink[] = [
+      {
+        label: 'Components',
+        href: '#components',
+        children: [{ label: 'Buttons', href: '#buttons' }],
+      },
+    ]
+    render(<TopNavBar links={links} />)
+    const toggle = screen.getByRole('button', { name: /Components/ })
+    await user.click(toggle)
+    expect(toggle).toHaveAttribute('aria-expanded', 'true')
+    await user.keyboard('{Escape}')
+    expect(toggle).toHaveAttribute('aria-expanded', 'false')
+  })
 })
 
 describe('TopNavBar accessibility', () => {

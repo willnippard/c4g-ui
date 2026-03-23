@@ -1,4 +1,12 @@
-import { type HTMLAttributes, type ReactNode, forwardRef } from 'react'
+import {
+  type HTMLAttributes,
+  type ReactNode,
+  forwardRef,
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+} from 'react'
 import { cn } from '../../lib/utils'
 
 export type TopNavLink = {
@@ -35,9 +43,143 @@ export const TopNavBar = forwardRef<HTMLElement, TopNavBarProps>(
     },
     ref,
   ) => {
+    const [openDropdown, setOpenDropdown] = useState<string | null>(null)
+    const navRef = useRef<HTMLElement | null>(null)
+
+    const setRefs = useCallback(
+      (node: HTMLElement | null) => {
+        navRef.current = node
+        if (typeof ref === 'function') ref(node)
+        else if (ref)
+          (ref as React.MutableRefObject<HTMLElement | null>).current = node
+      },
+      [ref],
+    )
+
+    // Close dropdowns on outside click
+    useEffect(() => {
+      const handleClickOutside = (e: MouseEvent) => {
+        if (navRef.current && !navRef.current.contains(e.target as Node)) {
+          setOpenDropdown(null)
+        }
+      }
+      document.addEventListener('mousedown', handleClickOutside)
+      return () => document.removeEventListener('mousedown', handleClickOutside)
+    }, [])
+
+    // Close on Escape
+    useEffect(() => {
+      const handleEscape = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+          setOpenDropdown(null)
+        }
+      }
+      document.addEventListener('keydown', handleEscape)
+      return () => document.removeEventListener('keydown', handleEscape)
+    }, [])
+
+    const toggleDropdown = (href: string) => {
+      setOpenDropdown((prev) => (prev === href ? null : href))
+    }
+
+    const hasDropdown = (link: TopNavLink) => !!(link.children?.length)
+
+    const renderDesktopLink = (link: TopNavLink) => {
+      const isOpen = openDropdown === link.href
+
+      if (hasDropdown(link)) {
+        return (
+          <li key={link.href} className="relative">
+            <button
+              type="button"
+              onClick={() => toggleDropdown(link.href)}
+              aria-expanded={isOpen}
+              aria-haspopup="true"
+              className={cn(
+                'flex items-center gap-3 px-4 py-2 rounded-lg text-sm font-semibold font-manrope transition-all duration-200',
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary',
+                link.active
+                  ? 'bg-surface-container-lowest text-primary'
+                  : 'text-on-surface hover:bg-surface-container-high',
+              )}
+            >
+              {link.icon && <span className="shrink-0">{link.icon}</span>}
+              <span>{link.label}</span>
+              <svg
+                className={cn(
+                  'w-4 h-4 transition-transform duration-200',
+                  isOpen && 'rotate-180',
+                )}
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </button>
+
+            {/* Dropdown panel */}
+            <div
+              className={cn(
+                'absolute top-full left-0 mt-2 min-w-[220px] bg-surface-container-lowest rounded-xl shadow-lg border border-outline-variant/20 py-2 transition-all duration-300',
+                isOpen
+                  ? 'opacity-100 translate-y-0 pointer-events-auto'
+                  : 'opacity-0 -translate-y-2 pointer-events-none',
+              )}
+            >
+              {link.children!.map((child) => (
+                <a
+                  key={child.href}
+                  href={child.href}
+                  aria-current={child.active ? 'page' : undefined}
+                  className={cn(
+                    'flex items-center gap-3 px-4 py-3 mx-2 rounded-lg text-sm font-semibold font-manrope transition-all duration-200',
+                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary',
+                    child.active
+                      ? 'text-primary bg-surface-container-lowest'
+                      : 'text-on-secondary-container hover:bg-surface-container-high',
+                  )}
+                >
+                  {child.icon && (
+                    <span className="shrink-0">{child.icon}</span>
+                  )}
+                  <span>{child.label}</span>
+                </a>
+              ))}
+            </div>
+          </li>
+        )
+      }
+
+      return (
+        <li key={link.href}>
+          <a
+            href={link.href}
+            aria-current={link.active ? 'page' : undefined}
+            className={cn(
+              'flex items-center gap-3 px-4 py-2 rounded-lg text-sm font-semibold font-manrope transition-all duration-200',
+              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary',
+              link.active
+                ? 'bg-surface-container-lowest text-primary'
+                : 'text-on-surface hover:bg-surface-container-high',
+            )}
+          >
+            {link.icon && <span className="shrink-0">{link.icon}</span>}
+            <span>{link.label}</span>
+          </a>
+        </li>
+      )
+    }
+
     return (
       <nav
-        ref={ref}
+        ref={setRefs}
         aria-label="Main"
         className={cn(
           'fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md',
@@ -56,34 +198,15 @@ export const TopNavBar = forwardRef<HTMLElement, TopNavBarProps>(
             {/* Desktop links */}
             {links.length > 0 && (
               <ul className="hidden md:flex gap-1 items-center list-none m-0 p-0 mr-2">
-                {links.map((link) => (
-                  <li key={link.href}>
-                    <a
-                      href={link.href}
-                      aria-current={link.active ? 'page' : undefined}
-                      className={cn(
-                        'flex items-center gap-3 px-4 py-2 rounded-lg text-sm font-semibold font-manrope transition-all duration-200',
-                        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary',
-                        link.active
-                          ? 'bg-surface-container-lowest text-primary'
-                          : 'text-on-surface hover:bg-surface-container-high',
-                      )}
-                    >
-                      {link.icon && (
-                        <span className="shrink-0">{link.icon}</span>
-                      )}
-                      <span>{link.label}</span>
-                    </a>
-                  </li>
-                ))}
+                {links.map((link) => renderDesktopLink(link))}
               </ul>
             )}
 
             {/* Action button */}
             <button
-            type="button"
-            className="bg-primary text-on-primary px-6 py-2.5 rounded-xl font-bold text-sm transition-all duration-200 hover:shadow-lg hover:shadow-primary/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary"
-            onClick={onAction}
+              type="button"
+              className="bg-primary text-on-primary px-6 py-2.5 rounded-xl font-bold text-sm transition-all duration-200 hover:shadow-lg hover:shadow-primary/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary"
+              onClick={onAction}
             >
               {actionLabel}
             </button>
