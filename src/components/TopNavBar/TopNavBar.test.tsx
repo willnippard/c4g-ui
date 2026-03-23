@@ -1,7 +1,9 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { axe } from 'vitest-axe'
 import { describe, it, expect, vi } from 'vitest'
 import { TopNavBar } from './TopNavBar'
+import type { TopNavLink } from './TopNavBar'
 
 describe('TopNavBar', () => {
   // --- Rendering ---
@@ -31,7 +33,7 @@ describe('TopNavBar', () => {
   })
 
   it('renders links when provided', () => {
-    const links = [
+    const links: TopNavLink[] = [
       { label: 'Home', href: '/' },
       { label: 'About', href: '/about' },
     ]
@@ -42,7 +44,7 @@ describe('TopNavBar', () => {
 
   it('does not render links section when links array is empty', () => {
     const { container } = render(<TopNavBar links={[]} />)
-    const linkContainer = container.querySelector('.md\\:flex.gap-8')
+    const linkContainer = container.querySelector('ul')
     expect(linkContainer).not.toBeInTheDocument()
   })
 
@@ -54,30 +56,41 @@ describe('TopNavBar', () => {
 
   it('has aria-label on the nav element', () => {
     render(<TopNavBar />)
-    expect(screen.getByRole('navigation')).toHaveAttribute('aria-label', 'Main')
+    expect(screen.getByRole('navigation')).toHaveAttribute(
+      'aria-label',
+      'Main',
+    )
   })
 
   it('sets aria-current="page" on active links', () => {
-    const links = [
+    const links: TopNavLink[] = [
       { label: 'Home', href: '/', active: true },
       { label: 'About', href: '/about' },
     ]
     render(<TopNavBar links={links} />)
-    expect(screen.getByText('Home')).toHaveAttribute('aria-current', 'page')
-    expect(screen.getByText('About')).not.toHaveAttribute('aria-current')
+    expect(screen.getByText('Home').closest('a')).toHaveAttribute(
+      'aria-current',
+      'page',
+    )
+    expect(screen.getByText('About').closest('a')).not.toHaveAttribute(
+      'aria-current',
+    )
   })
 
   it('links render with correct href', () => {
-    const links = [{ label: 'Docs', href: '/docs' }]
+    const links: TopNavLink[] = [{ label: 'Docs', href: '/docs' }]
     render(<TopNavBar links={links} />)
-    expect(screen.getByText('Docs')).toHaveAttribute('href', '/docs')
+    expect(screen.getByText('Docs').closest('a')).toHaveAttribute(
+      'href',
+      '/docs',
+    )
   })
 
   it('has focus-visible styles on links', () => {
-    const links = [{ label: 'Link', href: '/link' }]
+    const links: TopNavLink[] = [{ label: 'Link', href: '/link' }]
     render(<TopNavBar links={links} />)
-    const link = screen.getByText('Link')
-    expect(link.className).toContain('focus-visible')
+    const link = screen.getByText('Link').closest('a')
+    expect(link?.className).toContain('focus-visible')
   })
 
   it('has focus-visible styles on action button', () => {
@@ -93,5 +106,26 @@ describe('TopNavBar', () => {
     render(<TopNavBar onAction={onAction} />)
     await user.click(screen.getByText('Sign In'))
     expect(onAction).toHaveBeenCalledTimes(1)
+  })
+
+  // --- Icon support ---
+  it('renders icons alongside link labels', () => {
+    const links: TopNavLink[] = [
+      {
+        label: 'Home',
+        href: '/',
+        icon: <span data-testid="home-icon">H</span>,
+      },
+    ]
+    render(<TopNavBar links={links} />)
+    expect(screen.getByTestId('home-icon')).toBeInTheDocument()
+  })
+})
+
+describe('TopNavBar accessibility', () => {
+  it('has no accessibility violations', async () => {
+    const { container } = render(<TopNavBar />)
+    const results = await axe(container)
+    expect(results).toHaveNoViolations()
   })
 })

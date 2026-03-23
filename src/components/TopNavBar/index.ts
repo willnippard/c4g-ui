@@ -1,1 +1,6 @@
-export { TopNavBar, type TopNavBarProps, type NavLink } from './TopNavBar'
+export {
+  TopNavBar,
+  type TopNavBarProps,
+  type TopNavLink,
+  type NavLink,
+} from './TopNavBar'
