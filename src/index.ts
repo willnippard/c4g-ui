@@ -83,4 +83,16 @@ export {
   type TooltipPosition,
   type TooltipSize,
 } from './components/Tooltip'
+export {
+  Accordion,
+  type AccordionProps,
+  type AccordionItem,
+  type AccordionSize,
+} from './components/Accordion'
+export {
+  ProgressBar,
+  type ProgressBarProps,
+  type ProgressBarSize,
+  type ProgressBarVariant,
+} from './components/ProgressBar'
 export { cn } from './lib/utils'
