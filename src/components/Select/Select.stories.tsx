@@ -4,6 +4,23 @@ import { Select } from './Select'
 const meta: Meta<typeof Select> = {
   title: 'Components/Select',
   component: Select,
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'A styled native select dropdown with label, placeholder, helper text, and error state support. Uses auto-generated IDs for accessibility and comes in sm, md, and lg sizes.',
+      },
+    },
+  },
+  argTypes: {
+    size: { control: 'select', options: ['sm', 'md', 'lg'] },
+    label: { control: 'text' },
+    placeholder: { control: 'text' },
+    helperText: { control: 'text' },
+    error: { control: 'text' },
+    disabled: { control: 'boolean' },
+  },
 }
 
 export default meta

@@ -4,6 +4,23 @@ import { Textarea } from './Textarea'
 const meta: Meta<typeof Textarea> = {
   title: 'Components/Textarea',
   component: Textarea,
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'A multi-line text input with label, helper text, and error state support. Uses auto-generated IDs for accessibility and comes in sm, md, and lg sizes.',
+      },
+    },
+  },
+  argTypes: {
+    size: { control: 'select', options: ['sm', 'md', 'lg'] },
+    label: { control: 'text' },
+    placeholder: { control: 'text' },
+    helperText: { control: 'text' },
+    error: { control: 'text' },
+    disabled: { control: 'boolean' },
+  },
 }
 
 export default meta

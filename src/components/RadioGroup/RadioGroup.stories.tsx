@@ -4,6 +4,23 @@ import { RadioGroup } from './RadioGroup'
 const meta: Meta<typeof RadioGroup> = {
   title: 'Components/RadioGroup',
   component: RadioGroup,
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'An accessible radio button group with support for legends, descriptions, error messages, and horizontal or vertical orientation. Available in sm, md, and lg sizes.',
+      },
+    },
+  },
+  argTypes: {
+    size: { control: 'select', options: ['sm', 'md', 'lg'] },
+    orientation: { control: 'select', options: ['vertical', 'horizontal'] },
+    disabled: { control: 'boolean' },
+    required: { control: 'boolean' },
+    legend: { control: 'text' },
+    error: { control: 'text' },
+  },
 }
 
 export default meta

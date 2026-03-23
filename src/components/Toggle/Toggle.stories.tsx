@@ -4,6 +4,15 @@ import { Toggle } from './Toggle'
 const meta: Meta<typeof Toggle> = {
   title: 'Components/Toggle',
   component: Toggle,
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'A switch-style toggle for boolean settings with an optional label. Supports sm and md track sizes plus a separate density preset (sm, md, lg) for overall scale.',
+      },
+    },
+  },
   argTypes: {
     size: { control: 'select', options: ['sm', 'md'] },
     density: { control: 'select', options: ['sm', 'md', 'lg'] },

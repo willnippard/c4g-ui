@@ -4,10 +4,23 @@ import { ProjectCard } from './ProjectCard'
 const meta: Meta<typeof ProjectCard> = {
   title: 'Components/ProjectCard',
   component: ProjectCard,
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'A rich card component for displaying project summaries with an image, status badge, contributor avatars, and a details action. Supports sm, md, and lg size presets.',
+      },
+    },
+  },
   argTypes: {
     size: { control: 'select', options: ['sm', 'md', 'lg'] },
     status: { control: 'text' },
     avatarCount: { control: 'number' },
+    title: { control: 'text' },
+    description: { control: 'text' },
+    imageSrc: { control: 'text' },
+    imageAlt: { control: 'text' },
   },
 }
 

@@ -18,6 +18,15 @@ const stepsWithDescriptions: StepperProps['steps'] = [
 const meta: Meta<StepperProps> = {
   title: 'Components/Stepper',
   component: Stepper,
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'A multi-step progress indicator supporting horizontal and vertical orientations, custom icons, step descriptions, and clickable steps. Available in sm, md, and lg sizes.',
+      },
+    },
+  },
   argTypes: {
     activeStep: { control: { type: 'number', min: 0, max: 3 } },
     orientation: { control: 'select', options: ['horizontal', 'vertical'] },

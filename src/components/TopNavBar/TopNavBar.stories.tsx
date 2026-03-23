@@ -93,6 +93,15 @@ const IconCode = (
 const meta: Meta<typeof TopNavBar> = {
   title: 'Components/TopNavBar',
   component: TopNavBar,
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'A responsive top navigation bar with brand text, navigation links, dropdown menus, mega menus, a CTA button, and mobile hamburger support. Available in sm, md, and lg sizes.',
+      },
+    },
+  },
   decorators: [
     (Story) => (
       <div style={{ position: 'relative', minHeight: '300px' }}>

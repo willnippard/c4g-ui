@@ -4,6 +4,15 @@ import { SideNavBar } from './SideNavBar'
 const meta: Meta<typeof SideNavBar> = {
   title: 'Components/SideNavBar',
   component: SideNavBar,
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'A vertical sidebar navigation with brand header, nav items with active states, footer links, and an optional footer action button. Supports sm, md, and lg sizes.',
+      },
+    },
+  },
   argTypes: {
     title: { control: 'text' },
     subtitle: { control: 'text' },

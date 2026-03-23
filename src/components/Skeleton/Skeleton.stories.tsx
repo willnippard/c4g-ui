@@ -5,6 +5,15 @@ import { Card } from '../Card/Card'
 const meta: Meta<typeof Skeleton> = {
   title: 'Components/Skeleton',
   component: Skeleton,
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'A placeholder loading indicator with text, rectangular, and rounded variants. Supports multi-line text skeletons and sm, md, lg size presets.',
+      },
+    },
+  },
   argTypes: {
     variant: { control: 'select', options: ['text', 'rectangular', 'rounded'] },
     size: { control: 'select', options: ['sm', 'md', 'lg'] },

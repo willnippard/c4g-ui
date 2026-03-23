@@ -5,6 +5,15 @@ import { Tabs, type TabsProps } from './Tabs'
 const meta: Meta<typeof Tabs> = {
   title: 'Components/Tabs',
   component: Tabs,
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'An accessible tabbed interface with keyboard navigation (arrow keys, Home, End), optional icons, disabled tabs, and scrollable overflow. Supports sm, md, and lg sizes.',
+      },
+    },
+  },
   argTypes: {
     size: { control: 'select', options: ['sm', 'md', 'lg'] },
   },

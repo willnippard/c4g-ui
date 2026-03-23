@@ -5,6 +5,15 @@ import { Button } from '../Button'
 const meta: Meta<TooltipProps> = {
   title: 'Components/Tooltip',
   component: Tooltip,
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'A hover/focus-triggered tooltip that displays contextual information positioned relative to its trigger element. Supports top, bottom, left, and right positions with a configurable delay.',
+      },
+    },
+  },
   argTypes: {
     position: { control: 'select', options: ['top', 'bottom', 'left', 'right'] },
     size: { control: 'select', options: ['sm', 'md', 'lg'] },
