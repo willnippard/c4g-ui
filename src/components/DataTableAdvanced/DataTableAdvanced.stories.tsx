@@ -49,7 +49,7 @@ const meta: Meta = {
   title: 'Components/DataTableAdvanced',
   component: DataTableAdvanced as React.ComponentType,
   argTypes: {
-    size: { control: 'select', options: ['compact', 'spacious', 'zoomed'] },
+    size: { control: 'select', options: ['sm', 'md', 'lg'] },
   },
 }
 
@@ -68,25 +68,25 @@ export const Default: Story = {
   ),
 }
 
-export const Compact: Story = {
+export const Small: Story = {
   render: () => (
     <DataTableAdvanced<Volunteer>
       columns={columns}
       data={sampleData}
       keyExtractor={(row) => row.id}
-      size="compact"
+      size="sm"
       caption="Volunteer directory"
     />
   ),
 }
 
-export const Zoomed: Story = {
+export const Large: Story = {
   render: () => (
     <DataTableAdvanced<Volunteer>
       columns={columns}
       data={sampleData}
       keyExtractor={(row) => row.id}
-      size="zoomed"
+      size="lg"
       caption="Volunteer directory"
     />
   ),

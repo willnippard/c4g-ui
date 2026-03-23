@@ -35,7 +35,7 @@ function DataTableAdvancedInner<T>(
     columns,
     data,
     keyExtractor,
-    size = 'spacious',
+    size = 'md',
     caption,
     className,
     emptyState,
@@ -119,27 +119,27 @@ function DataTableAdvancedInner<T>(
   })
 
   const sizeToInput: Record<DataTableSize, 'compact' | 'spacious' | 'zoomed'> = {
-    compact: 'compact',
-    spacious: 'spacious',
-    zoomed: 'zoomed',
+    sm: 'compact',
+    md: 'spacious',
+    lg: 'zoomed',
   }
 
   const sizeToGap: Record<DataTableSize, string> = {
-    compact: 'gap-2',
-    spacious: 'gap-3',
-    zoomed: 'gap-4',
+    sm: 'gap-2',
+    md: 'gap-3',
+    lg: 'gap-4',
   }
 
   const sizeToText: Record<DataTableSize, string> = {
-    compact: 'text-xs',
-    spacious: 'text-sm',
-    zoomed: 'text-base',
+    sm: 'text-xs',
+    md: 'text-sm',
+    lg: 'text-base',
   }
 
   const sizeToSelect: Record<DataTableSize, string> = {
-    compact: 'px-2 py-1 text-xs',
-    spacious: 'px-3 py-1.5 text-sm',
-    zoomed: 'px-4 py-2 text-base',
+    sm: 'px-2 py-1 text-xs',
+    md: 'px-3 py-1.5 text-sm',
+    lg: 'px-4 py-2 text-base',
   }
 
   const noResultsContent = noResultsState ?? (
@@ -200,7 +200,7 @@ function DataTableAdvancedInner<T>(
             <label
               className={cn(
                 'font-semibold font-manrope text-foreground',
-                size === 'zoomed' ? 'text-base' : 'text-xs',
+                size === 'lg' ? 'text-base' : 'text-xs',
               )}
             >
               {col.header}
@@ -289,7 +289,7 @@ function DataTableAdvancedInner<T>(
         <p
           className={cn(
             'text-on-surface-variant font-manrope',
-            size === 'compact' ? 'text-[10px]' : sizeToText[size],
+            size === 'sm' ? 'text-[10px]' : sizeToText[size],
           )}
           aria-live="polite"
         >

@@ -1,7 +1,7 @@
 import { type ReactNode, useState, useMemo, useCallback } from 'react'
 import { cn } from '../../lib/utils'
 
-export type DataTableSize = 'compact' | 'spacious' | 'zoomed'
+export type DataTableSize = 'sm' | 'md' | 'lg'
 export type SortDirection = 'asc' | 'desc'
 
 export interface DataTableColumn<T> {
@@ -37,17 +37,17 @@ export interface DataTableProps<T> {
 }
 
 const sizeConfig = {
-  compact: {
+  sm: {
     th: 'px-4 py-2 text-[10px] whitespace-nowrap',
     td: 'px-4 py-2.5 text-xs whitespace-nowrap',
     container: 'rounded-lg',
   },
-  spacious: {
+  md: {
     th: 'px-8 py-4 text-xs whitespace-nowrap',
     td: 'px-8 py-5 text-sm whitespace-nowrap',
     container: 'rounded-xl',
   },
-  zoomed: {
+  lg: {
     th: 'px-12 py-6 text-sm whitespace-nowrap',
     td: 'px-12 py-8 text-lg whitespace-nowrap',
     container: 'rounded-2xl',
@@ -60,8 +60,8 @@ function resolveSize(
   density: 'condensed' | 'default' | undefined,
 ): DataTableSize {
   if (size) return size
-  if (density === 'condensed') return 'compact'
-  return 'spacious'
+  if (density === 'condensed') return 'sm'
+  return 'md'
 }
 
 function defaultComparator<T>(a: T, b: T, key: string): number {
