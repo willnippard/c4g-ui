@@ -118,10 +118,10 @@ function DataTableAdvancedInner<T>(
     return { key, header, render, align, maxWidth }
   })
 
-  const sizeToInput: Record<DataTableSize, 'compact' | 'spacious' | 'zoomed'> = {
-    sm: 'compact',
-    md: 'spacious',
-    lg: 'zoomed',
+  const sizeToInput: Record<DataTableSize, 'sm' | 'md' | 'lg'> = {
+    sm: 'sm',
+    md: 'md',
+    lg: 'lg',
   }
 
   const sizeToGap: Record<DataTableSize, string> = {
