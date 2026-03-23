@@ -49,5 +49,12 @@ export {
   type DataTableAdvancedProps,
   type DataTableAdvancedColumn,
 } from './components/DataTableAdvanced'
+export {
+  Pagination,
+  type PaginationProps,
+  type PaginationSize,
+} from './components/Pagination'
+export { Textarea, type TextareaProps, type TextareaSize } from './components/Textarea'
+export { Checkbox, type CheckboxProps, type CheckboxSize } from './components/Checkbox'
 export { AuthBlock, type AuthBlockProps } from './blocks/AuthBlock'
 export { cn } from './lib/utils'
