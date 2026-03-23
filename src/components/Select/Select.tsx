@@ -20,21 +20,24 @@ const sizeConfig = {
     wrapper: 'gap-1',
     label: 'text-xs',
     select: 'px-3 py-2 pr-8 text-sm',
-    icon: 'right-2 h-4 w-4',
+    iconWrapper: 'right-2',
+    iconSvg: 'h-4 w-4',
     helper: 'text-xs',
   },
   md: {
     wrapper: 'gap-1.5',
     label: 'text-xs',
     select: 'px-4 py-3 pr-10 text-base',
-    icon: 'right-3 h-5 w-5',
+    iconWrapper: 'right-3',
+    iconSvg: 'h-5 w-5',
     helper: 'text-xs',
   },
   lg: {
     wrapper: 'gap-2',
     label: 'text-base',
     select: 'px-5 py-4 pr-12 text-lg',
-    icon: 'right-4 h-6 w-6',
+    iconWrapper: 'right-4',
+    iconSvg: 'h-6 w-6',
     helper: 'text-sm',
   },
 } as const
@@ -90,21 +93,21 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           <div
             className={cn(
               'pointer-events-none absolute inset-y-0 flex items-center',
-              config.icon,
+              config.iconWrapper,
             )}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="currentColor"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2.5}
+              strokeLinecap="round"
+              strokeLinejoin="round"
               aria-hidden="true"
-              className="h-full w-full text-on-surface-variant"
+              className={cn('text-on-surface-variant', config.iconSvg)}
             >
-              <path
-                fillRule="evenodd"
-                d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
-                clipRule="evenodd"
-              />
+              <path d="M6 9l6 6 6-6" />
             </svg>
           </div>
         </div>
