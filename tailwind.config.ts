@@ -112,6 +112,30 @@ const config: Config = {
       borderRadius: {
         ethos: '8px',
       },
+      keyframes: {
+        'tooltip-top': {
+          '0%': { opacity: '0', transform: 'translateX(-50%) translateY(4px)' },
+          '100%': { opacity: '1', transform: 'translateX(-50%) translateY(0)' },
+        },
+        'tooltip-bottom': {
+          '0%': { opacity: '0', transform: 'translateX(-50%) translateY(-4px)' },
+          '100%': { opacity: '1', transform: 'translateX(-50%) translateY(0)' },
+        },
+        'tooltip-left': {
+          '0%': { opacity: '0', transform: 'translateY(-50%) translateX(4px)' },
+          '100%': { opacity: '1', transform: 'translateY(-50%) translateX(0)' },
+        },
+        'tooltip-right': {
+          '0%': { opacity: '0', transform: 'translateY(-50%) translateX(-4px)' },
+          '100%': { opacity: '1', transform: 'translateY(-50%) translateX(0)' },
+        },
+      },
+      animation: {
+        'tooltip-top': 'tooltip-top 150ms ease-out',
+        'tooltip-bottom': 'tooltip-bottom 150ms ease-out',
+        'tooltip-left': 'tooltip-left 150ms ease-out',
+        'tooltip-right': 'tooltip-right 150ms ease-out',
+      },
     },
   },
   plugins: [],

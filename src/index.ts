@@ -77,4 +77,10 @@ export {
   type SkeletonSize,
   type SkeletonVariant,
 } from './components/Skeleton'
+export {
+  Tooltip,
+  type TooltipProps,
+  type TooltipPosition,
+  type TooltipSize,
+} from './components/Tooltip'
 export { cn } from './lib/utils'
