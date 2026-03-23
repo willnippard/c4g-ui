@@ -100,4 +100,10 @@ export {
   type EmptyStateProps,
   type EmptyStateSize,
 } from './components/EmptyState'
+export {
+  DropdownMenu,
+  type DropdownMenuProps,
+  type DropdownMenuItem,
+  type DropdownMenuSize,
+} from './components/DropdownMenu'
 export { cn } from './lib/utils'
