@@ -190,7 +190,7 @@ function DataTableAdvancedInner<T>(
     >
       {/* Toolbar: search + column filters */}
       <div className={cn('flex flex-wrap items-end', sizeToGap[size])}>
-        <div className="w-full max-w-xs">
+        <div className="min-w-[160px] max-w-[280px]">
           <Input
             size={sizeToInput[size]}
             placeholder={searchPlaceholder}
