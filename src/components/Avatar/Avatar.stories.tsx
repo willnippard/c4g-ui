@@ -4,6 +4,15 @@ import { Avatar } from './Avatar'
 const meta: Meta<typeof Avatar> = {
   title: 'Components/Avatar',
   component: Avatar,
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'Displays a user avatar with image, initials fallback, or a generic icon. Supports rounded and square shape variants with automatic fallback when an image fails to load.',
+      },
+    },
+  },
   argTypes: {
     size: { control: 'select', options: ['sm', 'md', 'lg'] },
     variant: { control: 'select', options: ['square', 'rounded'] },

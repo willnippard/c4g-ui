@@ -4,11 +4,21 @@ import { Button } from './Button'
 const meta: Meta<typeof Button> = {
   title: 'Components/Button',
   component: Button,
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'A versatile button component with primary, secondary, and accent variants. Supports size and density presets for fine-grained layout control.',
+      },
+    },
+  },
   argTypes: {
     variant: { control: 'select', options: ['primary', 'secondary', 'accent'] },
     size: { control: 'select', options: ['sm', 'md', 'lg'] },
     density: { control: 'select', options: ['sm', 'md', 'lg'] },
     disabled: { control: 'boolean' },
+    children: { control: 'text' },
   },
 }
 

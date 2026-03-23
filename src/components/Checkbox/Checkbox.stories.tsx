@@ -4,6 +4,15 @@ import { Checkbox } from './Checkbox'
 const meta: Meta<typeof Checkbox> = {
   title: 'Components/Checkbox',
   component: Checkbox,
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'An accessible checkbox input with label, description, error state, and indeterminate support. Uses auto-generated IDs for proper ARIA associations.',
+      },
+    },
+  },
   argTypes: {
     size: { control: 'select', options: ['sm', 'md', 'lg'] },
     disabled: { control: 'boolean' },

@@ -30,8 +30,18 @@ const FolderIcon = () => (
 const meta: Meta<typeof Breadcrumbs> = {
   title: 'Components/Breadcrumbs',
   component: Breadcrumbs,
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'A navigational breadcrumb trail showing the current page location within a hierarchy. Supports custom separators, icons, and three size presets.',
+      },
+    },
+  },
   argTypes: {
     size: { control: 'select', options: ['sm', 'md', 'lg'] },
+    items: { control: 'object' },
   },
 }
 

@@ -31,9 +31,20 @@ const sampleItems: AccordionItem[] = [
 const meta: Meta<typeof Accordion> = {
   title: 'Components/Accordion',
   component: Accordion,
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'A vertically stacked set of collapsible panels. Supports single or multiple open panels, keyboard navigation, and disabled items.',
+      },
+    },
+  },
   argTypes: {
     size: { control: 'select', options: ['sm', 'md', 'lg'] },
     multiple: { control: 'boolean' },
+    defaultOpenKeys: { control: 'object' },
+    items: { control: 'object' },
   },
 }
 

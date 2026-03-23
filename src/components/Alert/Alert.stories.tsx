@@ -4,9 +4,19 @@ import { Alert } from './Alert'
 const meta: Meta<typeof Alert> = {
   title: 'Components/Alert',
   component: Alert,
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'Displays contextual feedback messages with semantic variants (success, error, warning, info). Supports optional dismiss and action buttons.',
+      },
+    },
+  },
   argTypes: {
     variant: { control: 'select', options: ['success', 'error', 'warning', 'info'] },
     size: { control: 'select', options: ['sm', 'md', 'lg'] },
+    onDismiss: { action: 'dismissed' },
   },
 }
 

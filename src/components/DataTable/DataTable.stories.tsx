@@ -51,8 +51,18 @@ const sampleData: Organization[] = [
 const meta: Meta<typeof DataTable<Organization>> = {
   title: 'Components/DataTable',
   component: DataTable,
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'A data table for displaying tabular information with support for custom cell rendering, client-side and server-side sorting, and configurable column widths.',
+      },
+    },
+  },
   argTypes: {
     size: { control: 'select', options: ['sm', 'md', 'lg'] },
+    caption: { control: 'text' },
   },
 }
 

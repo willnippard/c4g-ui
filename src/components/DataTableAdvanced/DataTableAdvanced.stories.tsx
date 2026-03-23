@@ -48,8 +48,19 @@ const columns: DataTableAdvancedColumn<Volunteer>[] = [
 const meta: Meta = {
   title: 'Components/DataTableAdvanced',
   component: DataTableAdvanced as React.ComponentType,
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'An enhanced data table with built-in search filtering and per-column filter dropdowns. Wraps DataTable with a toolbar for interactive data exploration.',
+      },
+    },
+  },
   argTypes: {
     size: { control: 'select', options: ['sm', 'md', 'lg'] },
+    searchPlaceholder: { control: 'text' },
+    caption: { control: 'text' },
   },
 }
 

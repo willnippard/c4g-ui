@@ -56,6 +56,15 @@ type CardStoryArgs = CardProps & {
 const meta: Meta<CardStoryArgs> = {
   title: 'Components/Card',
   component: Card,
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'A flexible content container with optional media, header, and footer slots. Scales across three size presets for compact to full-width layouts.',
+      },
+    },
+  },
   argTypes: {
     size: { control: 'select', options: ['sm', 'md', 'lg'] },
     header: { control: 'text' },
