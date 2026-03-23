@@ -106,4 +106,11 @@ export {
   type DropdownMenuItem,
   type DropdownMenuSize,
 } from './components/DropdownMenu'
+export {
+  Stepper,
+  type StepperProps,
+  type Step,
+  type StepperSize,
+  type StepperOrientation,
+} from './components/Stepper'
 export { cn } from './lib/utils'
