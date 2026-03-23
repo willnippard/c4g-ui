@@ -1,7 +1,7 @@
 import { addons } from '@storybook/manager-api'
-import { themes } from '@storybook/theming'
+import { c4gTheme } from './c4g-theme'
 
 addons.setConfig({
-  theme: themes.dark,
+  theme: c4gTheme,
   enableShortcuts: true,
 })

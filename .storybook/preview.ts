@@ -1,6 +1,6 @@
 import type { Preview } from '@storybook/react'
-import { themes } from '@storybook/theming'
 import { withThemeByClassName } from '@storybook/addon-themes'
+import { c4gTheme } from './c4g-theme'
 import '../src/styles/fonts.css'
 import '../src/styles/globals.css'
 
@@ -16,7 +16,7 @@ const preview: Preview = {
   ],
   parameters: {
     docs: {
-      theme: themes.dark,
+      theme: c4gTheme,
     },
     options: {
       storySort: {
