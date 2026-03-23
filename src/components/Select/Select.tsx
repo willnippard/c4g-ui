@@ -88,7 +88,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             ))}
           </select>
           <svg
-            className={cn('pointer-events-none absolute top-1/2 -translate-y-1/2 text-on-surface-variant', config.icon)}
+            className={cn('pointer-events-none absolute top-1/2 -translate-y-[calc(50%-1px)] text-on-surface-variant', config.icon)}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
             fill="currentColor"
