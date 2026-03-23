@@ -6,7 +6,7 @@ const meta: Meta<typeof Toggle> = {
   component: Toggle,
   argTypes: {
     size: { control: 'select', options: ['sm', 'md'] },
-    density: { control: 'select', options: ['compact', 'spacious', 'zoomed'] },
+    density: { control: 'select', options: ['sm', 'md', 'lg'] },
     disabled: { control: 'boolean' },
     label: { control: 'text' },
   },
@@ -43,24 +43,24 @@ export const DisabledChecked: Story = {
   args: { disabled: true, defaultChecked: true, label: 'Disabled active' },
 }
 
-export const Compact: Story = {
-  args: { density: 'compact', label: 'Compact' },
+export const DensitySm: Story = {
+  args: { density: 'sm', label: 'Density SM' },
 }
 
-export const Spacious: Story = {
-  args: { density: 'spacious', label: 'Spacious' },
+export const DensityMd: Story = {
+  args: { density: 'md', label: 'Density MD' },
 }
 
-export const Zoomed: Story = {
-  args: { density: 'zoomed', label: 'Zoomed' },
+export const DensityLg: Story = {
+  args: { density: 'lg', label: 'Density LG' },
 }
 
 export const AllDensities: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
-      <Toggle density="compact" label="Compact" defaultChecked />
-      <Toggle density="spacious" label="Spacious" defaultChecked />
-      <Toggle density="zoomed" label="Zoomed" defaultChecked />
+      <Toggle density="sm" label="SM" defaultChecked />
+      <Toggle density="md" label="MD" defaultChecked />
+      <Toggle density="lg" label="LG" defaultChecked />
     </div>
   ),
 }

@@ -1,7 +1,7 @@
 import { type InputHTMLAttributes, forwardRef, useId } from 'react'
 import { cn } from '../../lib/utils'
 
-export type ToggleDensity = 'compact' | 'spacious' | 'zoomed'
+export type ToggleDensity = 'sm' | 'md' | 'lg'
 
 export interface ToggleProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
@@ -27,21 +27,21 @@ const thumbTranslate = {
 } as const
 
 const densityConfig = {
-  compact: {
+  sm: {
     wrapper: 'gap-2',
     track: 'w-8 h-4',
     thumb: 'w-2.5 h-2.5 top-[3px] left-[3px]',
     thumbTranslate: 'peer-checked:translate-x-[14px]',
     label: 'text-xs',
   },
-  spacious: {
+  md: {
     wrapper: 'gap-3',
     track: '',
     thumb: '',
     thumbTranslate: '',
     label: 'text-sm',
   },
-  zoomed: {
+  lg: {
     wrapper: 'gap-4',
     track: 'w-16 h-8',
     thumb: 'w-6 h-6',
@@ -51,7 +51,7 @@ const densityConfig = {
 } as const
 
 export const Toggle = forwardRef<HTMLInputElement, ToggleProps>(
-  ({ className, label, size = 'md', density = 'spacious', disabled, id, ...props }, ref) => {
+  ({ className, label, size = 'md', density = 'md', disabled, id, ...props }, ref) => {
     const generatedId = useId()
     const toggleId = id || generatedId
     const labelId = label ? `${toggleId}-label` : undefined
@@ -88,7 +88,7 @@ export const Toggle = forwardRef<HTMLInputElement, ToggleProps>(
               !disabled && 'peer-hover:ring-4 peer-hover:ring-primary/15',
               !disabled && 'peer-hover:border-primary/40',
               'peer-focus-visible:ring-4 peer-focus-visible:ring-primary/35',
-              density !== 'spacious' ? densityCfg.track : trackSize[size],
+              density !== 'md' ? densityCfg.track : trackSize[size],
             )}
           />
           {/* Thumb */}
@@ -99,8 +99,8 @@ export const Toggle = forwardRef<HTMLInputElement, ToggleProps>(
               'bg-on-primary shadow-[0_1px_3px_rgba(0,0,0,0.1),0_1px_2px_-1px_rgba(0,0,0,0.1)]',
               'peer-[:not(:checked)]:bg-surface-container-lowest',
               'transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]',
-              density !== 'spacious' ? densityCfg.thumb : thumbSize[size],
-              density !== 'spacious' ? densityCfg.thumbTranslate : thumbTranslate[size],
+              density !== 'md' ? densityCfg.thumb : thumbSize[size],
+              density !== 'md' ? densityCfg.thumbTranslate : thumbTranslate[size],
             )}
           />
         </label>

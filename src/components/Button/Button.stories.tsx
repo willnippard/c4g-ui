@@ -7,7 +7,7 @@ const meta: Meta<typeof Button> = {
   argTypes: {
     variant: { control: 'select', options: ['primary', 'secondary', 'accent'] },
     size: { control: 'select', options: ['sm', 'md', 'lg'] },
-    density: { control: 'select', options: ['compact', 'spacious', 'zoomed'] },
+    density: { control: 'select', options: ['sm', 'md', 'lg'] },
     disabled: { control: 'boolean' },
   },
 }
@@ -39,24 +39,24 @@ export const Disabled: Story = {
   args: { children: 'Disabled', disabled: true },
 }
 
-export const Compact: Story = {
-  args: { children: 'Compact', density: 'compact' },
+export const DensitySm: Story = {
+  args: { children: 'Density SM', density: 'sm' },
 }
 
-export const Spacious: Story = {
-  args: { children: 'Spacious', density: 'spacious' },
+export const DensityMd: Story = {
+  args: { children: 'Density MD', density: 'md' },
 }
 
-export const Zoomed: Story = {
-  args: { children: 'Zoomed', density: 'zoomed' },
+export const DensityLg: Story = {
+  args: { children: 'Density LG', density: 'lg' },
 }
 
 export const AllDensities: Story = {
   render: () => (
     <div className="flex items-center gap-4">
-      <Button density="compact">Compact</Button>
-      <Button density="spacious">Spacious</Button>
-      <Button density="zoomed">Zoomed</Button>
+      <Button density="sm">SM</Button>
+      <Button density="md">MD</Button>
+      <Button density="lg">LG</Button>
     </div>
   ),
 }

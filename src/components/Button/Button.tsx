@@ -1,7 +1,7 @@
 import { type ButtonHTMLAttributes, forwardRef } from 'react'
 import { cn } from '../../lib/utils'
 
-export type ButtonDensity = 'compact' | 'spacious' | 'zoomed'
+export type ButtonDensity = 'sm' | 'md' | 'lg'
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'accent'
@@ -26,17 +26,17 @@ const sizeStyles: Record<NonNullable<ButtonProps['size']>, string> = {
 }
 
 const densityConfig = {
-  compact: {
+  sm: {
     wrapper: 'gap-1',
     padding: 'px-2 py-0.5',
     text: 'text-xs',
   },
-  spacious: {
+  md: {
     wrapper: 'gap-2',
     padding: '',
     text: '',
   },
-  zoomed: {
+  lg: {
     wrapper: 'gap-3',
     padding: 'px-6 py-2.5',
     text: 'text-lg',
@@ -44,7 +44,7 @@ const densityConfig = {
 } as const
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = 'primary', size = 'md', density = 'spacious', disabled, type = 'button', ...props }, ref) => {
+  ({ className, variant = 'primary', size = 'md', density = 'md', disabled, type = 'button', ...props }, ref) => {
     const densityCfg = densityConfig[density]
 
     return (
@@ -56,8 +56,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           variantStyles[variant],
           sizeStyles[size],
           densityCfg.wrapper,
-          density !== 'spacious' && densityCfg.padding,
-          density !== 'spacious' && densityCfg.text,
+          density !== 'md' && densityCfg.padding,
+          density !== 'md' && densityCfg.text,
           disabled && 'opacity-60 cursor-not-allowed',
           className,
         )}
