@@ -16,9 +16,15 @@ const preview: Preview = {
   ],
   parameters: {
     darkMode: {
-      dark: themes.dark,
-      light: themes.light,
+      dark: { ...themes.dark, appPreviewBg: themes.dark.appBg },
+      light: { ...themes.light, appPreviewBg: themes.light.appBg },
       stylePreview: false,
+      darkClass: 'dark',
+      lightClass: '',
+      classTarget: 'html',
+    },
+    docs: {
+      theme: themes.dark,
     },
     options: {
       storySort: {
