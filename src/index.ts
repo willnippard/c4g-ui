@@ -57,6 +57,12 @@ export {
 export { Textarea, type TextareaProps, type TextareaSize } from './components/Textarea'
 export { Checkbox, type CheckboxProps, type CheckboxSize } from './components/Checkbox'
 export { Modal, type ModalProps, type ModalSize } from './components/Modal'
+export {
+  Breadcrumbs,
+  type BreadcrumbsProps,
+  type BreadcrumbItem,
+  type BreadcrumbsSize,
+} from './components/Breadcrumbs'
 export { AuthBlock, type AuthBlockProps } from './blocks/AuthBlock'
 export {
   Avatar,
@@ -64,4 +70,11 @@ export {
   type AvatarSize,
   type AvatarVariant,
 } from './components/Avatar'
+export { Tabs, type TabsProps, type Tab, type TabsSize } from './components/Tabs'
+export {
+  Skeleton,
+  type SkeletonProps,
+  type SkeletonSize,
+  type SkeletonVariant,
+} from './components/Skeleton'
 export { cn } from './lib/utils'
