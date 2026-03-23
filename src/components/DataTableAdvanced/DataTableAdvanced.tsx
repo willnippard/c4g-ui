@@ -138,12 +138,24 @@ function DataTableAdvancedInner<T>(
     lg: 'text-base',
   }
 
+  const sizeToPadding: Record<DataTableSize, string> = {
+    sm: 'py-4',
+    md: 'py-8',
+    lg: 'py-12',
+  }
+
+  const sizeToIcon: Record<DataTableSize, number> = {
+    sm: 24,
+    md: 32,
+    lg: 40,
+  }
+
   const noResultsContent = noResultsState ?? (
-    <div className={cn('flex flex-col items-center py-8', sizeToGap[size])}>
+    <div className={cn('flex flex-col items-center', sizeToPadding[size], sizeToGap[size])}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        width="32"
-        height="32"
+        width={sizeToIcon[size]}
+        height={sizeToIcon[size]}
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
