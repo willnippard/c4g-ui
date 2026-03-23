@@ -194,20 +194,21 @@ function DataTableAdvancedInner<T>(
             ...(filterOptions[col.key] ?? []).map((val) => ({ value: val, label: val })),
           ]
           return (
-            <Select
-              key={col.key}
-              label={col.header}
-              size={sizeToInput[size]}
-              options={options}
-              value={columnFilters[col.key] ?? ''}
-              onChange={(e) =>
-                setColumnFilters((prev) => ({
-                  ...prev,
-                  [col.key]: e.target.value,
-                }))
-              }
-              aria-label={`Filter by ${col.header}`}
-            />
+            <div key={col.key} className="w-full max-w-xs">
+              <Select
+                label={col.header}
+                size={sizeToInput[size]}
+                options={options}
+                value={columnFilters[col.key] ?? ''}
+                onChange={(e) =>
+                  setColumnFilters((prev) => ({
+                    ...prev,
+                    [col.key]: e.target.value,
+                  }))
+                }
+                aria-label={`Filter by ${col.header}`}
+              />
+            </div>
           )
         })}
       </div>

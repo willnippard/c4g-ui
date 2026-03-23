@@ -19,7 +19,7 @@ const sizeConfig = {
   sm: {
     wrapper: 'gap-1',
     label: 'text-xs',
-    select: 'px-3 py-2 pr-8 text-sm',
+    select: 'px-2 py-1.5 pr-8 text-sm',
     iconWrapper: 'right-2',
     iconSvg: 'h-4 w-4',
     helper: 'text-xs',
@@ -27,7 +27,7 @@ const sizeConfig = {
   md: {
     wrapper: 'gap-1.5',
     label: 'text-xs',
-    select: 'px-4 py-3 pr-10 text-base',
+    select: 'px-3 py-2 pr-10 text-sm',
     iconWrapper: 'right-3',
     iconSvg: 'h-5 w-5',
     helper: 'text-xs',
@@ -35,7 +35,7 @@ const sizeConfig = {
   lg: {
     wrapper: 'gap-2',
     label: 'text-base',
-    select: 'px-5 py-4 pr-12 text-lg',
+    select: 'px-4 py-3 pr-12 text-lg',
     iconWrapper: 'right-4',
     iconSvg: 'h-6 w-6',
     helper: 'text-sm',
@@ -54,11 +54,11 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     const config = sizeConfig[size]
 
     return (
-      <div className={cn('flex flex-col max-w-sm', config.wrapper)}>
+      <div className={cn('flex flex-col', config.wrapper)}>
         {label && (
           <label
             htmlFor={selectId}
-            className={cn('font-bold uppercase tracking-widest text-on-surface', config.label)}
+            className={cn('font-semibold font-manrope text-foreground', config.label)}
           >
             {label}
           </label>
@@ -70,10 +70,10 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             aria-invalid={!!error || undefined}
             aria-describedby={descriptionId}
             className={cn(
-              'w-full border border-on-surface-variant/50 border-b-2 border-b-on-surface-variant rounded-md font-manrope text-on-surface bg-surface-container-low appearance-none transition-all cursor-pointer',
-              'focus-visible:border-primary focus-visible:border-b-primary focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:outline-none',
+              'w-full rounded-ethos border border-outline-variant/30 bg-card font-manrope text-foreground appearance-none transition-colors cursor-pointer',
+              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:border-transparent',
               config.select,
-              error && 'border-error focus:border-error',
+              error && 'border-error focus-visible:ring-error',
               props.disabled && 'opacity-60 cursor-not-allowed',
               className,
             )}
@@ -122,7 +122,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           </p>
         )}
         {helperText && !error && (
-          <p id={`${selectId}-helper`} className={cn('text-on-surface-variant font-manrope', config.helper)}>{helperText}</p>
+          <p id={`${selectId}-helper`} className={cn('text-muted-foreground font-manrope', config.helper)}>{helperText}</p>
         )}
       </div>
     )
