@@ -1,8 +1,10 @@
 import { type HTMLAttributes, forwardRef, useMemo, useState } from 'react'
 import { cn } from '../../lib/utils'
-import { Input } from '../Input'
 import { Badge } from '../Badge'
+import { Button } from '../Button'
 import { DataTable, type DataTableColumn, type DataTableSize } from '../DataTable'
+import { Input } from '../Input'
+import { Select, type SelectOption } from '../Select'
 
 export interface DataTableAdvancedColumn<T> extends DataTableColumn<T> {
   /** Enable a per-column filter dropdown for this column */
@@ -136,12 +138,6 @@ function DataTableAdvancedInner<T>(
     lg: 'text-base',
   }
 
-  const sizeToSelect: Record<DataTableSize, string> = {
-    sm: 'px-2 py-1 text-xs',
-    md: 'px-3 py-1.5 text-sm',
-    lg: 'px-4 py-2 text-base',
-  }
-
   const noResultsContent = noResultsState ?? (
     <div className={cn('flex flex-col items-center py-8', sizeToGap[size])}>
       <svg
@@ -164,16 +160,13 @@ function DataTableAdvancedInner<T>(
       <p className={cn('text-on-surface-variant font-manrope', sizeToText[size])}>
         No results match your search or filters.
       </p>
-      <button
-        type="button"
+      <Button
+        variant="secondary"
+        size={sizeToInput[size]}
         onClick={clearAllFilters}
-        className={cn(
-          'text-primary font-semibold font-manrope underline underline-offset-2 hover:text-primary/80 transition-colors',
-          sizeToText[size],
-        )}
       >
         Clear all filters
-      </button>
+      </Button>
     </div>
   )
 
@@ -195,17 +188,17 @@ function DataTableAdvancedInner<T>(
           />
         </div>
 
-        {filterableColumns.map((col) => (
-          <div key={col.key} className="flex flex-col gap-1">
-            <label
-              className={cn(
-                'font-semibold font-manrope text-foreground',
-                size === 'lg' ? 'text-base' : 'text-xs',
-              )}
-            >
-              {col.header}
-            </label>
-            <select
+        {filterableColumns.map((col) => {
+          const options: SelectOption[] = [
+            { value: '', label: 'All' },
+            ...(filterOptions[col.key] ?? []).map((val) => ({ value: val, label: val })),
+          ]
+          return (
+            <Select
+              key={col.key}
+              label={col.header}
+              size={sizeToInput[size]}
+              options={options}
               value={columnFilters[col.key] ?? ''}
               onChange={(e) =>
                 setColumnFilters((prev) => ({
@@ -214,21 +207,9 @@ function DataTableAdvancedInner<T>(
                 }))
               }
               aria-label={`Filter by ${col.header}`}
-              className={cn(
-                'rounded-ethos border border-outline-variant/30 bg-card font-manrope text-foreground transition-colors',
-                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
-                sizeToSelect[size],
-              )}
-            >
-              <option value="">All</option>
-              {(filterOptions[col.key] ?? []).map((val) => (
-                <option key={val} value={val}>
-                  {val}
-                </option>
-              ))}
-            </select>
-          </div>
-        ))}
+            />
+          )
+        })}
       </div>
 
       {/* Active filter chips */}
@@ -271,16 +252,13 @@ function DataTableAdvancedInner<T>(
                 </Badge>
               )
             })}
-          <button
-            type="button"
+          <Button
+            variant="secondary"
+            size={sizeToInput[size]}
             onClick={clearAllFilters}
-            className={cn(
-              'text-on-surface-variant font-manrope underline underline-offset-2 hover:text-on-surface transition-colors',
-              sizeToText[size],
-            )}
           >
             Clear all
-          </button>
+          </Button>
         </div>
       )}
 
