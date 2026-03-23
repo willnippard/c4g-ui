@@ -5,7 +5,7 @@ const meta: Meta<typeof ProjectCard> = {
   title: 'Components/ProjectCard',
   component: ProjectCard,
   argTypes: {
-    size: { control: 'select', options: ['compact', 'spacious', 'zoomed'] },
+    size: { control: 'select', options: ['sm', 'md', 'lg'] },
     status: { control: 'text' },
     avatarCount: { control: 'number' },
   },
@@ -68,9 +68,9 @@ export const WithDetailsHandler: Story = {
   },
 }
 
-export const Compact: Story = {
+export const Small: Story = {
   args: {
-    size: 'compact',
+    size: 'sm',
     title: 'Water Quality Monitor',
     description:
       'IoT-based water quality monitoring for rural communities lacking clean water infrastructure.',
@@ -82,9 +82,9 @@ export const Compact: Story = {
   },
 }
 
-export const Spacious: Story = {
+export const Medium: Story = {
   args: {
-    size: 'spacious',
+    size: 'md',
     title: 'Amazon Reforest AI',
     description:
       'Using machine learning to identify optimal reforestation zones across the Amazon basin, helping local communities restore degraded land.',
@@ -96,9 +96,9 @@ export const Spacious: Story = {
   },
 }
 
-export const Zoomed: Story = {
+export const Large: Story = {
   args: {
-    size: 'zoomed',
+    size: 'lg',
     title: 'Literacy Bridge',
     description:
       'Digital literacy platform providing accessible learning materials for underserved schools across sub-Saharan Africa.',

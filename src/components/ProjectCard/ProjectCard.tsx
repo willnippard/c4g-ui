@@ -1,7 +1,7 @@
 import { type HTMLAttributes, forwardRef } from 'react'
 import { cn } from '../../lib/utils'
 
-export type ProjectCardSize = 'compact' | 'spacious' | 'zoomed'
+export type ProjectCardSize = 'sm' | 'md' | 'lg'
 
 export interface ProjectCardProps extends HTMLAttributes<HTMLDivElement> {
   title: string
@@ -22,7 +22,7 @@ const avatarColors = [
 ]
 
 const sizeConfig = {
-  compact: {
+  sm: {
     card: 'rounded-lg',
     imageWrap: 'md:w-1/3 h-40 md:h-auto',
     statusBadge: 'top-2 left-2 px-2 py-0.5 text-[8px]',
@@ -32,7 +32,7 @@ const sizeConfig = {
     avatar: 'w-6 h-6',
     detailsBtn: 'text-xs',
   },
-  spacious: {
+  md: {
     card: 'rounded-xl',
     imageWrap: 'md:w-2/5 h-64 md:h-auto',
     statusBadge: 'top-4 left-4 px-3 py-1 text-[10px]',
@@ -42,7 +42,7 @@ const sizeConfig = {
     avatar: 'w-8 h-8',
     detailsBtn: 'text-sm',
   },
-  zoomed: {
+  lg: {
     card: 'rounded-2xl',
     imageWrap: 'md:w-1/2 h-80 md:h-auto',
     statusBadge: 'top-6 left-6 px-4 py-2 text-xs',
@@ -65,7 +65,7 @@ export const ProjectCard = forwardRef<HTMLDivElement, ProjectCardProps>(
       status,
       avatarCount = 3,
       onDetailsClick,
-      size = 'spacious',
+      size = 'md',
       ...props
     },
     ref,
