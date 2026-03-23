@@ -51,9 +51,9 @@ Each component uses `forwardRef`, typed variant props (union types), and follows
 - `ProjectCard` — project showcase card with image, status badge, avatar stack, and details action; sm/md/lg
 - `RadioGroup` — fieldset of radio options with legend, descriptions, error, vertical/horizontal orientation; sm/md/lg
 - `Select` — native dropdown with label, placeholder, error, helper text, auto-generated IDs; sm/md/lg
-- `SideNavBar` — vertical sidebar navigation with brand header, nav items, footer links, and CTA button
+- `SideNavBar` — vertical sidebar navigation with brand header, nav items, footer links, and CTA button; sm/md/lg
 - `Toggle` — switch input with label; sm/md (track size), sm/md/lg (density)
-- `TopNavBar` — fixed top navigation bar with brand, nav links, and action button
+- `TopNavBar` — fixed top navigation bar with brand, nav links, and action button; sm/md/lg
 
 ## Conventions
 
@@ -62,6 +62,7 @@ Each component uses `forwardRef`, typed variant props (union types), and follows
 - **Styling:** Tailwind utility classes, CSS custom properties for theming (`globals.css`), design tokens in `tailwind.config.ts`
 - **Design tokens:** primary green (#2A6B3F), accent gold (#D4A32A), fonts: Epilogue (display), Manrope (body)
 - **Dark mode:** Colors are defined as CSS custom properties in `src/styles/globals.css` (`:root` for light, `.dark` for dark). The Tailwind config references these variables. Components use semantic token classes (e.g. `bg-primary`, `text-on-surface`) — **never** use `dark:` prefixes or hardcoded hex values.
+- **Sizing:** All components use `sm | md | lg` for size and density presets. This is a library-wide standard — no component should use compact/spacious/zoomed/condensed.
 - **Exports:** all public components and types re-exported from `src/index.ts`
 
 ## Accessibility requirements
