@@ -18,6 +18,12 @@ const sizeStyles: Record<NonNullable<FABProps['size']>, string> = {
   lg: 'w-20 h-20 text-4xl',
 }
 
+const sizeIconStyles: Record<NonNullable<FABProps['size']>, string> = {
+  sm: 'w-5 h-5',
+  md: 'w-6 h-6',
+  lg: 'w-8 h-8',
+}
+
 const positionStyles: Record<NonNullable<FABProps['position']>, string> = {
   'bottom-right': 'bottom-8 right-8',
   'bottom-left': 'bottom-8 left-8',
@@ -49,7 +55,6 @@ const defaultIcon = (
     strokeWidth={2.5}
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="w-6 h-6"
     aria-hidden="true"
   >
     <line x1="12" y1="5" x2="12" y2="19" />
@@ -73,6 +78,8 @@ export const FAB = forwardRef<HTMLButtonElement, FABProps>(
     ref,
   ) => {
     const densityCfg = densityConfig[density]
+    const iconClasses =
+      density !== 'spacious' ? densityCfg.icon : sizeIconStyles[size]
 
     return (
       <button
@@ -92,7 +99,9 @@ export const FAB = forwardRef<HTMLButtonElement, FABProps>(
         disabled={disabled}
         {...props}
       >
-        {icon ?? defaultIcon}
+        <span className={cn('flex items-center justify-center', iconClasses)}>
+          {icon ?? defaultIcon}
+        </span>
       </button>
     )
   },
