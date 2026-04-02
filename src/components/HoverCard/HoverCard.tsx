@@ -5,9 +5,9 @@ import {
   useCallback,
   useRef,
   useState,
-} from "react";
-import { cn } from "../../lib/utils";
-import { Button } from "../Button";
+} from 'react';
+import { cn } from '../../lib/utils';
+import { Button } from '../Button';
 
 /* ─── HoverCard (the popup content) ──────────────────────────── */
 
@@ -23,7 +23,7 @@ export interface HoverCardProps extends HTMLAttributes<HTMLDivElement> {
   /** Status indicator with label and optional variant */
   status?: {
     label: string;
-    variant?: "active" | "warning" | "error";
+    variant?: 'active' | 'warning' | 'error';
   };
   /** Action link text */
   actionLabel?: string;
@@ -32,92 +32,92 @@ export interface HoverCardProps extends HTMLAttributes<HTMLDivElement> {
   /** Action click handler (used if no actionHref) */
   onAction?: () => void;
   /** Size preset */
-  size?: "sm" | "md" | "lg";
+  size?: 'sm' | 'md' | 'lg';
 }
 
 const sizeConfig = {
   sm: {
-    card: "rounded-xl p-4 gap-4 flex-row min-w-[280px]",
-    imageWrap: "w-20",
+    card: 'rounded-xl p-4 gap-4 flex-row min-w-[280px]',
+    imageWrap: 'w-20',
     imageAbsolute: true,
-    image: "rounded-lg",
-    name: "text-base",
-    subtitle: "text-xs",
-    status: "text-xs gap-1.5",
-    statusDot: "w-2 h-2",
-    action: "text-sm",
-    contentGap: "gap-2",
+    image: 'rounded-lg',
+    name: 'text-base',
+    subtitle: 'text-xs',
+    status: 'text-xs gap-1.5',
+    statusDot: 'w-2 h-2',
+    action: 'text-sm',
+    contentGap: 'gap-2',
   },
   md: {
-    card: "rounded-xl p-8 gap-8 flex-row min-w-[360px]",
-    imageWrap: "w-28",
+    card: 'rounded-xl p-8 gap-8 flex-row min-w-[360px]',
+    imageWrap: 'w-28',
     imageAbsolute: true,
-    image: "rounded-xl",
-    name: "text-xl",
-    subtitle: "text-sm",
-    status: "text-sm gap-2",
-    statusDot: "w-2.5 h-2.5",
-    action: "text-base",
-    contentGap: "gap-3",
+    image: 'rounded-xl',
+    name: 'text-xl',
+    subtitle: 'text-sm',
+    status: 'text-sm gap-2',
+    statusDot: 'w-2.5 h-2.5',
+    action: 'text-base',
+    contentGap: 'gap-3',
   },
   lg: {
-    card: "rounded-2xl p-12 gap-12 flex-col md:flex-row min-w-[480px]",
-    imageWrap: "w-full md:w-64 md:h-auto",
+    card: 'rounded-2xl p-12 gap-12 flex-col md:flex-row min-w-[480px]',
+    imageWrap: 'w-full md:w-64 md:h-auto',
     imageAbsolute: false,
-    image: "rounded-2xl",
-    name: "text-3xl font-black",
-    subtitle: "text-lg",
-    status: "text-xl gap-3",
-    statusDot: "w-4 h-4",
-    action: "text-2xl font-black",
-    contentGap: "gap-6",
+    image: 'rounded-2xl',
+    name: 'text-3xl font-black',
+    subtitle: 'text-lg',
+    status: 'text-xl gap-3',
+    statusDot: 'w-4 h-4',
+    action: 'text-2xl font-black',
+    contentGap: 'gap-6',
   },
 } as const;
 
 const statusConfig = {
   active: {
-    text: "text-primary",
+    text: 'text-primary',
     icon: (cls: string) => (
       <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="currentColor"
-        aria-hidden="true"
-        className={cn("text-primary shrink-0", cls)}
+        xmlns='http://www.w3.org/2000/svg'
+        viewBox='0 0 24 24'
+        fill='currentColor'
+        aria-hidden='true'
+        className={cn('text-primary shrink-0', cls)}
       >
-        <circle cx="12" cy="12" r="10" />
+        <circle cx='12' cy='12' r='10' />
       </svg>
     ),
   },
   warning: {
-    text: "text-tertiary",
+    text: 'text-tertiary',
     icon: (cls: string) => (
       <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="currentColor"
-        aria-hidden="true"
-        className={cn("text-tertiary shrink-0", cls)}
+        xmlns='http://www.w3.org/2000/svg'
+        viewBox='0 0 24 24'
+        fill='currentColor'
+        aria-hidden='true'
+        className={cn('text-tertiary shrink-0', cls)}
       >
-        <path d="M1 21h22L12 2 1 21z" />
+        <path d='M1 21h22L12 2 1 21z' />
       </svg>
     ),
   },
   error: {
-    text: "text-error",
+    text: 'text-error',
     icon: (cls: string) => (
       <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        aria-hidden="true"
-        className={cn("text-error shrink-0", cls)}
+        xmlns='http://www.w3.org/2000/svg'
+        viewBox='0 0 24 24'
+        fill='none'
+        stroke='currentColor'
+        strokeWidth='2'
+        aria-hidden='true'
+        className={cn('text-error shrink-0', cls)}
       >
-        <circle cx="12" cy="12" r="10" />
-        <line x1="15" y1="9" x2="9" y2="15" />
-        <line x1="9" y1="9" x2="15" y2="15" />
+        <circle cx='12' cy='12' r='10' />
+        <line x1='15' y1='9' x2='9' y2='15' />
+        <line x1='9' y1='9' x2='15' y2='15' />
       </svg>
     ),
   },
@@ -135,13 +135,13 @@ export const HoverCard = forwardRef<HTMLDivElement, HoverCardProps>(
       actionLabel,
       actionHref,
       onAction,
-      size = "md",
+      size = 'md',
       ...props
     },
     ref,
   ) => {
     const config = sizeConfig[size];
-    const statusVariant = statusConfig[status?.variant ?? "active"];
+    const statusVariant = statusConfig[status?.variant ?? 'active'];
 
     const actionElement =
       actionLabel &&
@@ -149,8 +149,8 @@ export const HoverCard = forwardRef<HTMLDivElement, HoverCardProps>(
         <a
           href={actionHref}
           className={cn(
-            "font-bold text-primary hover:underline underline-offset-4 inline-block transition-colors",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm",
+            'font-bold text-primary hover:underline underline-offset-4 inline-block transition-colors',
+            'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm',
             config.action,
           )}
         >
@@ -158,11 +158,11 @@ export const HoverCard = forwardRef<HTMLDivElement, HoverCardProps>(
         </a>
       ) : (
         <Button
-          variant="secondary"
+          variant='secondary'
           size={size}
           onClick={onAction}
           className={cn(
-            "bg-transparent text-primary hover:bg-transparent hover:underline underline-offset-4 px-0 py-0",
+            'bg-transparent text-primary hover:bg-transparent hover:underline underline-offset-4 px-0 py-0',
             config.action,
           )}
         >
@@ -174,32 +174,32 @@ export const HoverCard = forwardRef<HTMLDivElement, HoverCardProps>(
       <div
         ref={ref}
         className={cn(
-          "bg-surface-container-lowest flex shadow-xl shadow-on-surface/5 border border-outline-variant/20 w-fit",
+          'bg-surface-container-lowest flex shadow-xl shadow-on-surface/5 border border-outline-variant/20 w-fit',
           config.card,
           className,
         )}
         {...props}
       >
         {config.imageAbsolute ? (
-          <div className={cn("relative shrink-0 self-stretch overflow-hidden", config.imageWrap, config.image)}>
+          <div className={cn('relative shrink-0 self-stretch overflow-hidden', config.imageWrap, config.image)}>
             <img
               src={imageSrc}
               alt={imageAlt || name}
-              className="absolute inset-0 h-full w-full object-cover"
+              className='absolute inset-0 h-full w-full object-cover'
             />
           </div>
         ) : (
           <img
             src={imageSrc}
             alt={imageAlt || name}
-            className={cn("w-full object-cover shrink-0", config.image)}
+            className={cn('w-full object-cover shrink-0', config.image)}
           />
         )}
-        <div className={cn("flex flex-col justify-center", config.contentGap)}>
+        <div className={cn('flex flex-col justify-center', config.contentGap)}>
           <div>
             <h3
               className={cn(
-                "font-epilogue font-bold text-on-surface leading-tight truncate",
+                'font-epilogue font-bold text-on-surface leading-tight truncate',
                 config.name,
               )}
             >
@@ -208,7 +208,7 @@ export const HoverCard = forwardRef<HTMLDivElement, HoverCardProps>(
             {subtitle && (
               <p
                 className={cn(
-                  "text-on-surface-variant font-medium truncate",
+                  'text-on-surface-variant font-medium truncate',
                   config.subtitle,
                 )}
               >
@@ -217,11 +217,11 @@ export const HoverCard = forwardRef<HTMLDivElement, HoverCardProps>(
             )}
           </div>
           {(status || actionLabel) && (
-            <div className="space-y-1.5">
+            <div className='space-y-1.5'>
               {status && (
-                <div className={cn("flex items-center", config.status)}>
+                <div className={cn('flex items-center', config.status)}>
                   {statusVariant.icon(config.statusDot)}
-                  <span className={cn("font-medium", statusVariant.text)}>
+                  <span className={cn('font-medium', statusVariant.text)}>
                     {status.label}
                   </span>
                 </div>
@@ -235,7 +235,7 @@ export const HoverCard = forwardRef<HTMLDivElement, HoverCardProps>(
   },
 );
 
-HoverCard.displayName = "HoverCard";
+HoverCard.displayName = 'HoverCard';
 
 /* ─── HoverCardTrigger (wraps inline text + shows card on hover/focus) ── */
 
@@ -278,7 +278,7 @@ export const HoverCardTrigger = forwardRef<
   return (
     <span
       ref={ref}
-      className="relative inline"
+      className='relative inline'
       onMouseEnter={handleOpen}
       onMouseLeave={handleClose}
       onFocus={handleOpen}
@@ -286,14 +286,14 @@ export const HoverCardTrigger = forwardRef<
     >
       <span
         tabIndex={0}
-        aria-haspopup="dialog"
+        aria-haspopup='dialog'
         aria-expanded={open}
         className={cn(
-          "font-semibold text-on-surface cursor-pointer transition-all duration-200",
-          "decoration-primary/40 underline underline-offset-4 decoration-dotted decoration-2",
-          "hover:text-primary hover:decoration-primary hover:decoration-solid",
-          "focus-visible:text-primary focus-visible:decoration-primary focus-visible:decoration-solid",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:rounded-sm",
+          'font-semibold text-on-surface cursor-pointer transition-all duration-200',
+          'decoration-primary/40 underline underline-offset-4 decoration-dotted decoration-2',
+          'hover:text-primary hover:decoration-primary hover:decoration-solid',
+          'focus-visible:text-primary focus-visible:decoration-primary focus-visible:decoration-solid',
+          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:rounded-sm',
           className,
         )}
       >
@@ -301,9 +301,9 @@ export const HoverCardTrigger = forwardRef<
       </span>
       {open && (
         <div
-          role="dialog"
-          aria-label="Additional details"
-          className="absolute left-0 top-full mt-2 z-50 animate-in fade-in"
+          role='dialog'
+          aria-label='Additional details'
+          className='absolute left-0 top-full mt-2 z-50 animate-in fade-in'
           onMouseEnter={handleOpen}
           onMouseLeave={handleClose}
         >
@@ -314,4 +314,4 @@ export const HoverCardTrigger = forwardRef<
   );
 });
 
-HoverCardTrigger.displayName = "HoverCardTrigger";
+HoverCardTrigger.displayName = 'HoverCardTrigger';

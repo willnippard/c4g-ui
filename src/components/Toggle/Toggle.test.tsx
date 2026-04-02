@@ -1,6 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { axe } from 'vitest-axe'
 import { Toggle } from './Toggle'
 
 describe('Toggle', () => {
@@ -155,5 +156,13 @@ describe('Toggle', () => {
       render(<Toggle size="md" />)
       expect(screen.getByRole('switch')).toBeInTheDocument()
     })
+  })
+})
+
+describe('Toggle accessibility', () => {
+  it('has no accessibility violations', async () => {
+    const { container } = render(<Toggle label="Dark mode" />)
+    const results = await axe(container)
+    expect(results).toHaveNoViolations()
   })
 })

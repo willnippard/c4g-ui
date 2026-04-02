@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Stepper, type StepperProps } from './Stepper'
 
 const defaultSteps: StepperProps['steps'] = [

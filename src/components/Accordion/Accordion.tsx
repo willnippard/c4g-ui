@@ -9,6 +9,7 @@ import {
   useState,
 } from 'react'
 import { cn } from '../../lib/utils'
+import { ChevronDownIcon } from '../../lib/icons'
 
 export type AccordionSize = 'sm' | 'md' | 'lg'
 
@@ -33,38 +34,21 @@ export interface AccordionProps extends HTMLAttributes<HTMLDivElement> {
 const sizeConfig = {
   sm: {
     trigger: 'py-2 px-3 text-sm',
-    content: 'px-3 pb-2 text-xs',
+    content: 'px-3 pt-1 pb-2 text-xs',
     chevron: 'h-4 w-4',
   },
   md: {
     trigger: 'py-3 px-4 text-base',
-    content: 'px-4 pb-4 text-sm',
+    content: 'px-4 pt-1 pb-4 text-sm',
     chevron: 'h-5 w-5',
   },
   lg: {
     trigger: 'py-4 px-6 text-lg',
-    content: 'px-6 pb-6 text-base',
+    content: 'px-6 pt-2 pb-6 text-base',
     chevron: 'h-6 w-6',
   },
 } as const
 
-function ChevronIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 20 20"
-      fill="currentColor"
-      className={className}
-      aria-hidden="true"
-    >
-      <path
-        fillRule="evenodd"
-        d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
-        clipRule="evenodd"
-      />
-    </svg>
-  )
-}
 
 export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
   (
@@ -190,7 +174,7 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
                   )}
                 >
                   <span className="text-left">{item.title}</span>
-                  <ChevronIcon
+                  <ChevronDownIcon
                     className={cn(
                       'shrink-0 text-on-surface-variant transition-transform duration-200',
                       isOpen && 'rotate-180',

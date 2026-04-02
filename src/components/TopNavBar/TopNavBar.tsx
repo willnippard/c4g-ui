@@ -8,54 +8,12 @@ import {
   useCallback,
 } from 'react'
 import { cn } from '../../lib/utils'
-import { Button } from '../Button'
+import type { TopNavLink, TopNavBarSize } from './types'
+import { BrandSection } from './BrandSection'
+import { DesktopNav } from './DesktopNav'
+import { MobileNav } from './MobileNav'
 
-export type TopNavLink = {
-  label: string
-  href: string
-  icon?: ReactNode
-  active?: boolean
-  children?: TopNavLink[]
-  megaMenu?: ReactNode
-}
-
-/** @deprecated Use TopNavLink instead */
-export type NavLink = TopNavLink
-
-export type TopNavBarSize = 'sm' | 'md' | 'lg'
-
-const sizeConfig = {
-  sm: {
-    bar: 'h-12',
-    brand: 'text-base',
-    link: 'px-3 py-1.5 text-xs',
-    actionButton: 'px-4 py-1.5 text-xs',
-    dropdownItem: 'px-3 py-2',
-    hamburger: 'w-8 h-8',
-    mobileItem: 'py-2',
-    megaMenuTop: 'top-12',
-  },
-  md: {
-    bar: 'h-16',
-    brand: 'text-xl',
-    link: 'px-4 py-2 text-sm',
-    actionButton: 'px-6 py-2.5 text-sm',
-    dropdownItem: 'px-4 py-3',
-    hamburger: 'w-10 h-10',
-    mobileItem: 'py-3',
-    megaMenuTop: 'top-16',
-  },
-  lg: {
-    bar: 'h-20',
-    brand: 'text-2xl',
-    link: 'px-5 py-3 text-base',
-    actionButton: 'px-8 py-3.5 text-base',
-    dropdownItem: 'px-5 py-4',
-    hamburger: 'w-12 h-12',
-    mobileItem: 'py-4',
-    megaMenuTop: 'top-20',
-  },
-} as const
+export type { TopNavLink, NavLink, TopNavBarSize } from './types'
 
 export interface TopNavBarProps extends HTMLAttributes<HTMLElement> {
   /** Brand element — text string or ReactNode (e.g. logo). */
@@ -83,11 +41,9 @@ export const TopNavBar = forwardRef<HTMLElement, TopNavBarProps>(
     },
     ref,
   ) => {
-    const sc = sizeConfig[size]
     const [openDropdown, setOpenDropdown] = useState<string | null>(null)
     const [mobileOpen, setMobileOpen] = useState(false)
     const navRef = useRef<HTMLElement | null>(null)
-    const mobileMenuId = 'topnav-mobile-menu'
 
     const setRefs = useCallback(
       (node: HTMLElement | null) => {
@@ -126,223 +82,11 @@ export const TopNavBar = forwardRef<HTMLElement, TopNavBarProps>(
       setOpenDropdown((prev) => (prev === href ? null : href))
     }
 
-    const hasSubmenu = (link: TopNavLink) =>
-      !!(link.children?.length || link.megaMenu)
-
-    const renderDesktopLink = (link: TopNavLink) => {
-      const isOpen = openDropdown === link.href
-
-      if (hasSubmenu(link)) {
-        return (
-          <li key={link.href} className="relative">
-            <button
-              type="button"
-              onClick={() => toggleDropdown(link.href)}
-              aria-expanded={isOpen}
-              aria-haspopup="true"
-              className={cn(
-                'flex items-center gap-3 rounded-lg font-semibold font-manrope transition-all duration-200',
-                sc.link,
-                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary',
-                link.active
-                  ? 'bg-surface-container-lowest text-primary'
-                  : 'text-on-surface hover:bg-surface-container-high',
-              )}
-            >
-              {link.icon && <span className="shrink-0">{link.icon}</span>}
-              <span>{link.label}</span>
-              <svg
-                className={cn(
-                  'w-4 h-4 transition-transform duration-200',
-                  isOpen && 'rotate-180',
-                )}
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M19 9l-7 7-7-7"
-                />
-              </svg>
-            </button>
-
-            {/* Dropdown panel */}
-            {link.children && link.children.length > 0 && (
-              <div
-                className={cn(
-                  'absolute top-full left-0 mt-2 min-w-[220px] bg-surface-container-lowest rounded-xl shadow-lg border border-outline-variant/20 py-2 transition-all duration-300',
-                  isOpen
-                    ? 'opacity-100 translate-y-0 pointer-events-auto'
-                    : 'opacity-0 -translate-y-2 pointer-events-none',
-                )}
-              >
-                {link.children.map((child) => (
-                  <a
-                    key={child.href}
-                    href={child.href}
-                    aria-current={child.active ? 'page' : undefined}
-                    className={cn(
-                      'flex items-center gap-3 mx-2 rounded-lg font-semibold font-manrope transition-all duration-200',
-                      sc.dropdownItem,
-                      sc.link.split(' ').find((c) => c.startsWith('text-')),
-                      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary',
-                      child.active
-                        ? 'text-primary bg-surface-container-lowest'
-                        : 'text-on-secondary-container hover:bg-surface-container-high',
-                    )}
-                  >
-                    {child.icon && (
-                      <span className="shrink-0">{child.icon}</span>
-                    )}
-                    <span>{child.label}</span>
-                  </a>
-                ))}
-              </div>
-            )}
-
-            {/* Mega menu panel */}
-            {link.megaMenu && (
-              <div
-                className={cn(
-                  'fixed left-0 right-0 bg-surface-container-lowest shadow-xl border-t border-outline-variant/20 transition-all duration-300',
-                  sc.megaMenuTop,
-                  isOpen
-                    ? 'opacity-100 pointer-events-auto'
-                    : 'opacity-0 pointer-events-none',
-                )}
-              >
-                <div className="max-w-screen-2xl mx-auto px-8 py-6">
-                  {link.megaMenu}
-                </div>
-              </div>
-            )}
-          </li>
-        )
-      }
-
-      return (
-        <li key={link.href}>
-          <a
-            href={link.href}
-            aria-current={link.active ? 'page' : undefined}
-            className={cn(
-              'flex items-center gap-3 rounded-lg font-semibold font-manrope transition-all duration-200',
-              sc.link,
-              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary',
-              link.active
-                ? 'bg-surface-container-lowest text-primary'
-                : 'text-on-surface hover:bg-surface-container-high',
-            )}
-          >
-            {link.icon && <span className="shrink-0">{link.icon}</span>}
-            <span>{link.label}</span>
-          </a>
-        </li>
-      )
+    const sizeConfigs = {
+      sm: 'h-12',
+      md: 'h-16',
+      lg: 'h-20',
     }
-
-    const renderMobileLink = (link: TopNavLink) => (
-      <li key={link.href} role="none">
-        {hasSubmenu(link) ? (
-          <>
-            <button
-              type="button"
-              role="menuitem"
-              onClick={() => toggleDropdown(link.href)}
-              aria-expanded={openDropdown === link.href}
-              className={cn(
-                'flex items-center gap-3 w-full px-4 rounded-lg font-semibold font-manrope transition-all duration-200',
-                sc.mobileItem,
-                sc.link.split(' ').find((c) => c.startsWith('text-')),
-                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary',
-                link.active
-                  ? 'bg-surface-container-lowest text-primary'
-                  : 'text-on-surface hover:bg-surface-container-high',
-              )}
-            >
-              {link.icon && <span className="shrink-0">{link.icon}</span>}
-              <span className="flex-1 text-left">{link.label}</span>
-              <svg
-                className={cn(
-                  'w-4 h-4 transition-transform duration-200',
-                  openDropdown === link.href && 'rotate-180',
-                )}
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M19 9l-7 7-7-7"
-                />
-              </svg>
-            </button>
-
-            {/* Dropdown children as indented sub-items */}
-            {link.children && openDropdown === link.href && (
-              <ul
-                className="space-y-1 mt-1 list-none m-0 p-0"
-                role="menu"
-              >
-                {link.children.map((child) => (
-                  <li key={child.href} role="none">
-                    <a
-                      href={child.href}
-                      role="menuitem"
-                      aria-current={child.active ? 'page' : undefined}
-                      className={cn(
-                        'flex items-center gap-3 pl-10 pr-4 rounded-lg font-semibold font-manrope transition-all duration-200',
-                        sc.mobileItem,
-                        sc.link.split(' ').find((c) => c.startsWith('text-')),
-                        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary',
-                        child.active
-                          ? 'text-primary bg-surface-container-lowest'
-                          : 'text-on-secondary-container hover:bg-surface-container-high',
-                      )}
-                    >
-                      {child.icon && (
-                        <span className="shrink-0">{child.icon}</span>
-                      )}
-                      <span>{child.label}</span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            )}
-
-            {/* Mega menu content inline in mobile */}
-            {link.megaMenu && openDropdown === link.href && (
-              <div className="px-4 py-3">{link.megaMenu}</div>
-            )}
-          </>
-        ) : (
-          <a
-            href={link.href}
-            role="menuitem"
-            aria-current={link.active ? 'page' : undefined}
-            className={cn(
-              'flex items-center gap-3 px-4 rounded-lg font-semibold font-manrope transition-all duration-200',
-              sc.mobileItem,
-              sc.link.split(' ').find((c) => c.startsWith('text-')),
-              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary',
-              link.active
-                ? 'bg-surface-container-lowest text-primary'
-                : 'text-on-surface hover:bg-surface-container-high',
-            )}
-          >
-            {link.icon && <span className="shrink-0">{link.icon}</span>}
-            <span>{link.label}</span>
-          </a>
-        )}
-      </li>
-    )
 
     return (
       <nav
@@ -357,134 +101,41 @@ export const TopNavBar = forwardRef<HTMLElement, TopNavBarProps>(
         <div
           className={cn(
             'flex justify-between items-center px-8 max-w-screen-2xl mx-auto',
-            sc.bar,
+            sizeConfigs[size],
           )}
         >
           {/* Brand */}
-          <div
-            className={cn(
-              'font-black text-primary font-epilogue uppercase tracking-tighter',
-              sc.brand,
-            )}
-          >
-            {brand}
-          </div>
+          <BrandSection brand={brand} size={size} />
 
           {/* Right side: links + action button + hamburger */}
           <div className="flex items-center gap-4">
-            {/* Desktop links */}
-            {links.length > 0 && (
-              <ul className="hidden md:flex gap-1 items-center list-none m-0 p-0 mr-2">
-                {links.map((link) => renderDesktopLink(link))}
-              </ul>
-            )}
-
-            {/* Actions area (desktop only) */}
-            {actions && (
-              <div className="hidden md:flex items-center gap-3">
-                {actions}
-              </div>
-            )}
-
-            {/* Action button (desktop only) */}
-            <Button
-              variant="primary"
+            {/* Desktop navigation */}
+            <DesktopNav
+              links={links}
+              openDropdown={openDropdown}
+              onToggleDropdown={toggleDropdown}
+              actions={actions}
+              actionLabel={actionLabel}
+              onAction={onAction}
               size={size}
-              className={cn(
-                'hidden md:inline-flex',
-                sc.actionButton,
-              )}
-              onClick={onAction}
-            >
-              {actionLabel}
-            </Button>
+            />
 
-            {/* Hamburger (mobile only) */}
-            <button
-              type="button"
-              className={cn(
-                'md:hidden flex items-center justify-center rounded-lg text-on-surface hover:bg-surface-container-high transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary',
-                sc.hamburger,
-              )}
-              onClick={() => setMobileOpen((prev) => !prev)}
-              aria-expanded={mobileOpen}
-              aria-controls={mobileMenuId}
-              aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
-            >
-              {mobileOpen ? (
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              ) : (
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                </svg>
-              )}
-            </button>
+            {/* Mobile navigation */}
+            <MobileNav
+              mobileOpen={mobileOpen}
+              onToggleMobile={() => setMobileOpen((prev) => !prev)}
+              links={links}
+              openDropdown={openDropdown}
+              onToggleDropdown={toggleDropdown}
+              actions={actions}
+              actionLabel={actionLabel}
+              onAction={onAction}
+              size={size}
+            />
           </div>
         </div>
 
-        {/* Mobile menu */}
-        <div
-          id={mobileMenuId}
-          className={cn(
-            'md:hidden bg-surface-container-low border-t border-outline-variant/20 transition-all duration-300 overflow-hidden',
-            mobileOpen ? 'max-h-[80vh] opacity-100' : 'max-h-0 opacity-0',
-          )}
-        >
-          <ul
-            className="px-4 py-4 space-y-1 list-none m-0 p-0"
-            role="menu"
-            aria-label="Mobile navigation"
-          >
-            {links.map((link) => renderMobileLink(link))}
-          </ul>
-
-          <div className="px-4 pb-4 space-y-3">
-            {/* Actions area in mobile */}
-            {actions && (
-              <div className="pt-3 border-t border-outline-variant/20">
-                {actions}
-              </div>
-            )}
-
-            {/* Action button in mobile */}
-            <Button
-              variant="primary"
-              size={size}
-              className={cn(
-                'w-full',
-                sc.mobileItem,
-                sc.link.split(' ').find((c) => c.startsWith('text-')),
-              )}
-              onClick={onAction}
-            >
-              {actionLabel}
-            </Button>
-          </div>
-        </div>
+        {/* Mobile menu panel is rendered inside MobileNav */}
       </nav>
     )
   },

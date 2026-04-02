@@ -1,5 +1,6 @@
 import { type HTMLAttributes, forwardRef, useMemo } from 'react'
 import { cn } from '../../lib/utils'
+import { ChevronLeftIcon, ChevronRightIcon } from '../../lib/icons'
 import { Button } from '../Button'
 
 export type PaginationSize = 'sm' | 'md' | 'lg'
@@ -55,37 +56,6 @@ const sizeConfig: Record<PaginationSize, { gap: string; buttonSize: 'sm' | 'md' 
   lg: { gap: 'gap-2', buttonSize: 'lg', iconSize: 'h-5 w-5' },
 }
 
-const ChevronLeft = ({ className }: { className?: string }) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 20 20"
-    fill="currentColor"
-    className={className}
-    aria-hidden="true"
-  >
-    <path
-      fillRule="evenodd"
-      d="M11.78 5.22a.75.75 0 0 1 0 1.06L8.06 10l3.72 3.72a.75.75 0 1 1-1.06 1.06l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0Z"
-      clipRule="evenodd"
-    />
-  </svg>
-)
-
-const ChevronRight = ({ className }: { className?: string }) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 20 20"
-    fill="currentColor"
-    className={className}
-    aria-hidden="true"
-  >
-    <path
-      fillRule="evenodd"
-      d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z"
-      clipRule="evenodd"
-    />
-  </svg>
-)
 
 export const Pagination = forwardRef<HTMLElement, PaginationProps>(
   (
@@ -124,7 +94,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
           onClick={() => onPageChange(currentPage - 1)}
           aria-label="Go to previous page"
         >
-          <ChevronLeft className={config.iconSize} />
+          <ChevronLeftIcon className={config.iconSize} />
         </Button>
 
         {pages.map((item) => {
@@ -167,7 +137,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
           onClick={() => onPageChange(currentPage + 1)}
           aria-label="Go to next page"
         >
-          <ChevronRight className={config.iconSize} />
+          <ChevronRightIcon className={config.iconSize} />
         </Button>
       </nav>
     )

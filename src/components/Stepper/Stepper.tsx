@@ -1,5 +1,6 @@
 import { type HTMLAttributes, type ReactNode, forwardRef } from 'react'
 import { cn } from '../../lib/utils'
+import { CheckIcon } from '../../lib/icons'
 
 export interface Step {
   key: string
@@ -66,22 +67,6 @@ const sizeConfig = {
   },
 } as const
 
-function CheckIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={3}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <polyline points="20 6 9 17 4 12" />
-    </svg>
-  )
-}
 
 export const Stepper = forwardRef<HTMLDivElement, StepperProps>(
   (
@@ -135,7 +120,7 @@ export const Stepper = forwardRef<HTMLDivElement, StepperProps>(
                 )}
               >
                 {isCompleted ? (
-                  <CheckIcon className={config.circleIcon} />
+                  <CheckIcon className={cn(config.circleIcon, 'text-on-primary')} />
                 ) : step.icon ? (
                   <span className={config.iconSize}>{step.icon}</span>
                 ) : (

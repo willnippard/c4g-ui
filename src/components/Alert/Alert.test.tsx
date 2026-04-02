@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { axe } from 'vitest-axe'
 import { describe, it, expect, vi } from 'vitest'
 import { Alert } from './Alert'
 
@@ -98,5 +99,13 @@ describe('Alert', () => {
     )
     await user.click(screen.getByText('Undo'))
     expect(onClick).toHaveBeenCalledTimes(1)
+  })
+})
+
+describe('Alert accessibility', () => {
+  it('has no accessibility violations', async () => {
+    const { container } = render(<Alert>Something happened</Alert>)
+    const results = await axe(container)
+    expect(results).toHaveNoViolations()
   })
 })

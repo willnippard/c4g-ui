@@ -1,5 +1,6 @@
 import { type HTMLAttributes, type ReactNode, forwardRef } from 'react'
 import { cn } from '../../lib/utils'
+import { CloseIcon, CheckIcon } from '../../lib/icons'
 
 export interface ToastProps extends HTMLAttributes<HTMLDivElement> {
   variant?: 'success' | 'error' | 'warning' | 'info' | 'impact'
@@ -68,9 +69,7 @@ const makeDefaultIcon = (iconSize: string, variant: NonNullable<ToastProps['vari
     case 'success':
     case 'impact':
       return (
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" className={iconSize} aria-hidden="true">
-          <polyline points="20 6 9 17 4 12" />
-        </svg>
+        <CheckIcon className={iconSize} />
       )
     case 'error':
       return (
@@ -135,10 +134,7 @@ export const Toast = forwardRef<HTMLDivElement, ToastProps>(
             className="shrink-0 opacity-70 hover:opacity-100 transition-opacity rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:opacity-100"
             aria-label="Dismiss"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className={config.dismissIcon} aria-hidden="true">
-              <line x1="18" y1="6" x2="6" y2="18" />
-              <line x1="6" y1="6" x2="18" y2="18" />
-            </svg>
+            <CloseIcon className={config.dismissIcon} />
           </button>
         )}
       </div>

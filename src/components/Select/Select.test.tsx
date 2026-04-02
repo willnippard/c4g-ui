@@ -1,6 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { axe } from 'vitest-axe'
 import { Select } from './Select'
 import type { SelectOption } from './Select'
 
@@ -185,5 +186,17 @@ describe('Select', () => {
       render(<Select options={defaultOptions} size="lg" />)
       expect(screen.getByRole('combobox')).toBeInTheDocument()
     })
+  })
+})
+
+describe('Select accessibility', () => {
+  it('has no accessibility violations', async () => {
+    const options: SelectOption[] = [
+      { value: 'apple', label: 'Apple' },
+      { value: 'banana', label: 'Banana' },
+    ]
+    const { container } = render(<Select options={options} label="Fruit" />)
+    const results = await axe(container)
+    expect(results).toHaveNoViolations()
   })
 })

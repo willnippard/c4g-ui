@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react'
+import { axe } from 'vitest-axe'
 import { describe, it, expect } from 'vitest'
 import { Badge } from './Badge'
 
@@ -58,5 +59,13 @@ describe('Badge', () => {
   it('forwards additional HTML attributes', () => {
     render(<Badge data-testid="my-badge">Test</Badge>)
     expect(screen.getByTestId('my-badge')).toBeInTheDocument()
+  })
+})
+
+describe('Badge accessibility', () => {
+  it('has no accessibility violations', async () => {
+    const { container } = render(<Badge>New</Badge>)
+    const results = await axe(container)
+    expect(results).toHaveNoViolations()
   })
 })

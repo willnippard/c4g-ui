@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Card, type CardProps } from './Card'
 
 const exampleMedia: Record<string, CardProps['media']> = {

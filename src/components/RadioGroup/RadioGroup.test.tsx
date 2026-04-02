@@ -1,6 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { axe } from 'vitest-axe'
 import { RadioGroup } from './RadioGroup'
 import type { RadioOption } from './RadioGroup'
 
@@ -211,5 +212,17 @@ describe('RadioGroup', () => {
       render(<RadioGroup options={defaultOptions} name="test" size="lg" />)
       expect(screen.getByRole('radiogroup')).toBeInTheDocument()
     })
+  })
+})
+
+describe('RadioGroup accessibility', () => {
+  it('has no accessibility violations', async () => {
+    const options: RadioOption[] = [
+      { value: 'a', label: 'Option A' },
+      { value: 'b', label: 'Option B' },
+    ]
+    const { container } = render(<RadioGroup options={options} name="test" legend="Choose one" />)
+    const results = await axe(container)
+    expect(results).toHaveNoViolations()
   })
 })

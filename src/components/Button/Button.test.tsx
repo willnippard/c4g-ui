@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { axe } from 'vitest-axe'
 import { describe, it, expect, vi } from 'vitest'
 import { Button } from './Button'
 
@@ -94,5 +95,13 @@ describe('Button', () => {
     render(<Button className="my-class">Custom</Button>)
     const btn = screen.getByRole('button')
     expect(btn.className).toContain('my-class')
+  })
+})
+
+describe('Button accessibility', () => {
+  it('has no accessibility violations', async () => {
+    const { container } = render(<Button>Click me</Button>)
+    const results = await axe(container)
+    expect(results).toHaveNoViolations()
   })
 })

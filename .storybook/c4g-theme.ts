@@ -1,4 +1,4 @@
-import { create } from '@storybook/theming'
+import { create } from 'storybook/theming'
 
 /**
  * Custom Storybook UI theme branded for Code4Good.
@@ -7,9 +7,8 @@ import { create } from '@storybook/theming'
  * the component preview.  Component light/dark is handled independently by
  * `withThemeByClassName` in preview.ts.
  *
- * Storybook 8 does not support a runtime UI theme toggle.  The UI theme is
- * set statically here.  If a toggle is needed in the future, upgrade to
- * Storybook 9+ and use @vueless/storybook-dark-mode.
+ * The UI theme is set statically here.  For a runtime toggle, consider
+ * @vueless/storybook-dark-mode or a custom toolbar addon.
  */
 export const c4gTheme = create({
   base: 'dark',

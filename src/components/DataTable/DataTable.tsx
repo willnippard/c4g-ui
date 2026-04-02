@@ -1,4 +1,4 @@
-import { type KeyboardEvent, type ReactNode, useState, useMemo, useCallback } from 'react'
+import { type KeyboardEvent, type ReactNode, type Ref, useState, useMemo, useCallback, forwardRef } from 'react'
 import { cn } from '../../lib/utils'
 
 export type DataTableSize = 'sm' | 'md' | 'lg'
@@ -98,19 +98,22 @@ function SortIndicator({ direction, active }: { direction: SortDirection | null;
   )
 }
 
-export function DataTable<T>({
-  columns,
-  data,
-  keyExtractor,
-  density,
-  size,
-  className,
-  caption,
-  emptyState,
-  sortKey: controlledSortKey,
-  sortDirection: controlledSortDirection,
-  onSort,
-}: DataTableProps<T>) {
+function DataTableInner<T>(
+  {
+    columns,
+    data,
+    keyExtractor,
+    density,
+    size,
+    className,
+    caption,
+    emptyState,
+    sortKey: controlledSortKey,
+    sortDirection: controlledSortDirection,
+    onSort,
+  }: DataTableProps<T>,
+  ref: Ref<HTMLDivElement>,
+) {
   const resolved = resolveSize(size, density)
   const styles = sizeConfig[resolved]
 
@@ -163,6 +166,7 @@ export function DataTable<T>({
 
   return (
     <div
+      ref={ref}
       className={cn(
         'overflow-x-auto bg-surface-container-lowest shadow-sm border border-outline-variant/40',
         styles.container,
@@ -269,3 +273,13 @@ export function DataTable<T>({
     </div>
   )
 }
+
+/**
+ * Generic-safe forwardRef wrapper.
+ *
+ * React's `forwardRef` loses generic type parameters, so we cast through
+ * an intermediate to preserve the `<T>` on DataTableProps.
+ */
+export const DataTable = forwardRef(DataTableInner) as <T>(
+  props: DataTableProps<T> & { ref?: Ref<HTMLDivElement> },
+) => ReturnType<typeof DataTableInner>

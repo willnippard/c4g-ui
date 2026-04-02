@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react'
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { DataTable, type DataTableColumn, type SortDirection } from './DataTable'
 import { Badge } from '../Badge'
 

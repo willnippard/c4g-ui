@@ -1,5 +1,6 @@
 import { type InputHTMLAttributes, forwardRef, useEffect, useId, useRef } from 'react'
 import { cn } from '../../lib/utils'
+import { ErrorCircleIcon } from '../../lib/icons'
 
 export type CheckboxSize = 'sm' | 'md' | 'lg'
 
@@ -84,11 +85,11 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           <div className={cn('relative flex-shrink-0', config.box)}>
             <input
               ref={(node) => {
-                internalRef.current = node
+                ;(internalRef as React.MutableRefObject<HTMLInputElement | null>).current = node
                 if (typeof ref === 'function') {
                   ref(node)
                 } else if (ref) {
-                  ref.current = node
+                  ;(ref as React.MutableRefObject<HTMLInputElement | null>).current = node
                 }
               }}
               id={checkboxId}
@@ -170,23 +171,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             role="alert"
             className={cn('text-error font-manrope flex items-center gap-1.5', config.error)}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-              className="shrink-0"
-            >
-              <circle cx="12" cy="12" r="10" />
-              <line x1="12" y1="8" x2="12" y2="12" />
-              <line x1="12" y1="16" x2="12.01" y2="16" />
-            </svg>
+            <ErrorCircleIcon className="shrink-0" />
             {error}
           </p>
         )}
