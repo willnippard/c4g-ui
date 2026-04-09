@@ -4,7 +4,7 @@
 
 React component library for Code4Good. Provides reusable, accessible UI components with dark mode support.
 
-**Stack:** React 18/19, TypeScript, Tailwind CSS, Storybook 8, Vite 6
+**Stack:** React 18/19, TypeScript, Tailwind CSS 3.4, Storybook 10, Vite 6, Vitest 4
 
 ## Commands
 
@@ -14,6 +14,8 @@ React component library for Code4Good. Provides reusable, accessible UI componen
 | `npm run build` | Build library (tsc types + Vite bundle) |
 | `npm run build-storybook` | Static Storybook site |
 | `npm run lint` | ESLint |
+| `npm run test` | Vitest (watch mode) |
+| `npm run test:run` | Vitest (single run, CI) |
 
 ## Architecture
 
@@ -26,11 +28,15 @@ React component library for Code4Good. Provides reusable, accessible UI componen
 
 ```
 src/
-  components/    # One folder per component: Component.tsx, index.ts, Component.stories.tsx
-  lib/utils.ts   # cn() — clsx + tailwind-merge helper
+  components/    # One folder per component: Component.tsx, index.ts, Component.stories.tsx, Component.test.tsx
+  lib/
+    utils.ts     # cn() — clsx + tailwind-merge helper
+    icons.tsx    # Shared icon components (CloseIcon, ChevronDownIcon, CheckIcon, etc.)
   styles/        # globals.css (Tailwind base), fonts.css (Google Fonts, optional)
+  test/setup.ts  # Vitest setup (jest-dom + vitest-axe matchers)
   index.ts       # Public API barrel export
-  tailwind-preset.ts  # Design tokens for consumer Tailwind configs
+  tailwind-preset.ts  # Design tokens for consumer Tailwind configs (uses CSS vars)
+.github/workflows/ci.yml  # CI pipeline (lint, test, build)
 ```
 
 ### Components
@@ -66,7 +72,7 @@ Each component uses `forwardRef`, typed variant props (union types), and follows
 - `Textarea` — multiline text input with label, error, helper text; sm/md/lg
 - `Toggle` — switch input with label; sm/md (track size), sm/md/lg (density)
 - `Tooltip` — hover/focus popup with configurable position and delay; top/bottom/left/right, sm/md/lg
-- `TopNavBar` — fixed top navigation bar with brand, nav links, and action button; sm/md/lg
+- `TopNavBar` — fixed top navigation bar with brand, nav links, and action button; sm/md/lg. Decomposed into internal sub-components: `BrandSection`, `DesktopNav`, `MobileNav`, `types.ts`
 - `SideNavBar` — vertical sidebar navigation with brand header, nav items, footer links, and CTA button; sm/md/lg
 
 ## Conventions

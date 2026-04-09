@@ -1,6 +1,6 @@
 import './styles/globals.css'
 
-export { Button, type ButtonProps, type ButtonDensity } from './components/Button'
+export { Button, type ButtonProps, type ButtonDensity, type ButtonVariant, type ButtonSize } from './components/Button'
 export { Card, type CardProps, type CardSize } from './components/Card'
 export { Badge, type BadgeProps } from './components/Badge'
 export { Input, type InputProps, type InputSize } from './components/Input'

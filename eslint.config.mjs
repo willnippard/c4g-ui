@@ -13,5 +13,5 @@ export default tseslint.config(js.configs.recommended, ...tseslint.configs.recom
     ...reactHooks.configs.recommended.rules,
   },
 }, {
-  ignores: ['dist/', 'storybook-static/', '*.config.*'],
+  ignores: ['dist/', 'dist-new/', 'storybook-static/', '*.config.*'],
 }, storybook.configs["flat/recommended"]);

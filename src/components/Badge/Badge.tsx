@@ -2,7 +2,7 @@ import { type HTMLAttributes, forwardRef } from 'react'
 import { cn } from '../../lib/utils'
 
 export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
-  variant?: 'primary' | 'accent' | 'muted'
+  variant?: 'primary' | 'accent' | 'muted' | 'secondary' | 'outline' | 'destructive' | 'default'
   size?: 'sm' | 'md' | 'lg'
 }
 
@@ -13,6 +13,14 @@ const variantStyles: Record<NonNullable<BadgeProps['variant']>, string> = {
     'bg-accent text-accent-foreground',
   muted:
     'bg-muted text-muted-foreground',
+  secondary:
+    'bg-secondary text-secondary-foreground',
+  outline:
+    'bg-transparent border border-outline-variant text-foreground',
+  destructive:
+    'bg-error text-error-foreground',
+  default:
+    'bg-primary text-primary-foreground',
 }
 
 const sizeConfig = {

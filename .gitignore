@@ -1,6 +1,8 @@
 node_modules
 dist
+dist-new
 storybook-static
 sim-output
 .turbo
 .vercel
+debug-storybook.log
