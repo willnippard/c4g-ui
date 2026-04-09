@@ -96,26 +96,27 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     }, [clearTimer])
 
     const posConfig = positionConfig[position]
+    const childProps = children.props as Record<string, unknown>
 
     const trigger = cloneElement(children, {
       'aria-describedby': visible ? tooltipId : undefined,
       onMouseEnter: (e: React.MouseEvent) => {
         show()
-        children.props.onMouseEnter?.(e)
+        ;(childProps.onMouseEnter as ((e: React.MouseEvent) => void) | undefined)?.(e)
       },
       onMouseLeave: (e: React.MouseEvent) => {
         hide()
-        children.props.onMouseLeave?.(e)
+        ;(childProps.onMouseLeave as ((e: React.MouseEvent) => void) | undefined)?.(e)
       },
       onFocus: (e: React.FocusEvent) => {
         show()
-        children.props.onFocus?.(e)
+        ;(childProps.onFocus as ((e: React.FocusEvent) => void) | undefined)?.(e)
       },
       onBlur: (e: React.FocusEvent) => {
         hide()
-        children.props.onBlur?.(e)
+        ;(childProps.onBlur as ((e: React.FocusEvent) => void) | undefined)?.(e)
       },
-    })
+    } as Record<string, unknown>)
 
     return (
       <div ref={ref} className="relative inline-flex">

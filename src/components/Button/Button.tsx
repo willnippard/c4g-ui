@@ -74,11 +74,12 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     // When asChild is true, render as the child element (Slot pattern)
     if (asChild && isValidElement(children)) {
+      const childProps = children.props as Record<string, unknown>
       return cloneElement(children, {
         ...props,
         ref,
-        className: cn(baseStyles, children.props.className),
-        disabled: disabled ? disabled : children.props.disabled,
+        className: cn(baseStyles, childProps.className as string | undefined),
+        disabled: disabled ? disabled : childProps.disabled,
       } as Record<string, unknown>)
     }
 
