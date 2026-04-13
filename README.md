@@ -42,11 +42,11 @@ This gives you access to classes like `bg-primary`, `text-accent`, `font-epilogu
 
 ### 3. Fonts (optional)
 
-The library uses the **Epilogue** and **Manrope** Google Fonts. You can load them however you prefer:
+The library uses the **Outfit** and **DM Sans** Google Fonts. You can load them however you prefer:
 
 - **Google Fonts CDN** — add to your HTML `<head>`:
   ```html
-  <link href="https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100..900;1,100..900&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..1000;1,9..40,400..1000&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
   ```
 - **Self-hosted** — download and serve the fonts yourself (recommended for GDPR compliance or performance)
 

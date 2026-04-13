@@ -1,170 +1,172 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 @layer base {
   :root {
     /* Base */
-    --color-background: 248 246 241;
-    --color-foreground: 43 36 32;
+    --color-background: 43 33% 96%;
+    --color-foreground: 22 15% 15%;
 
     /* Surface hierarchy */
-    --color-surface: 255 248 245;
-    --color-surface-bright: 255 248 245;
-    --color-surface-dim: 229 215 209;
-    --color-surface-container-lowest: 255 255 255;
-    --color-surface-container-low: 255 241 234;
-    --color-surface-container: 249 235 229;
-    --color-surface-container-high: 243 229 223;
-    --color-surface-container-highest: 237 224 217;
-    --color-on-surface: 33 26 22;
-    --color-on-surface-variant: 64 73 64;
+    --color-surface: 18 100% 98%;
+    --color-surface-bright: 18 100% 98%;
+    --color-surface-dim: 18 28% 86%;
+    --color-surface-container-lowest: 0 0% 100%;
+    --color-surface-container-low: 20 100% 96%;
+    --color-surface-container: 18 63% 94%;
+    --color-surface-container-high: 18 45% 91%;
+    --color-surface-container-highest: 21 36% 89%;
+    --color-on-surface: 22 20% 11%;
+    --color-on-surface-variant: 120 7% 27%;
 
-    /* Primary */
-    --color-primary: 42 107 63;
-    --color-primary-foreground: 255 255 255;
-    --color-primary-container: 42 107 63;
-    --color-on-primary: 255 255 255;
-    --color-on-primary-container: 165 233 178;
-    --color-primary-fixed: 173 242 187;
-    --color-primary-fixed-dim: 146 214 160;
+    /* Primary — canonical forest green, aligned with c4g-landing */
+    --color-primary: 142 45% 30%;
+    --color-primary-foreground: 0 0% 100%;
+    --color-primary-container: 142 45% 30%;
+    --color-on-primary: 0 0% 100%;
+    --color-on-primary-container: 131 61% 78%;
+    --color-primary-fixed: 132 73% 81%;
+    --color-primary-fixed-dim: 132 45% 71%;
 
     /* Accent */
-    --color-accent: 212 163 42;
-    --color-accent-foreground: 43 36 32;
+    --color-accent: 43 67% 50%;
+    --color-accent-foreground: 22 15% 15%;
 
     /* Secondary */
-    --color-secondary: 234 229 219;
-    --color-secondary-foreground: 43 36 32;
-    --color-secondary-container: 231 226 216;
-    --color-on-secondary-container: 103 100 92;
-    --color-secondary-fixed: 231 226 216;
-    --color-secondary-fixed-dim: 202 198 188;
+    --color-secondary: 40 26% 89%;
+    --color-secondary-foreground: 22 15% 15%;
+    --color-secondary-container: 40 24% 88%;
+    --color-on-secondary-container: 44 6% 38%;
+    --color-secondary-fixed: 40 24% 88%;
+    --color-secondary-fixed-dim: 43 12% 76%;
 
     /* Muted */
-    --color-muted: 237 233 224;
-    --color-muted-foreground: 107 93 84;
+    --color-muted: 42 27% 90%;
+    --color-muted-foreground: 23 12% 37%;
 
     /* Card */
-    --color-card: 255 255 255;
-    --color-card-foreground: 43 36 32;
+    --color-card: 0 0% 100%;
+    --color-card-foreground: 22 15% 15%;
 
     /* Border */
-    --color-border: 221 215 204;
+    --color-border: 39 20% 83%;
 
     /* Tertiary */
-    --color-tertiary: 92 67 0;
-    --color-tertiary-container: 122 90 0;
-    --color-on-tertiary: 255 255 255;
-    --color-on-tertiary-container: 255 212 120;
-    --color-tertiary-fixed: 255 223 159;
-    --color-tertiary-fixed-dim: 243 191 69;
+    --color-tertiary: 44 100% 18%;
+    --color-tertiary-container: 44 100% 24%;
+    --color-on-tertiary: 0 0% 100%;
+    --color-on-tertiary-container: 41 100% 74%;
+    --color-tertiary-fixed: 40 100% 81%;
+    --color-tertiary-fixed-dim: 42 88% 61%;
 
     /* Outline */
-    --color-outline-variant: 192 201 190;
+    --color-outline-variant: 109 9% 77%;
 
-    /* Error */
-    --color-error: 186 26 26;
-    --color-error-container: 255 218 214;
-    --color-on-error: 255 255 255;
-    --color-on-error-container: 147 0 10;
+    /* Error — canonical value, aligned with c4g-landing */
+    --color-error: 0 75% 42%;
+    --color-error-container: 6 100% 92%;
+    --color-on-error: 0 0% 100%;
+    --color-on-error-container: 356 100% 29%;
 
     /* Inverse */
-    --color-inverse-surface: 54 47 43;
-    --color-inverse-on-surface: 252 238 231;
+    --color-inverse-surface: 22 11% 19%;
+    --color-inverse-on-surface: 20 78% 95%;
 
     /* Toast — fixed colors that don't swap between themes */
-    --color-toast-success: 45 120 68;
-    --color-toast-error: 180 40 40;
-    --color-toast-warning: 140 100 10;
-    --color-toast-info: 80 72 66;
-    --color-toast-impact: 145 108 10;
+    --color-toast-success: 138 45% 32%;
+    --color-toast-error: 0 64% 43%;
+    --color-toast-warning: 42 87% 29%;
+    --color-toast-info: 26 10% 29%;
+    --color-toast-impact: 44 87% 30%;
   }
 
   .dark {
     /* Base */
-    --color-background: 20 31 26;
-    --color-foreground: 241 237 228;
+    --color-background: 153 22% 10%;
+    --color-foreground: 42 32% 92%;
 
     /* Surface hierarchy (inverted: lowest is darkest) */
-    --color-surface: 26 18 16;
-    --color-surface-bright: 65 56 51;
-    --color-surface-dim: 26 18 16;
-    --color-surface-container-lowest: 17 13 11;
-    --color-surface-container-low: 33 26 22;
-    --color-surface-container: 43 34 32;
-    --color-surface-container-high: 54 45 41;
-    --color-surface-container-highest: 65 56 51;
-    --color-on-surface: 237 232 228;
-    --color-on-surface-variant: 192 201 190;
+    --color-surface: 12 24% 8%;
+    --color-surface-bright: 21 12% 23%;
+    --color-surface-dim: 12 24% 8%;
+    --color-surface-container-lowest: 20 21% 5%;
+    --color-surface-container-low: 22 20% 11%;
+    --color-surface-container: 11 15% 15%;
+    --color-surface-container-high: 18 14% 19%;
+    --color-surface-container-highest: 21 12% 23%;
+    --color-on-surface: 27 20% 91%;
+    --color-on-surface-variant: 109 9% 77%;
 
-    /* Primary (lighter for dark backgrounds) */
-    --color-primary: 146 214 160;
-    --color-primary-foreground: 0 57 26;
-    --color-primary-container: 10 82 41;
-    --color-on-primary: 0 57 26;
-    --color-on-primary-container: 173 242 187;
-    --color-primary-fixed: 173 242 187;
-    --color-primary-fixed-dim: 146 214 160;
+    /* Primary — lighter pastel green for dark backgrounds */
+    --color-primary: 132 42% 71%;
+    --color-primary-foreground: 147 100% 11%;
+    --color-primary-container: 146 78% 18%;
+    --color-on-primary: 147 100% 11%;
+    --color-on-primary-container: 132 73% 81%;
+    --color-primary-fixed: 132 73% 81%;
+    --color-primary-fixed-dim: 132 45% 71%;
 
     /* Accent (brighter for dark backgrounds) */
-    --color-accent: 243 191 69;
-    --color-accent-foreground: 61 41 0;
+    --color-accent: 42 88% 61%;
+    --color-accent-foreground: 40 100% 12%;
 
     /* Secondary */
-    --color-secondary: 73 71 63;
-    --color-secondary-foreground: 231 226 216;
-    --color-secondary-container: 73 71 63;
-    --color-on-secondary-container: 231 226 216;
-    --color-secondary-fixed: 231 226 216;
-    --color-secondary-fixed-dim: 202 198 188;
+    --color-secondary: 48 7% 27%;
+    --color-secondary-foreground: 40 24% 88%;
+    --color-secondary-container: 48 7% 27%;
+    --color-on-secondary-container: 40 24% 88%;
+    --color-secondary-fixed: 40 24% 88%;
+    --color-secondary-fixed-dim: 43 12% 76%;
 
     /* Muted */
-    --color-muted: 51 41 36;
-    --color-muted-foreground: 192 184 176;
+    --color-muted: 20 17% 17%;
+    --color-muted-foreground: 30 11% 72%;
 
     /* Card */
-    --color-card: 43 34 32;
-    --color-card-foreground: 237 232 228;
+    --color-card: 11 15% 15%;
+    --color-card-foreground: 27 20% 91%;
 
     /* Border */
-    --color-border: 80 68 64;
+    --color-border: 15 11% 28%;
 
     /* Tertiary (brighter for dark backgrounds) */
-    --color-tertiary: 243 191 69;
-    --color-tertiary-container: 92 67 0;
-    --color-on-tertiary: 61 41 0;
-    --color-on-tertiary-container: 255 223 159;
-    --color-tertiary-fixed: 255 223 159;
-    --color-tertiary-fixed-dim: 243 191 69;
+    --color-tertiary: 42 88% 61%;
+    --color-tertiary-container: 44 100% 18%;
+    --color-on-tertiary: 40 100% 12%;
+    --color-on-tertiary-container: 40 100% 81%;
+    --color-tertiary-fixed: 40 100% 81%;
+    --color-tertiary-fixed-dim: 42 88% 61%;
 
     /* Outline */
-    --color-outline-variant: 69 77 68;
+    --color-outline-variant: 113 6% 28%;
 
     /* Error */
-    --color-error: 255 180 171;
-    --color-error-container: 147 0 10;
-    --color-on-error: 105 0 5;
-    --color-on-error-container: 255 218 214;
+    --color-error: 6 100% 84%;
+    --color-error-container: 356 100% 29%;
+    --color-on-error: 357 100% 21%;
+    --color-on-error-container: 6 100% 92%;
 
     /* Inverse */
-    --color-inverse-surface: 237 232 228;
-    --color-inverse-on-surface: 54 47 43;
+    --color-inverse-surface: 27 20% 91%;
+    --color-inverse-on-surface: 22 11% 19%;
 
     /* Toast — same values as light (intentionally fixed) */
-    --color-toast-success: 45 120 68;
-    --color-toast-error: 180 40 40;
-    --color-toast-warning: 140 100 10;
-    --color-toast-info: 80 72 66;
-    --color-toast-impact: 145 108 10;
+    --color-toast-success: 138 45% 32%;
+    --color-toast-error: 0 64% 43%;
+    --color-toast-warning: 42 87% 29%;
+    --color-toast-info: 26 10% 29%;
+    --color-toast-impact: 44 87% 30%;
 
     /* Brand panel */
-    --color-brand-panel: 46 44 40;
-    --color-brand-panel-bar: 59 143 85;
+    --color-brand-panel: 40 7% 17%;
+    --color-brand-panel-bar: 139 42% 40%;
   }
 
   body {
-    @apply font-manrope text-foreground bg-background antialiased;
+    font-family: 'DM Sans', sans-serif;
+    color: hsl(var(--color-foreground));
+    background-color: hsl(var(--color-background));
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
@@ -174,7 +176,7 @@
     appearance: none;
     width: 1.25rem;
     height: 1.25rem;
-    border: 2px solid rgb(var(--color-on-surface-variant));
+    border: 2px solid hsl(var(--color-on-surface-variant));
     border-radius: 50%;
     display: grid;
     place-content: center;
@@ -190,12 +192,12 @@
     border-radius: 50%;
     transform: scale(0);
     transition: transform 120ms ease-in-out;
-    background-color: rgb(var(--color-on-primary));
+    background-color: hsl(var(--color-on-primary));
   }
 
   .radio-tactile:checked {
-    border-color: rgb(var(--color-primary));
-    background-color: rgb(var(--color-primary));
+    border-color: hsl(var(--color-primary));
+    background-color: hsl(var(--color-primary));
   }
 
   .radio-tactile:checked::before {
@@ -203,13 +205,13 @@
   }
 
   .radio-tactile:hover:not(:disabled) {
-    border-color: rgb(var(--color-primary));
-    box-shadow: 0 0 0 4px rgb(var(--color-primary) / 0.15);
+    border-color: hsl(var(--color-primary));
+    box-shadow: 0 0 0 4px hsl(var(--color-primary) / 0.15);
   }
 
   .radio-tactile:focus-visible {
     outline: 2px solid transparent;
-    box-shadow: 0 0 0 4px rgb(var(--color-primary) / 0.35);
+    box-shadow: 0 0 0 4px hsl(var(--color-primary) / 0.35);
   }
 
   .radio-tactile:disabled {

@@ -11,8 +11,8 @@ import type { Config } from 'tailwindcss'
  * `:root` / `.dark` variable definitions) for these to resolve.
  */
 
-/** Reference a CSS custom property as an rgb() colour with alpha support */
-const cv = (name: string) => `rgb(var(--color-${name}) / <alpha-value>)`
+/** Reference a CSS custom property as an hsl() colour with alpha support */
+const cv = (name: string) => `hsl(var(--color-${name}) / <alpha-value>)`
 
 export const c4gPreset: Partial<Config> = {
   darkMode: 'class',
@@ -114,8 +114,8 @@ export const c4gPreset: Partial<Config> = {
         },
       },
       fontFamily: {
-        epilogue: ['Epilogue', 'sans-serif'],
-        manrope: ['Manrope', 'sans-serif'],
+        epilogue: ['Outfit', 'sans-serif'],
+        manrope: ['DM Sans', 'sans-serif'],
       },
       borderRadius: {
         ethos: '8px',

@@ -80,7 +80,7 @@ Each component uses `forwardRef`, typed variant props (union types), and follows
 - **Commits:** semantic prefixes (`feat:`, `fix:`)
 - **Accessibility:** aria attributes, focus rings, semantic HTML
 - **Styling:** Tailwind utility classes, CSS custom properties for theming (`globals.css`), design tokens in `tailwind.config.ts`
-- **Design tokens:** primary green (#2A6B3F), accent gold (#D4A32A), fonts: Epilogue (display), Manrope (body)
+- **Design tokens:** primary green (#2A6E43), accent gold (#D4A32A), fonts: Outfit (display), DM Sans (body)
 - **Dark mode:** Colors are defined as CSS custom properties in `src/styles/globals.css` (`:root` for light, `.dark` for dark). The Tailwind config references these variables. Components use semantic token classes (e.g. `bg-primary`, `text-on-surface`) — **never** use `dark:` prefixes or hardcoded hex values.
 - **Sizing:** All components use `sm | md | lg` for size and density presets. This is a library-wide standard — no component should use compact/spacious/zoomed/condensed.
 - **Exports:** all public components and types re-exported from `src/index.ts`

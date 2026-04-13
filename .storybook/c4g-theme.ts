@@ -18,8 +18,8 @@ export const c4gTheme = create({
   brandUrl: 'https://github.com/code4good',
 
   // Colors — derived from the C4G design tokens
-  colorPrimary: '#92D6A0', // primary in dark mode
-  colorSecondary: '#2A6B3F', // primary green
+  colorPrimary: '#92D6A0', // primary in dark mode (pastel green)
+  colorSecondary: '#2A6E43', // canonical primary green
 
   // UI chrome
   appBg: '#141F1A', // background dark
@@ -44,6 +44,6 @@ export const c4gTheme = create({
   inputBorderRadius: 6,
 
   // Typography
-  fontBase: '"Manrope", "Inter", system-ui, sans-serif',
+  fontBase: '"DM Sans", "Inter", system-ui, sans-serif',
   fontCode: '"Fira Code", "JetBrains Mono", monospace',
 })

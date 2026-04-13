@@ -1,7 +1,7 @@
 import type { Config } from 'tailwindcss'
 
-/** Helper: reference a CSS custom property as an rgb() color with alpha support */
-const cv = (name: string) => `rgb(var(--color-${name}) / <alpha-value>)`
+/** Helper: reference a CSS custom property as an hsl() color with alpha support */
+const cv = (name: string) => `hsl(var(--color-${name}) / <alpha-value>)`
 
 const config: Config = {
   darkMode: 'class',
@@ -106,8 +106,8 @@ const config: Config = {
         },
       },
       fontFamily: {
-        epilogue: ['Epilogue', 'sans-serif'],
-        manrope: ['Manrope', 'sans-serif'],
+        epilogue: ['Outfit', 'sans-serif'],
+        manrope: ['DM Sans', 'sans-serif'],
       },
       borderRadius: {
         ethos: '8px',
@@ -138,7 +138,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
 }
 
 export default config
