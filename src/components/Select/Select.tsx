@@ -71,7 +71,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             aria-invalid={!!error || undefined}
             aria-describedby={descriptionId}
             className={cn(
-              'w-full rounded-ethos border border-outline-variant/30 bg-card font-manrope text-foreground appearance-none transition-colors cursor-pointer',
+              'w-full rounded-ethos border border-muted-foreground bg-card font-manrope text-foreground appearance-none transition-colors cursor-pointer',
               'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:border-transparent',
               config.select,
               error && 'border-error focus-visible:ring-error',

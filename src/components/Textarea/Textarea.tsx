@@ -60,7 +60,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           aria-invalid={!!error || undefined}
           aria-describedby={descriptionId}
           className={cn(
-            'rounded-ethos border border-outline-variant/30 bg-card font-manrope text-foreground placeholder:text-muted-foreground transition-colors resize-y',
+            'rounded-ethos border border-muted-foreground bg-card font-manrope text-foreground placeholder:text-muted-foreground transition-colors resize-y',
             'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:border-transparent',
             config.textarea,
             error && 'border-error focus-visible:ring-error',

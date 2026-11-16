@@ -104,7 +104,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             <div
               aria-hidden="true"
               className={cn(
-                'absolute inset-0 border-2 border-outline-variant transition-all duration-200',
+                'absolute inset-0 border-2 border-muted-foreground transition-all duration-200',
                 'bg-surface',
                 'peer-checked:bg-primary peer-checked:border-primary',
                 'peer-focus-visible:ring-4 peer-focus-visible:ring-primary/35',
