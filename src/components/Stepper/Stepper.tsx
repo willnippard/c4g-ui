@@ -218,7 +218,7 @@ export const Stepper = forwardRef<HTMLDivElement, StepperProps>(
                         ),
                     isCompleted
                       ? 'border-primary border-solid'
-                      : 'border-outline-variant border-dashed',
+                      : 'border-muted-foreground border-dashed',
                   )}
                 />
               )}

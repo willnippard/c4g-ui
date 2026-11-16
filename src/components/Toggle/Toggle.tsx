@@ -81,7 +81,7 @@ export const Toggle = forwardRef<HTMLInputElement, ToggleProps>(
           <div
             className={cn(
               'rounded-full transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]',
-              'bg-on-surface-variant/40 border border-outline-variant',
+              'bg-on-surface-variant/40 border border-muted-foreground',
               'shadow-[inset_0_2px_4px_rgba(0,0,0,0.06)]',
               'peer-checked:bg-primary peer-checked:border-transparent',
               'peer-checked:shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)]',
