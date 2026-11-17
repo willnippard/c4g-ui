@@ -90,6 +90,7 @@ Each component uses `forwardRef`, typed variant props (union types), and follows
 **After every significant update to any component, run an accessibility audit.** This is mandatory, not optional.
 
 - All text must meet **WCAG AA contrast ratios**: 4.5:1 for normal text, 3:1 for large text (≥18px or ≥14px bold)
+- Form control boundaries (input/select/textarea borders, checkbox boxes, toggle tracks) and other meaningful UI graphics must meet **WCAG 1.4.11 non-text contrast** of 3:1 against adjacent colors — use `border-muted-foreground` for unfocused control borders
 - Verify contrast in **both light and dark modes** — CSS variables swap colors between themes, so a passing light mode does not guarantee dark mode passes
 - Disabled states use `opacity-60` (not `opacity-50`) to preserve contrast
 - Storybook includes `@storybook/addon-a11y` — use the Accessibility panel to check for violations
@@ -97,4 +98,5 @@ Each component uses `forwardRef`, typed variant props (union types), and follows
   - Gold/amber backgrounds with white text (use dark text instead)
   - Tokens that invert in dark mode (e.g. `on-surface` becomes light — don't pair with `text-white`)
   - `opacity-*` modifiers that degrade already-borderline ratios
+  - `border-outline-variant` (especially with opacity, e.g. `/30`) on form controls — too faint to meet 3:1 non-text contrast
   - Use `inverse-surface` / `inverse-on-surface` for elements that should stay contrasty in both themes
